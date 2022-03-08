@@ -26,7 +26,7 @@ export class ArtistMovementService {
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND);
     
-    const artist = await this.artistRepository.findOne(artistId);
+    const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
 
@@ -39,7 +39,7 @@ export class ArtistMovementService {
       if (!movement)
         throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
       
-      const artist = await this.artistRepository.findOne(artistId);
+      const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
       if (!artist)
         throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 
@@ -52,7 +52,7 @@ export class ArtistMovementService {
   }
 
   async findMovementsByArtistId(artistId: number): Promise<MovementDTO[]> {
-    const artist: Artist = await this.artistRepository.findOne(artistId);
+    const artist: Artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 
@@ -60,7 +60,7 @@ export class ArtistMovementService {
   }
 
   async associateArtistMovement(artistId: number, movementDTO: MovementDTO[]): Promise<ArtistDTO> {
-    const artist = await this.artistRepository.findOne(artistId);
+    const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
 
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
@@ -84,7 +84,7 @@ export class ArtistMovementService {
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
 
-    const artist = await this.artistRepository.findOne(artistId);
+    const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 

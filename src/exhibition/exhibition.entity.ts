@@ -14,13 +14,17 @@ export class Exhibition {
   @Column()
   description: string;
 
-  @ManyToOne(() => Museum, museum => museum.exhibitions)
+  @ManyToOne(() => Museum, museum => museum.exhibitions, {
+    onDelete: 'CASCADE'
+  })
   museum: Museum;
 
   @OneToMany(() => Artwork, artwork => artwork.exhibition)
   artworks: Artwork[];
 
-  @OneToOne(() => Sponsor, sponsor => sponsor.exhibition)
+  @OneToOne(() => Sponsor, sponsor => sponsor.exhibition, {
+    onDelete: 'CASCADE'
+  })
   @JoinColumn()
   sponsor: Sponsor;
 }

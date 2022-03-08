@@ -1,7 +1,3 @@
-/*
-https://docs.nestjs.com/providers#services
-*/
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
@@ -21,7 +17,7 @@ export class MovementService {
   }
 
   async findOne(id: number): Promise<MovementDTO> {
-    const movement = await this.movementRepository.findOne(id);
+    const movement = await this.movementRepository.findOne(id, { relations: ["artists"] });
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
     else

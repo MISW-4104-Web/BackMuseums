@@ -1,4 +1,4 @@
-import { ArtistmovementModule } from './artistmovement/artistmovement.module';
+import { ArtistMovementModule } from './artist-movement/artist-movement.module';
 import { SponsorModule } from './sponsor/sponsor.module';
 import { TypeModule } from './type/type.module';
 import { MovementModule } from './movement/movement.module';
@@ -16,11 +16,10 @@ import { Movement } from './movement/movement.entity';
 import { Artist } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
-import { TYPE } from './type/type.enum';
 
 @Module({
   imports: [
-    ArtistmovementModule,
+    ArtistMovementModule,
     SponsorModule,
     TypeModule,
     MovementModule,

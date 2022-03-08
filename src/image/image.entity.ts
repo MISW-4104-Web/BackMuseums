@@ -1,6 +1,5 @@
-import { Artist } from "src/artist/artist.entity";
 import { Artwork } from "src/artwork/artwork.entity";
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 
 @Entity()
 export class Image {
@@ -19,9 +18,8 @@ export class Image {
   @Column()
   width: number;
 
-  @ManyToOne(() => Artwork, artwork => artwork.images)
+  @ManyToOne(() => Artwork, artwork => artwork.images, {
+    onDelete: 'CASCADE'
+  })
   artwork: Artwork;
-
-  @OneToOne(() => Artist, artist => artist.image)
-  artist: Artist;
 }

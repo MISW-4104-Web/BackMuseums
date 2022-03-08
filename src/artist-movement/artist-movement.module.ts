@@ -1,5 +1,5 @@
-import { ArtistMovementController } from './artistmovement.controller';
-import { ArtistMovementService } from './artistmovement.service';
+import { ArtistMovementController } from './artist-movement.controller';
+import { ArtistMovementService } from './artist-movement.service';
 /*
 https://docs.nestjs.com/modules
 */
@@ -14,4 +14,4 @@ import { Movement } from 'src/movement/movement.entity';
     controllers: [ArtistMovementController],
     providers: [ArtistMovementService],
 })
-export class ArtistmovementModule { }
+export class ArtistMovementModule { }
