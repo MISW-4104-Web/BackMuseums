@@ -46,7 +46,10 @@ import { Image } from './image/image.entity';
       synchronize: true,
       keepConnectionAlive: true,
       migrations: [__dirname + '/migration/**/*{.ts,.js}'],
-      migrationsRun: false,
+      migrationsRun: true,
+      extra: {
+        ssl: true
+      }
     }),
   ],
 })
