@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "b1c9eb05-eda5-470b-a210-1bc8d368b83b",
+		"name": "Artist-Movement tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artistmovement_artist_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artistmovement_movement_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new movement 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artistmovement_movement_id_2\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Surrealism\",\r\n    \"description\": \"Surrealism was a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.\",\r\n    \"countryOfOrigin\": \"France, Belgium\",\r\n    \"activeYears\": \"Late 1920s\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add movement to artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/{{artistmovement_movement_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						"{{artistmovement_movement_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an artist's movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/{{artistmovement_movement_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						"{{artistmovement_movement_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate movements to artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": {{artistmovement_movement_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artistmovement_movement_id_2}}\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all artist's movements",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artist's movement 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/{{artistmovement_movement_id_2}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						"{{artistmovement_movement_id_2}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artist's movement 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}/movements/{{artistmovement_movement_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}",
+						"movements",
+						"{{artistmovement_movement_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a movement 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/{{artistmovement_movement_id_2}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"{{artistmovement_movement_id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/{{artistmovement_movement_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"{{artistmovement_movement_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artistmovement_artist_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artistmovement_artist_id_1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

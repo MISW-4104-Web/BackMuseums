@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "166fd0e0-e614-4c95-9f5a-2ee485c93bc7",
+		"name": "Museum-Artwork tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museumartwork_museum_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 0\",\r\n    \"city\": \"City 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museumartwork_artist_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museumartwork_artwork_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{museumartwork_artist_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{museumartwork_artist_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{museumartwork_artist_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new artwork 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museumartwork_artwork_id_2\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Vie\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{museumartwork_artist_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{museumartwork_artist_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{museumartwork_artist_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add artwork to museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}",
+						"artworks",
+						"{{museumartwork_artwork_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a museum's artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}",
+						"artworks",
+						"{{museumartwork_artwork_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate artworks to museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": {{museumartwork_artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{museumartwork_artwork_id_2}}\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all museum's artworks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a museum's artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}",
+						"artworks",
+						"{{museumartwork_artwork_id_1}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{museumartwork_artist_id_1}}/artworks/{{museumartwork_artwork_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{museumartwork_artist_id_1}}",
+						"artworks",
+						"{{museumartwork_artwork_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artwork 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{museumartwork_artist_id_1}}/artworks/{{museumartwork_artwork_id_2}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{museumartwork_artist_id_1}}",
+						"artworks",
+						"{{museumartwork_artwork_id_2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{museumartwork_artist_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{museumartwork_artist_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museumartwork_museum_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museumartwork_museum_id_1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

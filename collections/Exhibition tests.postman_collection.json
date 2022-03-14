@@ -1,0 +1,443 @@
+{
+	"info": {
+		"_postman_id": "879b361c-958b-41e4-af62-ff379e2b5b0e",
+		"name": "Exhibition tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"exhibition_museum_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new sponsor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"exhibition_sponsor_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"description\": \"Madrid, Spain\",\r\n    \"website\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/sponsors",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sponsors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"exhibition_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Exhibition 1\",\r\n    \"description\": \"Description 0\",\r\n    \"sponsor\": {\r\n        \"id\": {{exhibition_sponsor_id_1}}\r\n    },\r\n    \"museum\": {\r\n        \"id\": {{exhibition_museum_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all exhibitions in a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"{{exhibition_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a non-existent exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The exhibition with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Exhibition 1\",\r\n    \"description\": \"Description 1\",\r\n    \"sponsor\": {\r\n        \"id\": {{exhibition_sponsor_id_1}}\r\n    },\r\n    \"museum\": {\r\n        \"id\": {{exhibition_museum_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"{{exhibition_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a non-existent exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The exhibition with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"{{exhibition_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent exhibition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The exhibition with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}",
+						"exhibitions",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a sponsor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/sponsors/{{exhibition_sponsor_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"sponsors",
+						"{{exhibition_sponsor_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{exhibition_museum_id_1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

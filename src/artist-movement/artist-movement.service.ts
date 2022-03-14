@@ -90,8 +90,5 @@ export class ArtistMovementService {
 
     artist.movements = artist.movements.filter(e => e.id !== movementId);
     return await this.artistRepository.save(artist);
-}
-
-
-
+  }
 }

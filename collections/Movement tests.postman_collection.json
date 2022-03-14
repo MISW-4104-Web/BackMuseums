@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "0f1466a2-014f-41fd-9f51-681d618977ce",
+		"name": "Movement tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"movement_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all movements",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/{{movement_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"{{movement_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a non-existent movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The movement with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/{{movement_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"{{movement_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a non-existent movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The movement with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/{{movement_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"{{movement_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent movement",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The movement with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/movements/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"movements",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

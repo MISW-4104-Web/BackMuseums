@@ -25,9 +25,6 @@ export class ArtistService {
   }
 
   async create(artistDTO: ArtistDTO): Promise<ArtistDTO> {
-    if (artistDTO.image == null)
-      throw new BusinessLogicException("The artist must have an artist image association", BusinessError.PRECONDITION_FAILED);
-
     const artist = new Artist();
     artist.name = artistDTO.name;
     artist.birthplace = artistDTO.birthplace;

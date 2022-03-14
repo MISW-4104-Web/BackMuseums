@@ -1,3 +1,6 @@
+import { ExhibitionArtworkModule } from './exhibition-artwork/exhibition-artwork.module';
+import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
+import { MovementArtistModule } from './movement-artist/movement-artist.module';
 import { ArtistMovementModule } from './artist-movement/artist-movement.module';
 import { SponsorModule } from './sponsor/sponsor.module';
 import { TypeModule } from './type/type.module';
@@ -19,6 +22,9 @@ import { Image } from './image/image.entity';
 
 @Module({
   imports: [
+    ExhibitionArtworkModule,
+    MuseumArtworkModule,
+    MovementArtistModule,
     ArtistMovementModule,
     SponsorModule,
     TypeModule,

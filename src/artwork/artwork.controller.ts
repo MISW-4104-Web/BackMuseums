@@ -3,35 +3,35 @@ import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { ArtworkDTO } from './artwork.dto';
 import { ArtworkService } from './artwork.service';
 
-@Controller('artworks')
+@Controller('artists')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ArtworkController {
   constructor(private readonly artworkService: ArtworkService) {}
 
-  @Get()
-  async findAll() {
-    return await this.artworkService.findAll();
+  @Get('/:artistId/artworks/:artworkId')
+  async findOne(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+    return await this.artworkService.findOne(artistId, artworkId);
   }
 
-  @Get(':artworkId')
-  async findOne(@Param('artworkId') artworkId: number) {
-    return await this.artworkService.findOne(artworkId);
+  @Get('/:artistId/artworks')
+  async findAll(@Param('artistId') artistId: number) {
+    return await this.artworkService.findAll(artistId);
   }
 
-  @Post()
+  @Post('/:artistId/artworks')
   @HttpCode(200)
-  async create(@Body() artworkDTO: ArtworkDTO) {
-    return await this.artworkService.create(artworkDTO);
+  async create(@Param('artistId') artistId: number, @Body() artworkDTO: ArtworkDTO) {
+    return await this.artworkService.create(artistId, artworkDTO);
   }
 
-  @Put(':artworkId')
-  async update(@Param('artworkId') artworkId: number, @Body() artworkDTO: ArtworkDTO) {
-    return await this.artworkService.update(artworkId, artworkDTO);
+  @Put('/:artistId/artworks/:artworkId')
+  async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() artworkDTO: ArtworkDTO) {
+    return await this.artworkService.update(artistId, artworkId, artworkDTO);
   }
 
-  @Delete(':artworkId')
+  @Delete('/:artistId/artworks/:artworkId')
   @HttpCode(204)
-  async delete(@Param('artworkId') artworkId: number) {
-    return await this.artworkService.delete(artworkId);
+  async delete(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+    return await this.artworkService.delete(artistId, artworkId);
   }
 }

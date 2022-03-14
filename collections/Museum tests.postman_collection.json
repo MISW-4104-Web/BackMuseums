@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "31a80767-a063-401a-b20f-04da73a97e35",
+		"name": "Museum tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museum_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 0\",\r\n    \"city\": \"City 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all museums",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museum_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a non-existent museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The museum with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museum_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a non-existent museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The museum with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"{{museum_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The museum with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/museums/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"museums",
+						"0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

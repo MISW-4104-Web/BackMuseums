@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "a5f531cb-ed82-4b4b-a5dc-2dba9bdfb1f7",
+		"name": "Artwork tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a new artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artwork_artist_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artwork_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artwork_artist_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all artworks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data= JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"{{artwork_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a non-existent artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The artwork with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(responseBody);\r",
+							"var data = JSON.parse(responseBody);\r",
+							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1937,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artwork_artist_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"{{artwork_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a non-existent artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The artwork with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"{{artwork_id_1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The artwork with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}",
+						"artworks",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"artists",
+						"{{artwork_artist_id_1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
