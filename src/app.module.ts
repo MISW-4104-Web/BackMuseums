@@ -48,7 +48,9 @@ import { Image } from './image/image.entity';
       migrations: [__dirname + '/migration/**/*{.ts,.js}'],
       migrationsRun: true,
       extra: {
-        ssl: true
+        ssl: {
+          rejectUnauthorized: false
+        }
       }
     }),
   ],
