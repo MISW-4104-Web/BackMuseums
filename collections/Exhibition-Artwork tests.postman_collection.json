@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums"
 					]
 				}
@@ -74,13 +74,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -115,13 +115,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibitionartwork_museum_id_1}}/exhibitions",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}/exhibitions",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibitionartwork_museum_id_1}}",
 						"exhibitions"
@@ -158,13 +158,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -199,13 +199,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{exhibitionartwork_artist_id_1}}",
 						"artworks",
@@ -235,7 +235,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Vie\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{museumartwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"La Vie\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{exhibitionartwork_artist_id_1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -243,13 +243,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{exhibitionartwork_artist_id_1}}",
 						"artworks",
@@ -276,13 +276,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"exhibitions",
 						"{{exhibitionartwork_exhibition_id_1}}",
 						"artworks",
@@ -311,13 +311,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"exhibitions",
 						"{{exhibitionartwork_exhibition_id_1}}",
 						"artworks",
@@ -354,13 +354,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/exhibitions/{{exhibitionartwork_museum_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_museum_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"exhibitions",
 						"{{exhibitionartwork_museum_id_1}}",
 						"artworks",
@@ -388,13 +388,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"exhibitions",
 						"{{exhibitionartwork_exhibition_id_1}}",
 						"artworks",
@@ -421,13 +421,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"exhibitions",
 						"{{exhibitionartwork_exhibition_id_1}}",
 						"artworks",
@@ -455,13 +455,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{exhibitionartwork_artist_id_1}}",
 						"artworks",
@@ -488,13 +488,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_2}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_2}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{exhibitionartwork_artist_id_1}}",
 						"artworks",
@@ -521,13 +521,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{exhibitionartwork_artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{exhibitionartwork_artist_id_1}}"
 					]
@@ -552,13 +552,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibitionartwork_museum_id_1}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibitionartwork_museum_id_1}}",
 						"exhibitions",
@@ -585,13 +585,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{exhibitionartwork_sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{exhibitionartwork_sponsor_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"{{exhibitionartwork_sponsor_id_1}}"
 					]
@@ -616,13 +616,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibitionartwork_museum_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibitionartwork_museum_id_1}}"
 					]

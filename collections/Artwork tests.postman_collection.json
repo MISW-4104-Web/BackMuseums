@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -74,13 +74,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -108,13 +108,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -143,13 +143,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -177,13 +177,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -221,13 +221,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -255,13 +255,13 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -288,13 +288,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -322,13 +322,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}/artworks/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}",
 						"artworks",
@@ -355,13 +355,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artwork_artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{artwork_artist_id_1}}"
 					]

@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements"
 					]
 				}
@@ -74,13 +74,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -115,13 +115,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -145,13 +145,13 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}",
 						"artists",
@@ -180,13 +180,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}",
 						"artists",
@@ -223,13 +223,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}/artists/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}",
 						"artists",
@@ -257,13 +257,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}/artists/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}",
 						"artists",
@@ -290,13 +290,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}",
 						"artists",
@@ -324,13 +324,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{movementartist_artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{movementartist_artist_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{movementartist_artist_id_1}}"
 					]
@@ -355,13 +355,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{movementartist_artist_id_2}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{movementartist_artist_id_2}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"{{movementartist_artist_id_2}}"
 					]
@@ -386,13 +386,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/movements/{{movementartist_movement_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"movements",
 						"{{movementartist_movement_id_1}}"
 					]

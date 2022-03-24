@@ -2,7 +2,7 @@ import { Exhibition } from "src/exhibition/exhibition.entity";
 import { Museum } from "src/museum/museum.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Artist } from "src/artist/artist.entity";
-import { TYPE } from "src/type/type.enum";
+import { ARTWORK_TYPE } from "src/artworktype/artworktype.enum";
 import { Image } from "src/image/image.entity";
 
 @Entity()
@@ -21,9 +21,9 @@ export class Artwork {
 
   @Column({
     type: "enum",
-    enum: TYPE,
+    enum: ARTWORK_TYPE,
   })
-  type: TYPE;
+  type: ARTWORK_TYPE;
 
   @ManyToOne(() => Museum, museum => museum.artworks)
   museum: Museum;

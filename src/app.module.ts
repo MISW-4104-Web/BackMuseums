@@ -3,7 +3,7 @@ import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
 import { MovementArtistModule } from './movement-artist/movement-artist.module';
 import { ArtistMovementModule } from './artist-movement/artist-movement.module';
 import { SponsorModule } from './sponsor/sponsor.module';
-import { TypeModule } from './type/type.module';
+import { ArtworkTypeModule } from './artworktype/artworktype.module';
 import { MovementModule } from './movement/movement.module';
 import { ArtistModule } from './artist/artist.module';
 import { ImageModule } from './image/image.module';
@@ -27,7 +27,7 @@ import { Image } from './image/image.entity';
     MovementArtistModule,
     ArtistMovementModule,
     SponsorModule,
-    TypeModule,
+    ArtworkTypeModule,
     MovementModule,
     ArtistModule,
     ImageModule,
@@ -47,11 +47,11 @@ import { Image } from './image/image.entity';
       keepConnectionAlive: true,
       migrations: [__dirname + '/migration/**/*{.ts,.js}'],
       migrationsRun: true,
-      extra: {
+      /* extra: {
         ssl: {
           rejectUnauthorized: false
         }
-      }
+      } */
     }),
   ],
 })

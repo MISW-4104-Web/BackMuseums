@@ -4,4 +4,5 @@ export class MuseumDTO {
   readonly description: string;
   readonly address: string;
   readonly city: string;
+  readonly image: string;
 }

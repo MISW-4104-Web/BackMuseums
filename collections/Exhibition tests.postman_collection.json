@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums"
 					]
 				}
@@ -74,13 +74,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -115,13 +115,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions"
@@ -148,13 +148,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions"
@@ -182,13 +182,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -216,13 +216,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -260,13 +260,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -294,13 +294,13 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -327,13 +327,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -361,13 +361,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}/exhibitions/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}",
 						"exhibitions",
@@ -394,13 +394,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{exhibition_sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{exhibition_sponsor_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"{{exhibition_sponsor_id_1}}"
 					]
@@ -425,13 +425,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{exhibition_museum_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"{{exhibition_museum_id_1}}"
 					]

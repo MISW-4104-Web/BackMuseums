@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -64,13 +64,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -96,13 +96,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"{{sponsor_id_1}}"
 					]
@@ -128,13 +128,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"0"
 					]
@@ -170,13 +170,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"{{sponsor_id_1}}"
 					]
@@ -202,13 +202,13 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"0"
 					]
@@ -233,13 +233,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id_1}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"{{sponsor_id_1}}"
 					]
@@ -265,13 +265,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"0"
 					]
