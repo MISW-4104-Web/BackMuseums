@@ -47,11 +47,11 @@ import { Image } from './image/image.entity';
       keepConnectionAlive: true,
       migrations: [__dirname + '/migration/**/*{.ts,.js}'],
       migrationsRun: true,
-      /* extra: {
+      extra: {
         ssl: {
           rejectUnauthorized: false
         }
-      } */
+      }
     }),
   ],
 })
