@@ -45,8 +45,11 @@ import { Image } from './image/image.entity';
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
-      migrations: [__dirname + '/migration/**/*{.ts,.js}'],
+      migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
+      cli: {
+        migrationsDir: "src/migrations"
+      },
       extra: {
         ssl: {
           rejectUnauthorized: false
