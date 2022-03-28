@@ -52,8 +52,8 @@ export class ImageService {
   }
 
   async create(artistId: number, artworkId: number, imageDTO: ImageDTO): Promise<ImageDTO> {
-    if (imageDTO.artwork == null)
-      throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);
+    /*if (imageDTO.artwork == null)
+      throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);*/
 
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
@@ -77,8 +77,8 @@ export class ImageService {
     if (!image)
     throw new BusinessLogicException("The image with the given id was not found", BusinessError.NOT_FOUND)
     
-    if (imageDTO.artwork == null)
-      throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);
+    /*if (imageDTO.artwork == null)
+      throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);*/
 
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)

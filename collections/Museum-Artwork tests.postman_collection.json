@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "166fd0e0-e614-4c95-9f5a-2ee485c93bc7",
+		"_postman_id": "48276a57-723a-4858-876a-c71acf6727b1",
 		"name": "Museum-Artwork tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museumartwork_museum_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 0\",\r\n    \"city\": \"City 1\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museumartwork_artist_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +95,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museumartwork_artwork_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artwork_id_1\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{museumartwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +115,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{museumartwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -123,7 +123,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{museumartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						""
 					]
@@ -139,7 +139,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museumartwork_artwork_id_2\", data.id);\r",
+							"postman.setGlobalVariable(\"artwork_id_2\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -151,7 +151,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Vie\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{museumartwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Child with dove\",\r\n    \"description\": \"It is an oil on canvas painting by the Spanish artist Pablo Picasso, which he created in 1901 at the start of his Blue Period\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,7 +159,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{museumartwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -167,7 +167,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{museumartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						""
 					]
@@ -192,7 +192,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -200,9 +200,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
-						"{{museumartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -227,7 +227,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -235,9 +235,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
-						"{{museumartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -262,7 +262,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"id\": {{museumartwork_artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{museumartwork_artwork_id_2}}\r\n    }\r\n]",
+					"raw": "[\r\n    {\r\n        \"id\": {{artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artwork_id_2}}\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -270,7 +270,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -278,7 +278,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
 						""
 					]
@@ -304,7 +304,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -312,7 +312,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
 						""
 					]
@@ -337,7 +337,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}/artworks/{{museumartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -345,9 +345,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
-						"{{museumartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -371,7 +371,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{museumartwork_artist_id_1}}/artworks/{{museumartwork_artwork_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id_1}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -379,9 +379,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{museumartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{museumartwork_artwork_id_1}}"
+						"{{artwork_id_1}}"
 					]
 				}
 			},
@@ -404,7 +404,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{museumartwork_artist_id_1}}/artworks/{{museumartwork_artwork_id_2}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id_2}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -412,9 +412,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{museumartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{museumartwork_artwork_id_2}}"
+						"{{artwork_id_2}}"
 					]
 				}
 			},
@@ -437,7 +437,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{museumartwork_artist_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -445,7 +445,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{museumartwork_artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},
@@ -468,7 +468,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museumartwork_museum_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -476,7 +476,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{museumartwork_museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},

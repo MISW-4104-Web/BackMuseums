@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4da33425-2c0e-4a99-82b3-4e7ad7411c65",
+		"_postman_id": "21a4beb9-88fe-411e-b4f1-b28530705688",
 		"name": "Movement-Artist tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movementartist_movement_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"movement_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"200\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movementartist_artist_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id_1\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +95,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movementartist_artist_id_2\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id_2\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Salvador Dalí\",\r\n    \"birthplace\": \"Cataluña, Spain\",\r\n    \"birthdate\": \"05-11-1904\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Salvador Dalí\",\r\n    \"birthplace\": \"Cataluña, Spain\",\r\n    \"birthdate\": \"1904-05-11\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -145,7 +145,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -153,9 +153,9 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}",
+						"{{movement_id}}",
 						"artists",
-						"{{movementartist_artist_id_1}}",
+						"{{artist_id_1}}",
 						""
 					]
 				}
@@ -180,7 +180,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -188,9 +188,9 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}",
+						"{{movement_id}}",
 						"artists",
-						"{{movementartist_artist_id_1}}",
+						"{{artist_id_1}}",
 						""
 					]
 				}
@@ -215,7 +215,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"id\": {{movementartist_artist_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{movementartist_artist_id_2}}\r\n    }\r\n]",
+					"raw": "[\r\n    {\r\n        \"id\": {{artist_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artist_id_2}}\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -223,7 +223,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -231,7 +231,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}",
+						"{{movement_id}}",
 						"artists",
 						""
 					]
@@ -257,7 +257,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -265,7 +265,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}",
+						"{{movement_id}}",
 						"artists",
 						""
 					]
@@ -290,7 +290,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}/artists/{{movementartist_artist_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -298,9 +298,9 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}",
+						"{{movement_id}}",
 						"artists",
-						"{{movementartist_artist_id_1}}",
+						"{{artist_id_1}}",
 						""
 					]
 				}
@@ -324,7 +324,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{movementartist_artist_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_1}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -332,7 +332,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{movementartist_artist_id_1}}"
+						"{{artist_id_1}}"
 					]
 				}
 			},
@@ -355,7 +355,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{movementartist_artist_id_2}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_2}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -363,7 +363,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{movementartist_artist_id_2}}"
+						"{{artist_id_2}}"
 					]
 				}
 			},
@@ -386,7 +386,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movementartist_movement_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -394,7 +394,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movementartist_movement_id_1}}"
+						"{{movement_id}}"
 					]
 				}
 			},

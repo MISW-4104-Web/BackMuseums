@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b41279e9-db69-4e4f-ba31-163dccbac487",
+		"_postman_id": "fb910164-a06a-4b5c-a224-1d602e48b565",
 		"name": "Exhibition-Artwork tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_museum_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_sponsor_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"sponsor_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"description\": \"Madrid, Spain\",\r\n    \"website\": \"google.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +95,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_exhibition_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"exhibition_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Exhibition 1\",\r\n    \"description\": \"Description 0\",\r\n    \"sponsor\": {\r\n        \"id\": {{exhibitionartwork_sponsor_id_1}}\r\n    },\r\n    \"museum\": {\r\n        \"id\": {{exhibitionartwork_museum_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +115,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}/exhibitions",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -123,7 +123,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibitionartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions"
 					]
 				}
@@ -138,7 +138,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_artist_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -150,7 +150,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -179,7 +179,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_artwork_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artwork_id_1\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -191,7 +191,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{exhibitionartwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -199,7 +199,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -207,7 +207,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{exhibitionartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						""
 					]
@@ -223,7 +223,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibitionartwork_artwork_id_2\", data.id);\r",
+							"postman.setGlobalVariable(\"artwork_id_2\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -235,7 +235,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Vie\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{exhibitionartwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Child with dove\",\r\n    \"description\": \"It is an oil on canvas painting by the Spanish artist Pablo Picasso, which he created in 1901 at the start of his Blue Period\",\r\n    \"year\": 1903,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -243,7 +243,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -251,7 +251,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{exhibitionartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						""
 					]
@@ -276,7 +276,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibition_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -284,9 +284,9 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{exhibitionartwork_exhibition_id_1}}",
+						"{{exhibition_id}}",
 						"artworks",
-						"{{exhibitionartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -311,7 +311,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibition_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -319,9 +319,9 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{exhibitionartwork_exhibition_id_1}}",
+						"{{exhibition_id}}",
 						"artworks",
-						"{{exhibitionartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -346,7 +346,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"id\": {{exhibitionartwork_artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{exhibitionartwork_artwork_id_2}}\r\n    }\r\n]",
+					"raw": "[\r\n    {\r\n        \"id\": {{artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artwork_id_2}}\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -354,7 +354,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_museum_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{museum_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -362,7 +362,7 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{exhibitionartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"artworks",
 						""
 					]
@@ -388,7 +388,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibition_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -396,7 +396,7 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{exhibitionartwork_exhibition_id_1}}",
+						"{{exhibition_id}}",
 						"artworks",
 						""
 					]
@@ -421,7 +421,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibitionartwork_exhibition_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibition_id}}/artworks/{{artwork_id_1}}/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -429,9 +429,9 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{exhibitionartwork_exhibition_id_1}}",
+						"{{exhibition_id}}",
 						"artworks",
-						"{{exhibitionartwork_artwork_id_1}}",
+						"{{artwork_id_1}}",
 						""
 					]
 				}
@@ -455,7 +455,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id_1}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -463,9 +463,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{exhibitionartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{exhibitionartwork_artwork_id_1}}"
+						"{{artwork_id_1}}"
 					]
 				}
 			},
@@ -488,7 +488,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}/artworks/{{exhibitionartwork_artwork_id_2}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id_2}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -496,9 +496,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{exhibitionartwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{exhibitionartwork_artwork_id_2}}"
+						"{{artwork_id_2}}"
 					]
 				}
 			},
@@ -521,7 +521,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{exhibitionartwork_artist_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -529,7 +529,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{exhibitionartwork_artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},
@@ -552,7 +552,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}/exhibitions/{{exhibitionartwork_exhibition_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -560,9 +560,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibitionartwork_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
-						"{{exhibitionartwork_exhibition_id_1}}"
+						"{{exhibition_id}}"
 					]
 				}
 			},
@@ -585,7 +585,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{exhibitionartwork_sponsor_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -593,7 +593,7 @@
 					"path": [
 						"api",
 						"sponsors",
-						"{{exhibitionartwork_sponsor_id_1}}"
+						"{{sponsor_id}}"
 					]
 				}
 			},
@@ -616,7 +616,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibitionartwork_museum_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -624,7 +624,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibitionartwork_museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},

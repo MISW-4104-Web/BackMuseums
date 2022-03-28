@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0f1466a2-014f-41fd-9f51-681d618977ce",
+		"_postman_id": "8eeaed3d-95f9-437c-a25e-646fc2777db5",
 		"name": "Movement tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movement_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"movement_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"121\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +96,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -104,7 +104,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movement_id_1}}"
+						"{{movement_id}}"
 					]
 				}
 			},
@@ -162,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"150\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,7 +170,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -178,7 +178,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movement_id_1}}"
+						"{{movement_id}}"
 					]
 				}
 			},
@@ -201,6 +201,15 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{protocol}}://{{host}}/api/movements/0",
 					"protocol": "{{protocol}}",
@@ -233,7 +242,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -241,7 +250,7 @@
 					"path": [
 						"api",
 						"movements",
-						"{{movement_id_1}}"
+						"{{movement_id}}"
 					]
 				}
 			},

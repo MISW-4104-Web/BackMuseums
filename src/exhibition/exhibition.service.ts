@@ -49,8 +49,8 @@ export class ExhibitionService {
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND);
     
-    if (exhibitionDTO.museum == null)
-      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);
+    /*if (exhibitionDTO.museum == null)
+      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);*/
 
     const museum = await this.museumRepository.findOne(museumId);
     if (!museum)
@@ -76,8 +76,8 @@ export class ExhibitionService {
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND);
     
-    if (exhibitionDTO.museum == null)
-      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);
+    /*if (exhibitionDTO.museum == null)
+      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);*/
 
     const museum = await this.museumRepository.findOne(museumId);
     if (!museum)

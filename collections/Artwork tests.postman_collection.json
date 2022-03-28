@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a5f531cb-ed82-4b4b-a5dc-2dba9bdfb1f7",
+		"_postman_id": "5b1bb759-8b4f-46fe-a800-d4d49488b390",
 		"name": "Artwork tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artwork_artist_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artwork_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artwork_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +74,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -82,9 +82,8 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
-						"artworks",
-						""
+						"{{artist_id}}",
+						"artworks"
 					]
 				}
 			},
@@ -108,7 +107,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -116,7 +115,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						""
 					]
@@ -143,7 +142,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -151,9 +150,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{artwork_id_1}}"
+						"{{artwork_id}}"
 					]
 				}
 			},
@@ -177,7 +176,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -185,7 +184,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						"0"
 					]
@@ -213,7 +212,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"Desc 1\",\r\n    \"year\": 1937,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artwork_artist_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -221,7 +220,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -229,9 +228,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{artwork_id_1}}"
+						"{{artwork_id}}"
 					]
 				}
 			},
@@ -254,8 +253,17 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -263,7 +271,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						"0"
 					]
@@ -288,7 +296,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/{{artwork_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -296,9 +304,9 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
-						"{{artwork_id_1}}"
+						"{{artwork_id}}"
 					]
 				}
 			},
@@ -322,7 +330,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -330,7 +338,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}",
+						"{{artist_id}}",
 						"artworks",
 						"0"
 					]
@@ -355,7 +363,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artwork_artist_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -363,7 +371,7 @@
 					"path": [
 						"api",
 						"artists",
-						"{{artwork_artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},

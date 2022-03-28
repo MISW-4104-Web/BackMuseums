@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "879b361c-958b-41e4-af62-ff379e2b5b0e",
+		"_postman_id": "0da97f2a-7772-447d-be61-4f2d82e2ed89",
 		"name": "Exhibition tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibition_museum_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Desc 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -54,7 +54,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibition_sponsor_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"sponsor_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -66,7 +66,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"description\": \"Madrid, Spain\",\r\n    \"website\": \"google.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -95,7 +95,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"exhibition_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"exhibition_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Exhibition 1\",\r\n    \"description\": \"Description 0\",\r\n    \"sponsor\": {\r\n        \"id\": {{exhibition_sponsor_id_1}}\r\n    },\r\n    \"museum\": {\r\n        \"id\": {{exhibition_museum_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +115,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -123,7 +123,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions"
 					]
 				}
@@ -148,7 +148,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -156,7 +156,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions"
 					]
 				}
@@ -182,7 +182,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -190,9 +190,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
-						"{{exhibition_id_1}}"
+						"{{exhibition_id}}"
 					]
 				}
 			},
@@ -216,7 +216,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -224,7 +224,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
 						"0"
 					]
@@ -252,7 +252,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Exhibition 1\",\r\n    \"description\": \"Description 1\",\r\n    \"sponsor\": {\r\n        \"id\": {{exhibition_sponsor_id_1}}\r\n    },\r\n    \"museum\": {\r\n        \"id\": {{exhibition_museum_id_1}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career. Visit us now.\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -260,7 +260,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -268,9 +268,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
-						"{{exhibition_id_1}}"
+						"{{exhibition_id}}"
 					]
 				}
 			},
@@ -293,8 +293,17 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -302,7 +311,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
 						"0"
 					]
@@ -327,7 +336,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/{{exhibition_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -335,9 +344,9 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
-						"{{exhibition_id_1}}"
+						"{{exhibition_id}}"
 					]
 				}
 			},
@@ -361,7 +370,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -369,7 +378,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}",
+						"{{museum_id}}",
 						"exhibitions",
 						"0"
 					]
@@ -394,7 +403,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{exhibition_sponsor_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -402,7 +411,7 @@
 					"path": [
 						"api",
 						"sponsors",
-						"{{exhibition_sponsor_id_1}}"
+						"{{sponsor_id}}"
 					]
 				}
 			},
@@ -425,7 +434,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{exhibition_museum_id_1}}",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -433,7 +442,7 @@
 					"path": [
 						"api",
 						"museums",
-						"{{exhibition_museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},

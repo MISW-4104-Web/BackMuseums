@@ -45,22 +45,23 @@ export class ArtworkService {
   }
 
   async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
-    var museum = null;
+    let museum = null;
     if (artworkDTO.museum != null) {
       museum = await this.museumRepository.findOne(artworkDTO.museum.id);
       if (!museum)
         throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
     }
 
-    var exhibition = null;
+    let exhibition = null;
     if (artworkDTO.exhibition != null) {
       exhibition = await this.exhibitionRepository.findOne(artworkDTO.exhibition.id);
       if (!exhibition)
         throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
     }
 
-    if (artworkDTO.artist == null)
+    /*if (artworkDTO.artist == null)
       throw new BusinessLogicException("The artwork must have an artist association", BusinessError.PRECONDITION_FAILED);
+    */
 
     const artist = await this.artistRepository.findOne(artistId);
     if (!artist)
@@ -82,22 +83,22 @@ export class ArtworkService {
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
     
-    var museum = null;
+    let museum = null;
     if (artworkDTO.museum != null) {
       museum = await this.museumRepository.findOne(artworkDTO.museum.id);
       if (!museum)
         throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
     }
   
-    var exhibition = null;
+    let exhibition = null;
     if (artworkDTO.exhibition != null) {
       exhibition = await this.exhibitionRepository.findOne(artworkDTO.exhibition.id);
       if (!exhibition)
         throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
     }
 
-    if (artworkDTO.artist == null)
-      throw new BusinessLogicException("The artwork must have an artist association", BusinessError.PRECONDITION_FAILED);
+    /*if (artworkDTO.artist == null)
+      throw new BusinessLogicException("The artwork must have an artist association", BusinessError.PRECONDITION_FAILED);*/
 
     const artist = await this.artistRepository.findOne(artistId);
     if (!artist)
