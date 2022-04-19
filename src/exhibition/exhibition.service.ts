@@ -19,7 +19,7 @@ export class ExhibitionService {
   ) {}
 
   async findAll(museumId: number): Promise<ExhibitionDTO[]> {
-    const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions'] });
+    const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions', 'exhibitions.sponsor', 'exhibitions.artworks'] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
     return museum.exhibitions;
@@ -38,7 +38,7 @@ export class ExhibitionService {
     if (!exhibitionmuseum)
       throw new BusinessLogicException("The exhibition is not associated to the museum", BusinessError.NOT_FOUND)
 
-    return exhibitionmuseum;
+    return exhibition;
   }
 
   async create(museumId: number, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
@@ -49,9 +49,6 @@ export class ExhibitionService {
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND);
     
-    /*if (exhibitionDTO.museum == null)
-      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);*/
-
     const museum = await this.museumRepository.findOne(museumId);
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
@@ -76,9 +73,6 @@ export class ExhibitionService {
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND);
     
-    /*if (exhibitionDTO.museum == null)
-      throw new BusinessLogicException("The exhibition must have a museum association", BusinessError.PRECONDITION_FAILED);*/
-
     const museum = await this.museumRepository.findOne(museumId);
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
