@@ -41,7 +41,7 @@ export class ArtworkService {
     if (!artworkartist)
       throw new BusinessLogicException("The artwork is not associated to the artist", BusinessError.NOT_FOUND)
 
-    return artworkartist;
+    return artwork;
   }
 
   async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
@@ -59,10 +59,6 @@ export class ArtworkService {
         throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
     }
 
-    /*if (artworkDTO.artist == null)
-      throw new BusinessLogicException("The artwork must have an artist association", BusinessError.PRECONDITION_FAILED);
-    */
-
     const artist = await this.artistRepository.findOne(artistId);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -72,6 +68,7 @@ export class ArtworkService {
     artwork.year = artworkDTO.year;
     artwork.description = artworkDTO.description;
     artwork.type = artworkDTO.type;
+    artwork.mainImage = artworkDTO.mainImage;
     artwork.museum = museum;
     artwork.exhibition = exhibition;
     artwork.artist = artist;
@@ -108,6 +105,7 @@ export class ArtworkService {
     artwork.year = artworkDTO.year;
     artwork.description = artworkDTO.description;
     artwork.type = artworkDTO.type;
+    artwork.mainImage = artworkDTO.mainImage;
     artwork.museum = museum;
     artwork.exhibition = exhibition;
     artwork.artist = artist;

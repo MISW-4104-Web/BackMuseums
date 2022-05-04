@@ -63,11 +63,11 @@ import { Image } from './image/image.entity';
       cli: {
         migrationsDir: "src/migrations"
       },
-      extra: {
+      /* extra: {
         ssl: {
           rejectUnauthorized: false
         }
-      }
+      } */
     }),
   ],
 })

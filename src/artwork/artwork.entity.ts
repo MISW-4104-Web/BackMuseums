@@ -25,6 +25,11 @@ export class Artwork {
   })
   type: ARTWORK_TYPE;
 
+  @Column({
+    nullable: true
+  })
+  mainImage: string;
+
   @ManyToOne(() => Museum, museum => museum.artworks)
   museum: Museum;
 

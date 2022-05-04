@@ -9,6 +9,7 @@ export class ArtworkDTO {
   readonly year: number;
   readonly description: string;
   readonly type: ARTWORK_TYPE;
+  readonly mainImage: string;
   readonly museum: Museum;
   readonly exhibition: Exhibition;
   readonly artist: Artist;
