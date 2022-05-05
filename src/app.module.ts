@@ -19,6 +19,7 @@ import { Movement } from './movement/movement.entity';
 import { Artist } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
+import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { Image } from './image/image.entity';
     MuseumArtworkModule,
     MovementArtistModule,
     ArtistMovementModule,
+    ArtistArtworkModule,
     SponsorModule,
     ArtworkTypeModule,
     MovementModule,
@@ -36,7 +38,7 @@ import { Image } from './image/image.entity';
     MuseumModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://','').split(':')[1].split('@')[1] || process.env.DATABASE_URL || process.env.DB_HOST || 'localhost',
+      host: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://', '').split(':')[1].split('@')[1] || process.env.DATABASE_URL || process.env.DB_HOST || 'localhost',
       port: 5432,
       username:
         (process.env.DATABASE_URL &&

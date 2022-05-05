@@ -19,31 +19,20 @@ export class ArtworkService {
     private readonly exhibitionRepository: Repository<Exhibition>,
     @InjectRepository(Artist)
     private readonly artistRepository: Repository<Artist>,
-  ) {}
+  ) { }
 
-  async findAll(artistId: number): Promise<ArtworkDTO[]> {
-    const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
-    if (!artist)
-      throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
-    return artist.artworks;
+  async findAll(): Promise<ArtworkDTO[]> {
+    return await this.artworkRepository.find({ relations: ["images", "artist"] });
   }
 
-  async findOne(artistId: number, artworkId: number): Promise<ArtworkDTO> {
-    const artist = await this.artistRepository.findOne(artistId, { relations: ["artworks"] });
-    if (!artist)
-      throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
-
-    const artwork = await this.artworkRepository.findOne(artworkId, { relations: ["artist"] });
+  async findOne(artworkId: number): Promise<ArtworkDTO> {
+    const artwork = await this.artworkRepository.findOne(artworkId, { relations: ["images", "artist"] });
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
-    
-    const artworkartist = artist.artworks.find(e => e.id === artwork.id);
-    if (!artworkartist)
-      throw new BusinessLogicException("The artwork is not associated to the artist", BusinessError.NOT_FOUND)
-
     return artwork;
   }
 
+  /*
   async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
     let museum = null;
     if (artworkDTO.museum != null) {
@@ -94,9 +83,6 @@ export class ArtworkService {
         throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
     }
 
-    /*if (artworkDTO.artist == null)
-      throw new BusinessLogicException("The artwork must have an artist association", BusinessError.PRECONDITION_FAILED);*/
-
     const artist = await this.artistRepository.findOne(artistId);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -126,5 +112,5 @@ export class ArtworkService {
     artist.artworks = artist.artworks.filter(e => e.id !== artwork.id);
     await this.artistRepository.save(artist);
     return await this.artworkRepository.remove(artwork);
-  }
+  }*/
 }
