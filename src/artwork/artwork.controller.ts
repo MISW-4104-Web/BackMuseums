@@ -3,21 +3,22 @@ import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { ArtworkDTO } from './artwork.dto';
 import { ArtworkService } from './artwork.service';
 
-@Controller('artists')
+@Controller('artworks')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ArtworkController {
-  constructor(private readonly artworkService: ArtworkService) {}
+  constructor(private readonly artworkService: ArtworkService) { }
 
-  @Get('/:artistId/artworks/:artworkId')
-  async findOne(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
-    return await this.artworkService.findOne(artistId, artworkId);
+  @Get('/:artworkId')
+  async findOne(@Param('artworkId') artworkId: number) {
+    return await this.artworkService.findOne(artworkId);
   }
 
-  @Get('/:artistId/artworks')
-  async findAll(@Param('artistId') artistId: number) {
-    return await this.artworkService.findAll(artistId);
+  @Get()
+  async findAll() {
+    return await this.artworkService.findAll();
   }
 
+  /*
   @Post('/:artistId/artworks')
   @HttpCode(200)
   async create(@Param('artistId') artistId: number, @Body() artworkDTO: ArtworkDTO) {
@@ -33,5 +34,5 @@ export class ArtworkController {
   @HttpCode(204)
   async delete(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
     return await this.artworkService.delete(artistId, artworkId);
-  }
+  }*/
 }

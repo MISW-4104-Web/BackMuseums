@@ -19,6 +19,9 @@ export class Museum {
     @Column()
     city: string;
 
+    @Column()
+    image: string;
+
     @OneToMany(() => Exhibition, exhibition => exhibition.museum)
     exhibitions: Exhibition[];
 

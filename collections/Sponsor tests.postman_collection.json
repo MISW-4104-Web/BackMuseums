@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fe54c33c-fa1c-4b0f-8716-19ab79cbcf3a",
+		"_postman_id": "6788ab1f-4231-4906-9c62-24e2acd5a5b6",
 		"name": "Sponsor tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"sponsor_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"sponsor_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Sponsor 0\",\r\n    \"description\": \"Description 1\",\r\n    \"website\": \"google.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -64,13 +64,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors"
 					]
 				}
@@ -96,15 +96,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
-						"{{sponsor_id_1}}"
+						"{{sponsor_id}}"
 					]
 				}
 			},
@@ -128,13 +128,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
 						"0"
 					]
@@ -162,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Sponsor 1\",\r\n    \"description\": \"Description 1\",\r\n    \"website\": \"google.com\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,15 +170,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
-						"{{sponsor_id_1}}"
+						"{{sponsor_id}}"
 					]
 				}
 			},
@@ -201,14 +201,55 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
+						"sponsors",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent sponsor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The sponsor with the given id was not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
 						"sponsors",
 						"0"
 					]
@@ -233,47 +274,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/{{sponsor_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"sponsors",
-						"{{sponsor_id_1}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a non-existent artist",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; \r",
-							"tests[\"Correct error message\"] = responseBody.has(\"The sponsor with the given id was not found\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://{{host}}:{{port}}/sponsors/0",
-					"protocol": "http",
-					"host": [
-						"{{host}}"
-					],
-					"port": "{{port}}",
-					"path": [
-						"sponsors",
-						"0"
+						"{{sponsor_id}}"
 					]
 				}
 			},

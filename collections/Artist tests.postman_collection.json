@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "550a2bf8-2e0d-41d6-aa6f-ad178effce0f",
+		"_postman_id": "0f272a1d-25ba-4ffe-b11e-9c542b3b4226",
 		"name": "Artist tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -64,13 +64,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists"
 					]
 				}
@@ -96,15 +96,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
-						"{{artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},
@@ -128,13 +128,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"0"
 					]
@@ -162,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Málaga, Spain\",\r\n    \"birthdate\": \"10-25-1881\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Málaga, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,15 +170,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
-						"{{artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},
@@ -201,14 +201,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Málaga, Spain\",\r\n    \"birthdate\": \"10-25-1881\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"0"
 					]
@@ -233,15 +242,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/{{artist_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
-						"{{artist_id_1}}"
+						"{{artist_id}}"
 					]
 				}
 			},
@@ -265,13 +274,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/artists/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"artists",
 						"0"
 					]

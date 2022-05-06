@@ -30,6 +30,7 @@ export class MuseumService {
     museum.description = museumDTO.description;
     museum.address = museumDTO.address;
     museum.city = museumDTO.city;
+    museum.image = museumDTO.image;
     return await this.museumRepository.save(museum);
   }
 
@@ -42,6 +43,7 @@ export class MuseumService {
     museum.description = museumDTO.description;
     museum.address = museumDTO.address;
     museum.city = museumDTO.city;
+    museum.image = museumDTO.image;
 
     await this.museumRepository.save(museum);
     return museum;

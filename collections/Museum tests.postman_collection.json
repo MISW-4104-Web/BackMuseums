@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "31a80767-a063-401a-b20f-04da73a97e35",
+		"_postman_id": "5d17678c-baf3-495c-ae14-1c465c817668",
 		"name": "Museum tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museum_id_1\", data.id);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
 							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -25,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 0\",\r\n    \"city\": \"City 1\"\r\n}",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +33,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums"
 					]
 				}
@@ -64,13 +64,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums"
 					]
 				}
@@ -96,15 +96,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
-						"{{museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},
@@ -128,13 +128,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"0"
 					]
@@ -162,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Museum 1\",\r\n    \"description\": \"Description 1\",\r\n    \"address\": \"Address 1\",\r\n    \"city\": \"City 1\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Tha National Gallery of London\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,15 +170,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
-						"{{museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},
@@ -201,14 +201,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"0"
 					]
@@ -233,15 +242,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/{{museum_id_1}}",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
-						"{{museum_id_1}}"
+						"{{museum_id}}"
 					]
 				}
 			},
@@ -265,13 +274,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:{{port}}/museums/0",
-					"protocol": "http",
+					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
 					],
-					"port": "{{port}}",
 					"path": [
+						"api",
 						"museums",
 						"0"
 					]

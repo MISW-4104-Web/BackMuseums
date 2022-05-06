@@ -3,7 +3,7 @@ import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
 import { MovementArtistModule } from './movement-artist/movement-artist.module';
 import { ArtistMovementModule } from './artist-movement/artist-movement.module';
 import { SponsorModule } from './sponsor/sponsor.module';
-import { TypeModule } from './type/type.module';
+import { ArtworkTypeModule } from './artworktype/artworktype.module';
 import { MovementModule } from './movement/movement.module';
 import { ArtistModule } from './artist/artist.module';
 import { ImageModule } from './image/image.module';
@@ -19,6 +19,7 @@ import { Movement } from './movement/movement.entity';
 import { Artist } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
+import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 
 @Module({
   imports: [
@@ -26,8 +27,9 @@ import { Image } from './image/image.entity';
     MuseumArtworkModule,
     MovementArtistModule,
     ArtistMovementModule,
+    ArtistArtworkModule,
     SponsorModule,
-    TypeModule,
+    ArtworkTypeModule,
     MovementModule,
     ArtistModule,
     ImageModule,
@@ -36,17 +38,33 @@ import { Image } from './image/image.entity';
     MuseumModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://','').split(':')[1].split('@')[1] || process.env.DATABASE_URL || process.env.DB_HOST || 'localhost',
+      host: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://', '').split(':')[1].split('@')[1] || process.env.DATABASE_URL || process.env.DB_HOST || 'localhost',
       port: 5432,
-      username: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://','').split(':')[0] || process.env.DB_USER || 'postgres',
-      password: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://','').split(':')[1].split('@')[0] || process.env.DB_PASSWORD || 'postgres',
-      database: process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3] || process.env.DB_NAME || 'modern-art-museum',
+      username:
+        (process.env.DATABASE_URL &&
+          process.env.DATABASE_URL.replace('postgres://', '').split(':')[0]) ||
+        process.env.DB_USER ||
+        'postgres',
+      password:
+        (process.env.DATABASE_URL &&
+          process.env.DATABASE_URL.replace('postgres://', '')
+            .split(':')[1]
+            .split('@')[0]) ||
+        process.env.DB_PASSWORD ||
+        'postgres',
+      database:
+        (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
+        process.env.DB_NAME ||
+        'modern-art-museum',
       entities: [Artist, Artwork, Exhibition, Image, Movement, Museum, Sponsor],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
-      migrations: [__dirname + '/migration/**/*{.ts,.js}'],
+      migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
+      cli: {
+        migrationsDir: "src/migrations"
+      },
       extra: {
         ssl: {
           rejectUnauthorized: false
