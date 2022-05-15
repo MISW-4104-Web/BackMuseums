@@ -42,7 +42,7 @@ export class ExhibitionService {
   }
 
   async create(museumId: number, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
-    if (exhibitionDTO.sponsor == null)
+    if (exhibitionDTO.sponsor === null)
       throw new BusinessLogicException("The exhibition must have a sponsor association", BusinessError.PRECONDITION_FAILED);
 
     const sponsor = await this.sponsorRepository.findOne(exhibitionDTO.sponsor.id);
@@ -66,7 +66,7 @@ export class ExhibitionService {
     if (!exhibition)
     throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)
 
-    if (exhibitionDTO.sponsor == null)
+    if (exhibitionDTO.sponsor === null)
       throw new BusinessLogicException("The exhibition must have a sponsor association", BusinessError.PRECONDITION_FAILED);
 
     const sponsor = await this.sponsorRepository.findOne(exhibitionDTO.sponsor.id);
