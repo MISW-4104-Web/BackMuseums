@@ -3,5 +3,4 @@ export class MovementDTO {
   readonly name: string;
   readonly description: string;
   readonly countryOfOrigin: string;
-  readonly activeYears: string;
 }

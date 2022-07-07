@@ -29,7 +29,6 @@ export class MovementService {
     movement.name = movementDTO.name;
     movement.description = movementDTO.description;
     movement.countryOfOrigin = movementDTO.countryOfOrigin;
-    movement.activeYears = movementDTO.activeYears;
     
     return await this.movementRepository.save(movement);
   }
@@ -42,7 +41,6 @@ export class MovementService {
       movement.name = movementDTO.name;
       movement.description = movementDTO.description;
       movement.countryOfOrigin = movementDTO.countryOfOrigin;
-      movement.activeYears = movementDTO.activeYears;
       
       await this.movementRepository.save(movement);
       return movement;

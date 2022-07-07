@@ -3,23 +3,21 @@ import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, TableInher
 
 @Entity()
 export class Image {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  source: string;
-
-  @Column()
-  altText: string;
-
-  @Column()
-  height: number;
-
-  @Column()
-  width: number;
-
-  @ManyToOne(() => Artwork, artwork => artwork.images, {
-    onDelete: 'CASCADE'
-  })
-  artwork: Artwork;
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    source: string;
+  
+    @Column()
+    altText: string;
+  
+    @Column()
+    height: number;
+  
+    @Column()
+    width: number;
+  
+    @ManyToOne(() => Artwork, artwork => artwork.images)
+    artwork: Artwork;
 }

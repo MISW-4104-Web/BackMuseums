@@ -3,22 +3,19 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "t
 
 @Entity()
 export class Movement {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
+    @PrimaryGeneratedColumn()
+    id: number;
   
-  @Column()
-  countryOfOrigin: string;
-
-  @Column()
-  activeYears: string;
-
-  @ManyToMany(() => Artist, artist => artist.movements)
-  @JoinTable()
-  artists: Artist[];
+    @Column()
+    name: string;
+  
+    @Column()
+    description: string;
+    
+    @Column()
+    countryOfOrigin: string;
+  
+    @ManyToMany(() => Artist, artist => artist.movements)
+    @JoinTable()
+    artists: Artist[];
 }

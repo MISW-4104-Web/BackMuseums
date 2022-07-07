@@ -38,7 +38,14 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
     MuseumModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_URL && process.env.DATABASE_URL.replace('postgres://', '').split(':')[1].split('@')[1] || process.env.DATABASE_URL || process.env.DB_HOST || 'localhost',
+      host:
+        (process.env.DATABASE_URL &&
+          process.env.DATABASE_URL.replace('postgres://', '')
+            .split(':')[1]
+            .split('@')[1]) ||
+        process.env.DATABASE_URL ||
+        process.env.DB_HOST ||
+        'localhost',
       port: 5432,
       username:
         (process.env.DATABASE_URL &&
@@ -63,14 +70,14 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
       cli: {
-        migrationsDir: "src/migrations"
+        migrationsDir: 'src/migrations',
       },
       extra: {
-        ssl: {
-          rejectUnauthorized: false
-        }
-      }
+//        ssl: {
+//          rejectUnauthorized: false
+//        }
+      },
     }),
   ],
 })
-export class AppModule { }
+export class AppModule {}

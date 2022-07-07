@@ -5,26 +5,22 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 
 @Entity()
 export class Exhibition {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
-
-  @ManyToOne(() => Museum, museum => museum.exhibitions, {
-    onDelete: 'CASCADE'
-  })
-  museum: Museum;
-
-  @OneToMany(() => Artwork, artwork => artwork.exhibition)
-  artworks: Artwork[];
-
-  @OneToOne(() => Sponsor, sponsor => sponsor.exhibition, {
-    onDelete: 'CASCADE'
-  })
-  @JoinColumn()
-  sponsor: Sponsor;
+    @PrimaryGeneratedColumn()
+    id: number;
+  
+    @Column()
+    name: string;
+  
+    @Column()
+    description: string;
+  
+    @ManyToOne(() => Museum, museum => museum.exhibitions)
+    museum: Museum;
+  
+    @OneToMany(() => Artwork, artwork => artwork.exhibition)
+    artworks: Artwork[];
+  
+    @OneToOne(() => Sponsor, sponsor => sponsor.exhibition)
+    @JoinColumn()
+    sponsor: Sponsor;
 }
