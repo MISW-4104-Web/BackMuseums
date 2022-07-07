@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ArtworkDetailDTO } from 'src/artwork/artwork.detail.dto';
 import { ArtworkDTO } from 'src/artwork/artwork.dto';
 import { Artwork } from 'src/artwork/artwork.entity';
 import { ExhibitionDTO } from 'src/exhibition/exhibition.dto';
@@ -30,7 +31,7 @@ export class ExhibitionArtworkService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async findArtworkByExhibitionIdArtworkId(artworkId: string, exhibitionId: string): Promise<ArtworkDTO> {
+  async findArtworkByExhibitionIdArtworkId(artworkId: string, exhibitionId: string): Promise<ArtworkDetailDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -47,7 +48,7 @@ export class ExhibitionArtworkService {
       return exhibitionArtwork;
   }
 
-  async findArtworksByExhibitionId(exhibitionId: string): Promise<ArtworkDTO[]> {
+  async findArtworksByExhibitionId(exhibitionId: string): Promise<ArtworkDetailDTO[]> {
     const exhibition: Exhibition = await this.exhibitionRepository.findOne(exhibitionId, { relations : ["artworks"] });
     if (!exhibition)
       throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)

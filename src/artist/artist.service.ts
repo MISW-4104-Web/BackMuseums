@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
+import { ArtistDetailDTO } from './artist.detail.dto';
 import { ArtistDTO } from './artist.dto';
 import { Artist } from './artist.entity';
 
@@ -12,11 +13,11 @@ export class ArtistService {
     private readonly artistRepository: Repository<Artist>
   ) {}
 
-  async findAll(): Promise<ArtistDTO[]> {
+  async findAll(): Promise<ArtistDetailDTO[]> {
     return await this.artistRepository.find({ relations: ["movements", "artworks"] });
   }
 
-  async findOne(id: string): Promise<ArtistDTO> {
+  async findOne(id: string): Promise<ArtistDetailDTO> {
     const artist = await this.artistRepository.findOne(id, { relations: ["movements", "artworks"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)

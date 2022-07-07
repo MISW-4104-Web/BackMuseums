@@ -4,6 +4,7 @@ import { Museum } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Sponsor } from 'src/sponsor/sponsor.entity';
 import { Repository } from 'typeorm';
+import { ExhibitionDetailDTO } from './exhibition.detail.dto';
 import { ExhibitionDTO } from './exhibition.dto';
 import { Exhibition } from './exhibition.entity';
 
@@ -18,14 +19,14 @@ export class ExhibitionService {
     private readonly museumRepository: Repository<Museum>
   ) {}
 
-  async findAll(museumId: string): Promise<ExhibitionDTO[]> {
+  async findAll(museumId: string): Promise<ExhibitionDetailDTO[]> {
     const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions', 'exhibitions.sponsor', 'exhibitions.artworks'] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
     return museum.exhibitions;
   }
 
-  async findOne(museumId: string, exhibitionId: string): Promise<ExhibitionDTO> {
+  async findOne(museumId: string, exhibitionId: string): Promise<ExhibitionDetailDTO> {
     const museum = await this.museumRepository.findOne(museumId, { relations: ["exhibitions"]});
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);

@@ -5,6 +5,7 @@ import { Exhibition } from 'src/exhibition/exhibition.entity';
 import { Museum } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
+import { ArtworkDetailDTO } from './artwork.detail.dto';
 import { ArtworkDTO } from './artwork.dto';
 import { Artwork } from './artwork.entity';
 
@@ -21,11 +22,11 @@ export class ArtworkService {
     private readonly artistRepository: Repository<Artist>,
   ) { }
 
-  async findAll(): Promise<ArtworkDTO[]> {
+  async findAll(): Promise<ArtworkDetailDTO[]> {
     return await this.artworkRepository.find({ relations: ["images", "artist"] });
   }
 
-  async findOne(artworkId: string): Promise<ArtworkDTO> {
+  async findOne(artworkId: string): Promise<ArtworkDetailDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId, { relations: ["images", "artist"] });
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)

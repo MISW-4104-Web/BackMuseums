@@ -6,6 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtistDTO } from 'src/artist/artist.dto';
 import { Artist } from 'src/artist/artist.entity';
+import { MovementDetailDTO } from 'src/movement/movement.detail.dto';
 import { MovementDTO } from 'src/movement/movement.dto';
 import { Movement } from 'src/movement/movement.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
@@ -34,7 +35,7 @@ export class ArtistMovementService {
     return await this.artistRepository.save(artist);
   }
 
-  async findMovementByArtistIdMovementId(movementId: string, artistId: string): Promise<MovementDTO> {
+  async findMovementByArtistIdMovementId(movementId: string, artistId: string): Promise<MovementDetailDTO> {
     const movement = await this.movementRepository.findOne(movementId);
       if (!movement)
         throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
@@ -51,12 +52,12 @@ export class ArtistMovementService {
       return artistMovement;
   }
 
-  async findMovementsByArtistId(artistId: string): Promise<MovementDTO[]> {
+  async findMovementsByArtistId(artistId: string): Promise<MovementDetailDTO[]> {
     const artist: Artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 
-    return artist.movements.filter(p => p.constructor.name === "Movement")
+    return artist.movements/*.filter(p => p.constructor.name === "Movement")*/
   }
 
   async associateArtistMovement(artistId: string, movementDTO: MovementDTO[]): Promise<ArtistDTO> {

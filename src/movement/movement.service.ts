@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
+import { MovementDetailDTO } from './movement.detail.dto';
 import { MovementDTO } from './movement.dto';
 import { Movement } from './movement.entity';
 
@@ -12,11 +13,11 @@ export class MovementService {
     private readonly movementRepository: Repository<Movement>
   ) {}
 
-  async findAll(): Promise<MovementDTO[]> {
+  async findAll(): Promise<MovementDetailDTO[]> {
     return await this.movementRepository.find();
   }
 
-  async findOne(id: string): Promise<MovementDTO> {
+  async findOne(id: string): Promise<MovementDetailDTO> {
     const movement = await this.movementRepository.findOne(id, { relations: ["artists"] });
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)

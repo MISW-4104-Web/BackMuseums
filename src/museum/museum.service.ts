@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
+import { MuseumDetailDTO } from './museum.detail.dto';
 import { MuseumDTO } from './museum.dto';
 import { Museum } from './museum.entity';
 
@@ -12,11 +13,11 @@ export class MuseumService {
     private readonly museumRepository: Repository<Museum>
   ) {}
 
-  async findAll(): Promise<MuseumDTO[]> {
+  async findAll(): Promise<MuseumDetailDTO[]> {
     return await this.museumRepository.find({ relations: ["artworks", "exhibitions"] });
   }
 
-  async findOne(id: string): Promise<MuseumDTO> {
+  async findOne(id: string): Promise<MuseumDetailDTO> {
     const museum = await this.museumRepository.findOne(id, { relations: ["artworks", "exhibitions"] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
