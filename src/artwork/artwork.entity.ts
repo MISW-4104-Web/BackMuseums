@@ -7,8 +7,8 @@ import { Image } from "src/image/image.entity";
 
 @Entity()
 export class Artwork {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
   
     @Column()
     name: string;

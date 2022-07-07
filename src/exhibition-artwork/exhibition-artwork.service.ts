@@ -17,7 +17,7 @@ export class ExhibitionArtworkService {
     private readonly artworkRepository: Repository<Artwork>
   ) {}
 
-  async addExhibitionArtwork(exhibitionId: number, artworkId: number): Promise<ExhibitionDTO> {
+  async addExhibitionArtwork(exhibitionId: string, artworkId: string): Promise<ExhibitionDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
@@ -30,7 +30,7 @@ export class ExhibitionArtworkService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async findArtworkByExhibitionIdArtworkId(artworkId: number, exhibitionId: number): Promise<ArtworkDTO> {
+  async findArtworkByExhibitionIdArtworkId(artworkId: string, exhibitionId: string): Promise<ArtworkDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -47,7 +47,7 @@ export class ExhibitionArtworkService {
       return exhibitionArtwork;
   }
 
-  async findArtworksByExhibitionId(exhibitionId: number): Promise<ArtworkDTO[]> {
+  async findArtworksByExhibitionId(exhibitionId: string): Promise<ArtworkDTO[]> {
     const exhibition: Exhibition = await this.exhibitionRepository.findOne(exhibitionId, { relations : ["artworks"] });
     if (!exhibition)
       throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)
@@ -55,7 +55,7 @@ export class ExhibitionArtworkService {
     return exhibition.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateExhibitionArtwork(exhibitionId: number, artworkDTO: ArtworkDTO[]): Promise<ExhibitionDTO> {
+  async associateExhibitionArtwork(exhibitionId: string, artworkDTO: ArtworkDTO[]): Promise<ExhibitionDTO> {
     const exhibition = await this.exhibitionRepository.findOne(exhibitionId, { relations : ["artworks"] });
 
     if (!exhibition)
@@ -75,7 +75,7 @@ export class ExhibitionArtworkService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async deleteArtworkToExhibition(artworkId: number, exhibitionId: number): Promise<ExhibitionDTO> {
+  async deleteArtworkToExhibition(artworkId: string, exhibitionId: string): Promise<ExhibitionDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)

@@ -3,8 +3,8 @@ import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, TableInher
 
 @Entity()
 export class Image {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
   
     @Column()
     source: string;

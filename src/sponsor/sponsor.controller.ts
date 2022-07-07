@@ -14,7 +14,7 @@ export class SponsorController {
   }
 
   @Get(':sponsorId')
-  async findOne(@Param('sponsorId') sponsorId: number) {
+  async findOne(@Param('sponsorId') sponsorId: string) {
     return await this.sponsorService.findOne(sponsorId);
   }
 
@@ -25,13 +25,13 @@ export class SponsorController {
   }
 
   @Put(':sponsorId')
-  async update(@Param('sponsorId') sponsorId: number, @Body() sponsorDTO: SponsorDTO) {
+  async update(@Param('sponsorId') sponsorId: string, @Body() sponsorDTO: SponsorDTO) {
     return await this.sponsorService.update(sponsorId, sponsorDTO);
   }
 
   @Delete(':sponsorId')
   @HttpCode(204)
-  async delete(@Param('sponsorId') sponsorId: number) {
+  async delete(@Param('sponsorId') sponsorId: string) {
     return await this.sponsorService.delete(sponsorId);
   }
 }

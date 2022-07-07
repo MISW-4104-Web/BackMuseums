@@ -18,14 +18,14 @@ export class ExhibitionService {
     private readonly museumRepository: Repository<Museum>
   ) {}
 
-  async findAll(museumId: number): Promise<ExhibitionDTO[]> {
+  async findAll(museumId: string): Promise<ExhibitionDTO[]> {
     const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions', 'exhibitions.sponsor', 'exhibitions.artworks'] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
     return museum.exhibitions;
   }
 
-  async findOne(museumId: number, exhibitionId: number): Promise<ExhibitionDTO> {
+  async findOne(museumId: string, exhibitionId: string): Promise<ExhibitionDTO> {
     const museum = await this.museumRepository.findOne(museumId, { relations: ["exhibitions"]});
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
@@ -41,7 +41,7 @@ export class ExhibitionService {
     return exhibition;
   }
 
-  async create(museumId: number, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
+  async create(museumId: string, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
     if (exhibitionDTO.sponsor == null)
       throw new BusinessLogicException("The exhibition must have a sponsor association", BusinessError.PRECONDITION_FAILED);
 
@@ -61,7 +61,7 @@ export class ExhibitionService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async update(museumId: number, exhibitionId: number, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
+  async update(museumId: string, exhibitionId: string, exhibitionDTO: ExhibitionDTO): Promise<ExhibitionDTO> {
     const exhibition = await this.exhibitionRepository.findOne(exhibitionId);
     if (!exhibition)
     throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)
@@ -86,7 +86,7 @@ export class ExhibitionService {
     return exhibition;
   }
 
-  async delete(museumId: number, exhibitionId: number) {
+  async delete(museumId: string, exhibitionId: string) {
     const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions'] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);

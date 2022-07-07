@@ -1,5 +1,5 @@
 export class ArtistDTO {
-  readonly id: number;
+  readonly id: string;
   readonly name: string;
   readonly birthplace: string;
   readonly birthdate: Date;

@@ -19,7 +19,7 @@ export class SponsorService {
     return await this.sponsorRepository.find({ relations: ["exhibition"] });
   }
 
-  async findOne(id: number): Promise<SponsorDTO> {
+  async findOne(id: string): Promise<SponsorDTO> {
     const sponsor = await this.sponsorRepository.findOne(id, { relations: ["exhibition"] });
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
@@ -42,7 +42,7 @@ export class SponsorService {
     return await this.sponsorRepository.save(sponsor);
   }
 
-  async update(id: number, sponsorDTO: SponsorDTO): Promise<SponsorDTO> {
+  async update(id: string, sponsorDTO: SponsorDTO): Promise<SponsorDTO> {
     const sponsor = await this.sponsorRepository.findOne(id);
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
@@ -62,7 +62,7 @@ export class SponsorService {
     return sponsor;
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const sponsor = await this.sponsorRepository.findOne(id);
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)

@@ -16,7 +16,7 @@ export class MuseumService {
     return await this.museumRepository.find({ relations: ["artworks", "exhibitions"] });
   }
 
-  async findOne(id: number): Promise<MuseumDTO> {
+  async findOne(id: string): Promise<MuseumDTO> {
     const museum = await this.museumRepository.findOne(id, { relations: ["artworks", "exhibitions"] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
@@ -34,7 +34,7 @@ export class MuseumService {
     return await this.museumRepository.save(museum);
   }
 
-  async update(id: number, museumDTO: MuseumDTO): Promise<MuseumDTO> {
+  async update(id: string, museumDTO: MuseumDTO): Promise<MuseumDTO> {
     const museum = await this.museumRepository.findOne(id);
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
@@ -49,7 +49,7 @@ export class MuseumService {
     return museum;
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const museum = await this.museumRepository.findOne(id);
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)

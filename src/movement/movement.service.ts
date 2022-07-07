@@ -16,7 +16,7 @@ export class MovementService {
     return await this.movementRepository.find();
   }
 
-  async findOne(id: number): Promise<MovementDTO> {
+  async findOne(id: string): Promise<MovementDTO> {
     const movement = await this.movementRepository.findOne(id, { relations: ["artists"] });
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
@@ -33,7 +33,7 @@ export class MovementService {
     return await this.movementRepository.save(movement);
   }
 
-  async update(id: number, movementDTO: MovementDTO): Promise<MovementDTO> {
+  async update(id: string, movementDTO: MovementDTO): Promise<MovementDTO> {
     const movement = await this.movementRepository.findOne(id);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
@@ -47,7 +47,7 @@ export class MovementService {
     }
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const movement = await this.movementRepository.findOne(id);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)

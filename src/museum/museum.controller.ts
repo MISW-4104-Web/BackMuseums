@@ -14,7 +14,7 @@ export class MuseumController {
   }
 
   @Get(':museumId')
-  async findOne(@Param('museumId') museumId: number) {
+  async findOne(@Param('museumId') museumId: string) {
     return await this.museumService.findOne(museumId);
   }
 
@@ -25,13 +25,13 @@ export class MuseumController {
   }
 
   @Put(':museumId')
-  async update(@Param('museumId') museumId: number, @Body() museumDTO: MuseumDTO) {
+  async update(@Param('museumId') museumId: string, @Body() museumDTO: MuseumDTO) {
     return await this.museumService.update(museumId, museumDTO);
   }
 
   @Delete(':museumId')
   @HttpCode(204)
-  async delete(@Param('museumId') museumId: number) {
+  async delete(@Param('museumId') museumId: string) {
     return await this.museumService.delete(museumId);
   }
 }

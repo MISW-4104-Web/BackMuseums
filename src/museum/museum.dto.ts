@@ -1,5 +1,5 @@
 export class MuseumDTO {
-  readonly id: number;
+  readonly id: string;
   readonly name: string;
   readonly description: string;
   readonly address: string;

@@ -9,29 +9,29 @@ export class ExhibitionController {
   constructor(private readonly exhibitionService: ExhibitionService) {}
 
   @Get('/:museumId/exhibitions/')
-  async findAll(@Param('museumId') museumId: number) {
+  async findAll(@Param('museumId') museumId: string) {
     return await this.exhibitionService.findAll(museumId);
   }
 
   @Get('/:museumId/exhibitions/:exhibitionId')
-  async findOne(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number) {
+  async findOne(@Param('museumId') museumId: string, @Param('exhibitionId') exhibitionId: string) {
     return await this.exhibitionService.findOne(museumId, exhibitionId);
   }
 
   @Post('/:museumId/exhibitions/')
   @HttpCode(200)
-  async create(@Param('museumId') museumId: number, @Body() exhibitionDTO: ExhibitionDTO) {
+  async create(@Param('museumId') museumId: string, @Body() exhibitionDTO: ExhibitionDTO) {
     return await this.exhibitionService.create(museumId, exhibitionDTO);
   }
 
   @Put('/:museumId/exhibitions/:exhibitionId')
-  async update(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number, @Body() exhibitionDTO: ExhibitionDTO) {
+  async update(@Param('museumId') museumId: string, @Param('exhibitionId') exhibitionId: string, @Body() exhibitionDTO: ExhibitionDTO) {
     return await this.exhibitionService.update(museumId, exhibitionId, exhibitionDTO);
   }
 
   @Delete('/:museumId/exhibitions/:exhibitionId')
   @HttpCode(204)
-  async delete(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number) {
+  async delete(@Param('museumId') museumId: string, @Param('exhibitionId') exhibitionId: string) {
     return await this.exhibitionService.delete(museumId, exhibitionId);
   }
 }

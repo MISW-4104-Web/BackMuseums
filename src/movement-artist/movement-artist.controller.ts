@@ -13,29 +13,29 @@ export class MovementArtistController {
   constructor(private readonly movementArtistService: MovementArtistService) {}
 
   @Get(':movementId/artists/:artistId')
-  async findArtistByMovementIdArtistId(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
+  async findArtistByMovementIdArtistId(@Param('artistId') artistId: string, @Param('movementId') movementId: string) {
     return await this.movementArtistService.findArtistByMovementIdArtistId(artistId, movementId);
   }
 
   @Get(':movementId/artists')
-  async findArtistsByMovementId(@Param('movementId') movementId: number) {
+  async findArtistsByMovementId(@Param('movementId') movementId: string) {
     return await this.movementArtistService.findArtistsByMovementId(movementId);
   }
 
   @Post(':movementId/artists/:artistId/')
   @HttpCode(200)
-  async addMovementArtist(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
+  async addMovementArtist(@Param('artistId') artistId: string, @Param('movementId') movementId: string) {
     return await this.movementArtistService.addMovementArtist(movementId, artistId);
   }
 
   @Put(':movementId/artists')
-  async associateMovementArtist(@Param('movementId') movementId: number, @Body() artistDTO: ArtistDTO[]) {
+  async associateMovementArtist(@Param('movementId') movementId: string, @Body() artistDTO: ArtistDTO[]) {
     return await this.movementArtistService.associateMovementArtist(movementId, artistDTO);
   }
 
   @Delete(':movementId/artists/:artistId')
   @HttpCode(204)
-  async deleteArtistToMovement(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
+  async deleteArtistToMovement(@Param('artistId') artistId: string, @Param('movementId') movementId: string) {
     return await this.movementArtistService.deleteArtistToMovement(artistId, movementId);
   }
 }

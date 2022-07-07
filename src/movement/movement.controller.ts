@@ -14,7 +14,7 @@ export class MovementController {
   }
 
   @Get(':movementId')
-  async findOne(@Param('movementId') movementId: number) {
+  async findOne(@Param('movementId') movementId: string) {
     return await this.movementService.findOne(movementId);
   }
 
@@ -25,13 +25,13 @@ export class MovementController {
   }
 
   @Put(':movementId')
-  async update(@Param('movementId') movementId: number, @Body() movementDTO: MovementDTO) {
+  async update(@Param('movementId') movementId: string, @Body() movementDTO: MovementDTO) {
     return await this.movementService.update(movementId, movementDTO);
   }
 
   @Delete(':movementId')
   @HttpCode(204)
-  async delete(@Param('movementId') movementId: number) {
+  async delete(@Param('movementId') movementId: string) {
     return await this.movementService.delete(movementId);
   }
 }

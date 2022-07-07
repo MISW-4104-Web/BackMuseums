@@ -16,7 +16,7 @@ export class ArtistService {
     return await this.artistRepository.find({ relations: ["movements", "artworks"] });
   }
 
-  async findOne(id: number): Promise<ArtistDTO> {
+  async findOne(id: string): Promise<ArtistDTO> {
     const artist = await this.artistRepository.findOne(id, { relations: ["movements", "artworks"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
@@ -33,7 +33,7 @@ export class ArtistService {
     return await this.artistRepository.save(artist);
   }
 
-  async update(id: number, artistDTO: ArtistDTO): Promise<ArtistDTO> {
+  async update(id: string, artistDTO: ArtistDTO): Promise<ArtistDTO> {
     const artist = await this.artistRepository.findOne(id);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
@@ -47,7 +47,7 @@ export class ArtistService {
     return artist;
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const artist = await this.artistRepository.findOne(id);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)

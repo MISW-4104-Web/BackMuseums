@@ -21,14 +21,14 @@ export class ArtistArtworkService {
         private readonly artistRepository: Repository<Artist>,
     ) { }
 
-    async findAll(artistId: number): Promise<ArtworkDTO[]> {
+    async findAll(artistId: string): Promise<ArtworkDTO[]> {
         const artist = await this.artistRepository.findOne(artistId, { relations: ['artworks'] });
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
         return artist.artworks;
     }
 
-    async findOne(artistId: number, artworkId: number): Promise<ArtworkDTO> {
+    async findOne(artistId: string, artworkId: string): Promise<ArtworkDTO> {
         const artist = await this.artistRepository.findOne(artistId, { relations: ["artworks"] });
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -44,7 +44,7 @@ export class ArtistArtworkService {
         return artwork;
     }
 
-    async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
+    async create(artistId: string, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
         let museum = null;
         if (artworkDTO.museum != null) {
             museum = await this.museumRepository.findOne(artworkDTO.museum.id);
@@ -75,7 +75,7 @@ export class ArtistArtworkService {
         return await this.artworkRepository.save(artwork);
     }
 
-    async update(artistId: number, artworkId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
+    async update(artistId: string, artworkId: string, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
         const artwork = await this.artworkRepository.findOne(artworkId);
         if (!artwork)
             throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -114,7 +114,7 @@ export class ArtistArtworkService {
         return artwork;
     }
 
-    async delete(artistId: number, artworkId: number) {
+    async delete(artistId: string, artworkId: string) {
         const artist = await this.artistRepository.findOne(artistId, { relations: ['artworks'] });
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)

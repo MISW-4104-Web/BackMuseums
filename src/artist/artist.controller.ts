@@ -14,7 +14,7 @@ export class ArtistController {
   }
 
   @Get(':artistId')
-  async findOne(@Param('artistId') artistId: number) {
+  async findOne(@Param('artistId') artistId: string) {
     return await this.artistService.findOne(artistId);
   }
 
@@ -25,13 +25,13 @@ export class ArtistController {
   }
 
   @Put(':artistId')
-  async update(@Param('artistId') artistId: number, @Body() artistDTO: ArtistDTO) {
+  async update(@Param('artistId') artistId: string, @Body() artistDTO: ArtistDTO) {
     return await this.artistService.update(artistId, artistDTO);
   }
 
   @Delete(':artistId')
   @HttpCode(204)
-  async delete(@Param('artistId') artistId: number) {
+  async delete(@Param('artistId') artistId: string) {
     return await this.artistService.delete(artistId);
   }
 }

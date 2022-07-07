@@ -4,7 +4,7 @@ import { Museum } from "src/museum/museum.entity";
 import { ARTWORK_TYPE } from "src/artworktype/artworktype.enum";
 
 export class ArtworkDTO {
-  readonly id: number;
+  readonly id: string;
   readonly name: string;
   readonly year: number;
   readonly description: string;

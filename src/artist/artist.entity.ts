@@ -4,8 +4,8 @@ import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn
 
 @Entity()
 export class Artist {
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
   
     @Column()
     name: string;

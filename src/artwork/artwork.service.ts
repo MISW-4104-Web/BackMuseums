@@ -25,7 +25,7 @@ export class ArtworkService {
     return await this.artworkRepository.find({ relations: ["images", "artist"] });
   }
 
-  async findOne(artworkId: number): Promise<ArtworkDTO> {
+  async findOne(artworkId: string): Promise<ArtworkDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId, { relations: ["images", "artist"] });
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -33,7 +33,7 @@ export class ArtworkService {
   }
 
   /*
-  async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
+  async create(artistId: string, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
     let museum = null;
     if (artworkDTO.museum != null) {
       museum = await this.museumRepository.findOne(artworkDTO.museum.id);
@@ -64,7 +64,7 @@ export class ArtworkService {
     return await this.artworkRepository.save(artwork);
   }
 
-  async update(artistId: number, artworkId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
+  async update(artistId: string, artworkId: string, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -100,7 +100,7 @@ export class ArtworkService {
     return artwork;
   }
 
-  async delete(artistId: number, artworkId: number) {
+  async delete(artistId: string, artworkId: string) {
     const artist = await this.artistRepository.findOne(artistId, { relations: ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)

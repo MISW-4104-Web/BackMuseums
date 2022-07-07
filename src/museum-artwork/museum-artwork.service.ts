@@ -21,7 +21,7 @@ export class MuseumArtworkService {
     private readonly artworkRepository: Repository<Artwork>
   ) {}
 
-  async addMuseumArtwork(museumId: number, artworkId: number): Promise<MuseumDTO> {
+  async addMuseumArtwork(museumId: string, artworkId: string): Promise<MuseumDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
@@ -34,7 +34,7 @@ export class MuseumArtworkService {
     return await this.museumRepository.save(museum);
   }
 
-  async findArtworkByMuseumIdArtworkId(artworkId: number, museumId: number): Promise<ArtworkDTO> {
+  async findArtworkByMuseumIdArtworkId(artworkId: string, museumId: string): Promise<ArtworkDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -51,7 +51,7 @@ export class MuseumArtworkService {
       return museumArtwork;
   }
 
-  async findArtworksByMuseumId(museumId: number): Promise<ArtworkDTO[]> {
+  async findArtworksByMuseumId(museumId: string): Promise<ArtworkDTO[]> {
     const museum: Museum = await this.museumRepository.findOne(museumId, { relations : ["artworks"] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
@@ -59,7 +59,7 @@ export class MuseumArtworkService {
     return museum.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateMuseumArtwork(museumId: number, artworkDTO: ArtworkDTO[]): Promise<MuseumDTO> {
+  async associateMuseumArtwork(museumId: string, artworkDTO: ArtworkDTO[]): Promise<MuseumDTO> {
     const museum = await this.museumRepository.findOne(museumId, { relations : ["artworks"] });
 
     if (!museum)
@@ -79,7 +79,7 @@ export class MuseumArtworkService {
     return await this.museumRepository.save(museum);
   }
 
-  async deleteArtworkToMuseum(artworkId: number, museumId: number): Promise<MuseumDTO> {
+  async deleteArtworkToMuseum(artworkId: string, museumId: string): Promise<MuseumDTO> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)

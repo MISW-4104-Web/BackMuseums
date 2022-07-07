@@ -18,7 +18,7 @@ export class ImageService {
     private readonly artistRepository: Repository<Artist>
   ) {}
 
-  async findAll(artistId: number, artworkId: number): Promise<ImageDTO[]> {
+  async findAll(artistId: string, artworkId: string): Promise<ImageDTO[]> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -30,7 +30,7 @@ export class ImageService {
     return artwork.images;
   }
 
-  async findOne(artistId: number, artworkId: number, imageId: number): Promise<ImageDTO> {
+  async findOne(artistId: string, artworkId: string, imageId: string): Promise<ImageDTO> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -51,7 +51,7 @@ export class ImageService {
 
   }
 
-  async create(artistId: number, artworkId: number, imageDTO: ImageDTO): Promise<ImageDTO> {
+  async create(artistId: string, artworkId: string, imageDTO: ImageDTO): Promise<ImageDTO> {
     /*if (imageDTO.artwork == null)
       throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);*/
 
@@ -72,7 +72,7 @@ export class ImageService {
     return await this.imageRepository.save(image);
   }
 
-  async update(artistId: number, artworkId: number, imageId: number, imageDTO: ImageDTO): Promise<ImageDTO> {
+  async update(artistId: string, artworkId: string, imageId: string, imageDTO: ImageDTO): Promise<ImageDTO> {
     const image = await this.imageRepository.findOne(imageId);
     if (!image)
     throw new BusinessLogicException("The image with the given id was not found", BusinessError.NOT_FOUND)
@@ -98,7 +98,7 @@ export class ImageService {
     return image;
   }
 
-  async delete(artistId: number, artworkId: number, imageId: number) {
+  async delete(artistId: string, artworkId: string, imageId: string) {
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);

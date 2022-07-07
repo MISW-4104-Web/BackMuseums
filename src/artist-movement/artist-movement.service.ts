@@ -21,7 +21,7 @@ export class ArtistMovementService {
     private readonly movementRepository: Repository<Movement>
   ) {}
 
-  async addArtistMovement(artistId: number, movementId: number): Promise<ArtistDTO> {
+  async addArtistMovement(artistId: string, movementId: string): Promise<ArtistDTO> {
     const movement = await this.movementRepository.findOne(movementId);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND);
@@ -34,7 +34,7 @@ export class ArtistMovementService {
     return await this.artistRepository.save(artist);
   }
 
-  async findMovementByArtistIdMovementId(movementId: number, artistId: number): Promise<MovementDTO> {
+  async findMovementByArtistIdMovementId(movementId: string, artistId: string): Promise<MovementDTO> {
     const movement = await this.movementRepository.findOne(movementId);
       if (!movement)
         throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
@@ -51,7 +51,7 @@ export class ArtistMovementService {
       return artistMovement;
   }
 
-  async findMovementsByArtistId(artistId: number): Promise<MovementDTO[]> {
+  async findMovementsByArtistId(artistId: string): Promise<MovementDTO[]> {
     const artist: Artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
@@ -59,7 +59,7 @@ export class ArtistMovementService {
     return artist.movements.filter(p => p.constructor.name === "Movement")
   }
 
-  async associateArtistMovement(artistId: number, movementDTO: MovementDTO[]): Promise<ArtistDTO> {
+  async associateArtistMovement(artistId: string, movementDTO: MovementDTO[]): Promise<ArtistDTO> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
 
     if (!artist)
@@ -79,7 +79,7 @@ export class ArtistMovementService {
     return await this.artistRepository.save(artist);
   }
 
-  async deleteMovementToArtist(movementId: number, artistId: number): Promise<ArtistDTO> {
+  async deleteMovementToArtist(movementId: string, artistId: string): Promise<ArtistDTO> {
     const movement = await this.movementRepository.findOne(movementId);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)

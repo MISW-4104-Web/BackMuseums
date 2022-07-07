@@ -1,7 +1,7 @@
 import { Artwork } from "src/artwork/artwork.entity";
 
 export class ImageDTO {
-  readonly id: number;
+  readonly id: string;
   readonly source: string;
   readonly altText: string;
   readonly height: number;

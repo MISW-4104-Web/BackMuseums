@@ -9,29 +9,29 @@ export class ArtistArtworkController {
     constructor(private readonly artworkService: ArtistArtworkService) { }
 
     @Get('/:artistId/artworks/:artworkId')
-    async findOne(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+    async findOne(@Param('artistId') artistId: string, @Param('artworkId') artworkId: string) {
         return await this.artworkService.findOne(artistId, artworkId);
     }
 
     @Get('/:artistId/artworks')
-    async findAll(@Param('artistId') artistId: number) {
+    async findAll(@Param('artistId') artistId: string) {
         return await this.artworkService.findAll(artistId);
     }
 
     @Post('/:artistId/artworks')
     @HttpCode(200)
-    async create(@Param('artistId') artistId: number, @Body() artworkDTO: ArtworkDTO) {
+    async create(@Param('artistId') artistId: string, @Body() artworkDTO: ArtworkDTO) {
         return await this.artworkService.create(artistId, artworkDTO);
     }
 
     @Put('/:artistId/artworks/:artworkId')
-    async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() artworkDTO: ArtworkDTO) {
+    async update(@Param('artistId') artistId: string, @Param('artworkId') artworkId: string, @Body() artworkDTO: ArtworkDTO) {
         return await this.artworkService.update(artistId, artworkId, artworkDTO);
     }
 
     @Delete('/:artistId/artworks/:artworkId')
     @HttpCode(204)
-    async delete(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+    async delete(@Param('artistId') artistId: string, @Param('artworkId') artworkId: string) {
         return await this.artworkService.delete(artistId, artworkId);
     }
 }
