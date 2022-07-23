@@ -1,9 +1,9 @@
-import { Exhibition } from "src/exhibition/exhibition.entity";
-import { Museum } from "src/museum/museum.entity";
+import { Exhibition } from "../exhibition/exhibition.entity";
+import { Museum } from "../museum/museum.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Artist } from "src/artist/artist.entity";
-import { ARTWORK_TYPE } from "src/artworktype/artworktype.enum";
-import { Image } from "src/image/image.entity";
+import { Artist } from "../artist/artist.entity";
+import { ARTWORK_TYPE } from "../artworktype/artworktype.enum";
+import { Image } from "../image/image.entity";
 
 @Entity()
 export class Artwork {

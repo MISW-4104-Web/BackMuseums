@@ -1,5 +1,5 @@
-import { Artwork } from 'src/artwork/artwork.entity';
-import { Exhibition } from 'src/exhibition/exhibition.entity';
+import { Artwork } from '../artwork/artwork.entity';
+import { Exhibition } from '../exhibition/exhibition.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()

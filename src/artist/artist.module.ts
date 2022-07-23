@@ -3,10 +3,11 @@ import { ArtistService } from './artist.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Artist } from './artist.entity';
+import { ArService } from './ar/ar.service';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Artist])],
     controllers: [ArtistController],
-    providers: [ArtistService],
+    providers: [ArtistService, ArService],
 })
 export class ArtistModule { }

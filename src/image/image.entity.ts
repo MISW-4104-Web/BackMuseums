@@ -1,4 +1,4 @@
-import { Artwork } from "src/artwork/artwork.entity";
+import { Artwork } from "../artwork/artwork.entity";
 import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 
 @Entity()
