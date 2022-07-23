@@ -66,9 +66,9 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
         migrationsDir: "src/migrations"
       },
       extra: {
-        ssl: {
+        /*ssl: {
           rejectUnauthorized: false
-        }
+        }*/
       }
     }),
   ],

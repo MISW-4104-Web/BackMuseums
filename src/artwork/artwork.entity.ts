@@ -19,11 +19,14 @@ export class Artwork {
   @Column()
   description: string;
 
-  @Column({
+  /*@Column({
     type: "enum",
     enum: ARTWORK_TYPE,
   })
-  type: ARTWORK_TYPE;
+  type: ARTWORK_TYPE;*/
+
+  @Column()
+  type: string;
 
   @Column({
     nullable: true
