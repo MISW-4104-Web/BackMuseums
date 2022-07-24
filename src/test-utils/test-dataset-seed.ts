@@ -7,11 +7,13 @@ export const testDatasetSeed = async () => {
 
   entityManager.clear<Artist>(Artist);
 
-  entityManager.insert<Artist>(Artist, {
+  const artist = await entityManager.insert<Artist>(Artist, {
     name: "moa",
     birthplace: "place",
     birthdate: new Date(),
     image: "image"
   });
+
+  console.log("ART", artist.generatedMaps[0].id)
 
 };

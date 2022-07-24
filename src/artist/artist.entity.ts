@@ -1,6 +1,6 @@
 import { Artwork } from "../artwork/artwork.entity";
 import { Movement } from "../movement/movement.entity";
-import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Artist {

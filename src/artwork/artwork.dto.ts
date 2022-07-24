@@ -8,7 +8,7 @@ export class ArtworkDTO {
   readonly name: string;
   readonly year: number;
   readonly description: string;
-  readonly type: ARTWORK_TYPE;
+  readonly type: string; //ARTWORK_TYPE;
   readonly mainImage: string;
   readonly museum: Museum;
   readonly exhibition: Exhibition;

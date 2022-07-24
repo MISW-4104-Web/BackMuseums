@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ArtistService } from './artist.service';
 import { TypeOrmSQLITETestingModule } from '../test-utils/typeorm-testing'
 import { testDatasetSeed } from '../test-utils/test-dataset-seed';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 
 describe('ArtistService', () => {
   let service: ArtistService;
@@ -21,8 +22,12 @@ describe('ArtistService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should return artist info for findOne', async () => {
+  it('should return all artists', async () => {
     const artists = await service.findAll();  
     expect(artists).toHaveLength(1)
+  });
+
+  it('should return exception when get an invalid artist', async () => {
+    await expect(() => service.findOne(0)).rejects.toHaveProperty("message", "The artist with the given id was not found")
   });
 });
