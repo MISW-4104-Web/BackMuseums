@@ -20,6 +20,9 @@ import { Artist } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -78,6 +81,9 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 //        }
       },
     }),
+    AuthModule,
+    UsersModule,
   ],
+  controllers: [AppController]
 })
 export class AppModule {}

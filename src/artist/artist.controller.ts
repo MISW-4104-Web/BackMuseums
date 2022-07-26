@@ -1,13 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors, UseGuards } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { ArtistDTO } from './artist.dto';
 import { ArtistService } from './artist.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('artists')
+//@UseGuards(JwtAuthGuard)
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 
+//  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return await this.artistService.findAll();
