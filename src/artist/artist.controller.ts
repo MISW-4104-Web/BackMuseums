@@ -5,7 +5,7 @@ import { ArtistService } from './artist.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('artists')
-//@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}

@@ -39,6 +39,8 @@ import { AppController } from './app.controller';
     ArtworkModule,
     ExhibitionModule,
     MuseumModule,
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host:
@@ -52,7 +54,8 @@ import { AppController } from './app.controller';
       port: 5432,
       username:
         (process.env.DATABASE_URL &&
-          process.env.DATABASE_URL.replace('postgres://', '').split(':')[0]) ||
+          process.env.DATABASE_URL.replace('postgres://', '')
+            .split(':')[0]) ||
         process.env.DB_USER ||
         'postgres',
       password:
@@ -63,7 +66,9 @@ import { AppController } from './app.controller';
         process.env.DB_PASSWORD ||
         'postgres',
       database:
-        (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
+        (process.env.DATABASE_URL &&
+          process.env.DATABASE_URL
+            .split('/')[3]) ||
         process.env.DB_NAME ||
         'modern-art-museum',
       entities: [Artist, Artwork, Exhibition, Image, Movement, Museum, Sponsor],
@@ -76,14 +81,12 @@ import { AppController } from './app.controller';
         migrationsDir: 'src/migrations',
       },
       extra: {
-//        ssl: {
-//          rejectUnauthorized: false
-//        }
+        //ssl: {
+        //  rejectUnauthorized: false
+        //}
       },
     }),
-    AuthModule,
-    UsersModule,
   ],
   controllers: [AppController]
 })
-export class AppModule {}
+export class AppModule { }
