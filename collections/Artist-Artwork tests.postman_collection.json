@@ -1,10 +1,53 @@
 {
 	"info": {
-		"_postman_id": "5b1bb759-8b4f-46fe-a800-d4d49488b390",
+		"_postman_id": "dbf09730-7b20-402a-9c40-4dc46a1e92ae",
 		"name": "Artist-Artwork tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
+		{
+			"name": "Obtain Admin Authorization Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"auth_token\", data.token);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}/api/auth/login",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Create a new artist",
 			"event": [
@@ -21,6 +64,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -434,7 +487,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -444,7 +497,7 @@
 						"artists",
 						"{{artist_id}}",
 						"artworks",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -652,7 +705,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -662,7 +715,7 @@
 						"artists",
 						"{{artist_id}}",
 						"artworks",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -820,7 +873,7 @@
 						}
 					],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		},
@@ -842,7 +895,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -852,7 +905,7 @@
 						"artists",
 						"{{artist_id}}",
 						"artworks",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -933,6 +986,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -997,7 +1060,7 @@
 						}
 					],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		}

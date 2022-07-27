@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0dcb1e07-0cd2-4c81-9038-85a1f07c73eb",
+		"_postman_id": "f4b47784-539a-43d3-996d-2ce5f8278a04",
 		"name": "Artwork tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
 		{

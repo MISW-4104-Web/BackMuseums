@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "5d17678c-baf3-495c-ae14-1c465c817668",
+		"_postman_id": "33be1f95-1e50-4f25-8048-650c60080f61",
 		"name": "Museum tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
 		{
@@ -128,7 +129,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -136,7 +137,7 @@
 					"path": [
 						"api",
 						"museums",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -211,7 +212,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -219,7 +220,7 @@
 					"path": [
 						"api",
 						"museums",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -274,7 +275,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -282,7 +283,7 @@
 					"path": [
 						"api",
 						"museums",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},

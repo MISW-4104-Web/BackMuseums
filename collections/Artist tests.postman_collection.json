@@ -1,10 +1,53 @@
 {
 	"info": {
-		"_postman_id": "0f272a1d-25ba-4ffe-b11e-9c542b3b4226",
+		"_postman_id": "ad54880e-17c8-44dc-bb06-6e3b198cf143",
 		"name": "Artist tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
+		{
+			"name": "Obtain Admin Authorization Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"auth_token\", data.token);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}/api/auth/login",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Create a new artist",
 			"event": [
@@ -21,6 +64,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -61,6 +114,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -93,6 +156,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -125,10 +198,20 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -136,7 +219,7 @@
 					"path": [
 						"api",
 						"artists",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -158,6 +241,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -199,6 +292,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
@@ -211,7 +314,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -219,7 +322,7 @@
 					"path": [
 						"api",
 						"artists",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -239,6 +342,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
@@ -271,10 +384,20 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/0",
+					"raw": "{{protocol}}://{{host}}/api/artists/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -282,7 +405,7 @@
 					"path": [
 						"api",
 						"artists",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},

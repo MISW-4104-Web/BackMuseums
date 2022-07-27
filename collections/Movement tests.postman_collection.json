@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8eeaed3d-95f9-437c-a25e-646fc2777db5",
+		"_postman_id": "d98c5708-bcd2-4240-86d5-f6c3f30a5909",
 		"name": "Movement tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
 		{
@@ -128,7 +129,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
+					"raw": "{{protocol}}://{{host}}/api/movements/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -136,7 +137,7 @@
 					"path": [
 						"api",
 						"movements",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -211,7 +212,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
+					"raw": "{{protocol}}://{{host}}/api/movements/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -219,7 +220,7 @@
 					"path": [
 						"api",
 						"movements",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -274,7 +275,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
+					"raw": "{{protocol}}://{{host}}/api/movements/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -282,7 +283,7 @@
 					"path": [
 						"api",
 						"movements",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},

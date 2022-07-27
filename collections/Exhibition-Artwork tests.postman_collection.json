@@ -1,10 +1,53 @@
 {
 	"info": {
-		"_postman_id": "fb910164-a06a-4b5c-a224-1d602e48b565",
+		"_postman_id": "ecb903ec-c662-4193-a73e-91489821910c",
 		"name": "Exhibition-Artwork tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
+		{
+			"name": "Obtain Admin Authorization Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"auth_token\", data.token);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{host}}/api/auth/login",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Create a new museum",
 			"event": [
@@ -107,7 +150,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": \"{{sponsor_id}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,6 +189,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -346,7 +399,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"id\": {{artwork_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artwork_id_2}}\r\n    }\r\n]",
+					"raw": "[\r\n    {\r\n        \"id\": \"{{artwork_id_1}}\"\r\n    },\r\n    {\r\n        \"id\": \"{{artwork_id_2}}\"\r\n    }\r\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -354,7 +407,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{museum_id}}/artworks/",
+					"raw": "{{protocol}}://{{host}}/api/exhibitions/{{exhibition_id}}/artworks/",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -362,7 +415,7 @@
 					"path": [
 						"api",
 						"exhibitions",
-						"{{museum_id}}",
+						"{{exhibition_id}}",
 						"artworks",
 						""
 					]
@@ -518,6 +571,16 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{auth_token}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {

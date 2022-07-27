@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0da97f2a-7772-447d-be61-4f2d82e2ed89",
+		"_postman_id": "f32ffe10-63fb-4211-9a0e-2913b70f45d4",
 		"name": "Exhibition tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18901686"
 	},
 	"item": [
 		{
@@ -107,7 +108,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": \"{{sponsor_id}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -216,7 +217,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -226,7 +227,7 @@
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -252,7 +253,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career. Visit us now.\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career. Visit us now.\",\r\n    \"sponsor\": {\r\n        \"id\": \"{{sponsor_id}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -295,7 +296,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": \"{{sponsor_id}}\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -303,7 +304,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -313,7 +314,7 @@
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -370,7 +371,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/00000000-0000-0000-0000-000000000000",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{host}}"
@@ -380,7 +381,7 @@
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
-						"0"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
