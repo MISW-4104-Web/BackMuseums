@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import constants from '../auth/constants';
-
-export type User = any;
+import { User } from './user'
 
 @Injectable()
 export class UsersService {
-    private users = constants.BASE_USERS;
-    
+    private users = [
+        new User(1, "admin", "admin", ["admin"]),
+        new User(2, "user", "user", ["user"]),
+    ];
+
     async findOne(username: string): Promise<User | undefined> {
         return this.users.find(user => user.username === username);
     }
-
 }
