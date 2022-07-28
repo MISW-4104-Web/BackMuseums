@@ -21,7 +21,7 @@ import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
 
 @Module({
@@ -39,7 +39,7 @@ import { AppController } from './app.controller';
     ArtworkModule,
     ExhibitionModule,
     MuseumModule,
-    UsersModule,
+    UserModule,
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',

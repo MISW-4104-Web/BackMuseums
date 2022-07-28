@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Obtain Admin Authorization Token",
+			"name": "Obtain Admin Authentication Token",
 			"event": [
 				{
 					"listen": "test",
