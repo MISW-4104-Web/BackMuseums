@@ -3,14 +3,14 @@ import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { ArtistDTO } from './artist.dto';
 import { ArtistService } from './artist.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('artists')
 @UseGuards(JwtAuthGuard)
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor,  CacheInterceptor)
 export class ArtistController {
   constructor(private readonly artistService: ArtistService) {}
 
-//  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll() {
     return await this.artistService.findAll();

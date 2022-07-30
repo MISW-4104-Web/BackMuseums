@@ -2,9 +2,10 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { ArtworkDTO } from '../artwork/artwork.dto';
 import { ArtistArtworkService } from './artist-artwork.service';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('artists')
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor, CacheInterceptor)
 export class ArtistArtworkController {
     constructor(private readonly artworkService: ArtistArtworkService) { }
 

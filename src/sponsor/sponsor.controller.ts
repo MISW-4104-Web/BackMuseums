@@ -2,9 +2,10 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { SponsorDTO } from './sponsor.dto';
 import { SponsorService } from './sponsor.service';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('sponsors')
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor, CacheInterceptor)
 export class SponsorController {
   constructor(private readonly sponsorService: SponsorService) {}
 

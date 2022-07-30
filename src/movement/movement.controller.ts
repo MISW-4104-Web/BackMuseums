@@ -2,9 +2,10 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { MovementDTO } from './movement.dto';
 import { MovementService } from './movement.service';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('movements')
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor, CacheInterceptor)
 export class MovementController {
   constructor(private readonly movementService: MovementService) {}
 

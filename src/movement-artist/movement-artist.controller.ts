@@ -1,14 +1,11 @@
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
-
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { ArtistDTO } from 'src/artist/artist.dto';
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { MovementArtistService } from './movement-artist.service';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('movements')
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor, CacheInterceptor)
 export class MovementArtistController {
   constructor(private readonly movementArtistService: MovementArtistService) {}
 

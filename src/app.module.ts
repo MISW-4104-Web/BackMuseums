@@ -11,7 +11,7 @@ import { ArtworkModule } from './artwork/artwork.module';
 import { ExhibitionModule } from './exhibition/exhibition.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MuseumModule } from './museum/museum.module';
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { Museum } from './museum/museum.entity';
 import { Exhibition } from './exhibition/exhibition.entity';
 import { Artwork } from './artwork/artwork.entity';
@@ -25,7 +25,10 @@ import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
 
 @Module({
-  imports: [
+  imports: [ 
+    CacheModule.register({
+      isGlobal: true,
+    }),
     ExhibitionArtworkModule,
     MuseumArtworkModule,
     MovementArtistModule,

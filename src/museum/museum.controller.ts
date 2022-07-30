@@ -2,9 +2,10 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
 import { MuseumDTO } from './museum.dto';
 import { MuseumService } from './museum.service';
+import { CacheInterceptor } from '@nestjs/common';
 
 @Controller('museums')
-@UseInterceptors(BusinessErrorsInterceptor)
+@UseInterceptors(BusinessErrorsInterceptor, CacheInterceptor)
 export class MuseumController {
   constructor(private readonly museumService: MuseumService) {}
 
