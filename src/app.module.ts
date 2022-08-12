@@ -23,9 +23,16 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AppController } from './app.controller';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
+import { ApolloDriver } from '@nestjs/apollo';
 
 @Module({
   imports: [ 
+    GraphQLModule.forRoot({
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      driver: ApolloDriver
+    }),
     CacheModule.register({
       isGlobal: true,
     }),

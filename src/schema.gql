@@ -1,0 +1,16 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Museum {
+  id: String!
+  name: String!
+  description: String!
+  address: String!
+  city: String!
+  image: String!
+}
+
+type Query {
+  museums: [Museum!]!
+}
