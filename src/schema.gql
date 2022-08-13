@@ -13,4 +13,19 @@ type Museum {
 
 type Query {
   museums: [Museum!]!
+  museum(id: String!): Museum!
+}
+
+type Mutation {
+  createMuseum(museum: MuseumDTO!): Museum!
+  updateMuseum(id: String!, museum: MuseumDTO!): Museum!
+  deleteMuseum(id: String!): Museum!
+}
+
+input MuseumDTO {
+  name: String!
+  description: String!
+  address: String!
+  city: String!
+  image: String!
 }

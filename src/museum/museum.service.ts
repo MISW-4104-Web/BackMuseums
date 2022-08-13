@@ -25,7 +25,7 @@ export class MuseumService {
       return museum;
   }
 
-  async create(museumDTO: MuseumDTO): Promise<MuseumDTO> {
+  async create(museumDTO: MuseumDTO): Promise<Museum> {
     const museum = new Museum();
     museum.name = museumDTO.name;
     museum.description = museumDTO.description;
@@ -35,7 +35,7 @@ export class MuseumService {
     return await this.museumRepository.save(museum);
   }
 
-  async update(id: string, museumDTO: MuseumDTO): Promise<MuseumDTO> {
+  async update(id: string, museumDTO: MuseumDTO): Promise<Museum> {
     const museum = await this.museumRepository.findOne(id);
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
