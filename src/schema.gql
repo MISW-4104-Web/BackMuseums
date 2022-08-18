@@ -9,6 +9,17 @@ type Museum {
   address: String!
   city: String!
   image: String!
+  artworks: [Artwork!]!
+}
+
+type Artwork {
+  id: String!
+  name: String!
+  year: Float!
+  description: String!
+  type: String!
+  mainImage: String!
+  museum: Museum!
 }
 
 type Query {

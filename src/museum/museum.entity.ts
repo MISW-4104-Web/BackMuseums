@@ -1,7 +1,7 @@
 import { Artwork } from 'src/artwork/artwork.entity';
 import { Exhibition } from 'src/exhibition/exhibition.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 @Entity()
@@ -33,6 +33,7 @@ export class Museum {
     @OneToMany(() => Exhibition, exhibition => exhibition.museum)
     exhibitions: Exhibition[];
 
+    @Field(type => [Artwork])
     @OneToMany(() => Artwork, artwork => artwork.museum)
     artworks: Artwork[];
 }
