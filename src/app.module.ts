@@ -4,7 +4,6 @@ import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
 import { MovementArtistModule } from './movement-artist/movement-artist.module';
 import { ArtistMovementModule } from './artist-movement/artist-movement.module';
 import { SponsorModule } from './sponsor/sponsor.module';
-import { ArtworkTypeModule } from './artworktype/artworktype.module';
 import { MovementModule } from './movement/movement.module';
 import { ArtistModule } from './artist/artist.module';
 import { ImageModule } from './image/image.module';
@@ -21,6 +20,9 @@ import { Artist } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
+import { MuseumExhibitionModule } from './museum-exhibition/museum-exhibition.module';
+import { ArtworkArtistModule } from './artwork-artist/artwork-artist.module';
+import { ArtworkImageModule } from './artwork-image/artwork-image.module';
 
 @Module({
   imports: [
@@ -30,7 +32,6 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
     ArtistMovementModule,
     ArtistArtworkModule,
     SponsorModule,
-    ArtworkTypeModule,
     MovementModule,
     ArtistModule,
     ImageModule,
@@ -64,7 +65,7 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
       cli: {
-        migrationsDir: "src/migrations"
+        migrationsDir: "src/shared/migrations"
       },
       /*extra: {
         ssl: {
@@ -72,6 +73,9 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
         }
       }*/
     }),
+    MuseumExhibitionModule,
+    ArtworkArtistModule,
+    ArtworkImageModule,
   ],
 })
 export class AppModule { }

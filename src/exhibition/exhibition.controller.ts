@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
-import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { ExhibitionDto } from './exhibition.dto';
 import { Exhibition } from './exhibition.entity';
 import { ExhibitionService } from './exhibition.service';

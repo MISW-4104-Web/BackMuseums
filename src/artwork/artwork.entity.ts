@@ -3,7 +3,6 @@ import { Exhibition } from "src/exhibition/exhibition.entity";
 import { MuseumEntity } from "src/museum/museum.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Artist } from "src/artist/artist.entity";
-import { ARTWORK_TYPE } from "src/artworktype/artworktype.enum";
 import { Image } from "src/image/image.entity";
 
 @Entity()
@@ -20,11 +19,8 @@ export class Artwork {
   @Column()
   description: string;
 
-  @Column({
-    type: "enum",
-    enum: ARTWORK_TYPE,
-  })
-  type: ARTWORK_TYPE;
+  @Column()
+  type: string;
 
   @Column({
     nullable: true

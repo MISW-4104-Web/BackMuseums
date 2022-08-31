@@ -3,7 +3,7 @@ https://docs.nestjs.com/controllers#controllers
 */
 
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { MovementDTO } from 'src/movement/movement.dto';
 import { ArtistMovementService } from './artist-movement.service';
 

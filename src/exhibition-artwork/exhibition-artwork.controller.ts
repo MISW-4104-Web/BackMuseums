@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { ArtworkDTO } from 'src/artwork/artwork.dto';
-import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { ExhibitionArtworkService } from './exhibition-artwork.service';
 
 @Controller('exhibitions')

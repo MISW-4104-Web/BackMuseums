@@ -4,7 +4,7 @@ https://docs.nestjs.com/controllers#controllers
 
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { ArtistDTO } from 'src/artist/artist.dto';
-import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { MovementArtistService } from './movement-artist.service';
 
 @Controller('movements')
