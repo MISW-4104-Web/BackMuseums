@@ -59,21 +59,17 @@ export class MovementArtistService {
     return movement.artists.filter(p => p.constructor.name === "Artist")
   }
 
-  async associateMovementArtist(movementId: number, artistDTO: ArtistDTO[]): Promise<MovementDTO> {
+  async associateMovementArtist(movementId: number, artists: Artist[]): Promise<MovementDTO> {
     const movement = await this.movementRepository.findOne(movementId, { relations : ["artists"] });
 
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
 
-    let artists: Artist[] = [];
-
-    for (let i = 0; i < artistDTO.length; i++) {
-      const artist = await this.artistRepository.findOne(artistDTO[i].id);
+    artists.forEach(async artistEntity => {
+      const artist = await this.artistRepository.findOne(artistEntity.id);
       if (!artist)
         throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
-      else 
-        artists.push(artist);
-    }
+    })
 
     movement.artists = artists;
     return await this.movementRepository.save(movement);

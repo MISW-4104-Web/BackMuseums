@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { ArtistDTO } from './artist.dto';
 import { Artist } from './artist.entity';
 
 @Injectable()
@@ -12,11 +11,11 @@ export class ArtistService {
     private readonly artistRepository: Repository<Artist>
   ) {}
 
-  async findAll(): Promise<ArtistDTO[]> {
+  async findAll(): Promise<Artist[]> {
     return await this.artistRepository.find({ relations: ["movements", "artworks"] });
   }
 
-  async findOne(id: number): Promise<ArtistDTO> {
+  async findOne(id: number): Promise<Artist> {
     const artist = await this.artistRepository.findOne(id, { relations: ["movements", "artworks"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
@@ -24,27 +23,17 @@ export class ArtistService {
       return artist;
   }
 
-  async create(artistDTO: ArtistDTO): Promise<ArtistDTO> {
-    const artist = new Artist();
-    artist.name = artistDTO.name;
-    artist.birthplace = artistDTO.birthplace;
-    artist.birthdate = artistDTO.birthdate;
-    artist.image = artistDTO.image;
+  async create(artist: Artist): Promise<Artist> {
     return await this.artistRepository.save(artist);
   }
 
-  async update(id: number, artistDTO: ArtistDTO): Promise<ArtistDTO> {
+  async update(id: number, artistEntity: Artist): Promise<Artist> {
     const artist = await this.artistRepository.findOne(id);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
     
-    artist.name = artistDTO.name;
-    artist.birthplace = artistDTO.birthplace;
-    artist.birthdate = artistDTO.birthdate;
-    artist.image = artistDTO.image;
-
-    await this.artistRepository.save(artist);
-    return artist;
+    artistEntity.id = artist.id;
+    return await this.artistRepository.save(artistEntity);
   }
 
   async delete(id: number) {

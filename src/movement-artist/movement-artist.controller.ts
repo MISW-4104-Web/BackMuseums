@@ -1,9 +1,7 @@
-/*
-https://docs.nestjs.com/controllers#controllers
-*/
-
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { ArtistDTO } from 'src/artist/artist.dto';
+import { Artist } from 'src/artist/artist.entity';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { MovementArtistService } from './movement-artist.service';
 
@@ -29,8 +27,9 @@ export class MovementArtistController {
   }
 
   @Put(':movementId/artists')
-  async associateMovementArtist(@Param('movementId') movementId: number, @Body() artistDTO: ArtistDTO[]) {
-    return await this.movementArtistService.associateMovementArtist(movementId, artistDTO);
+  async associateMovementArtist(@Param('movementId') movementId: number, @Body() artistsDto: ArtistDTO[]) {
+    const artists: Artist [] = plainToInstance(Artist, artistsDto)
+    return await this.movementArtistService.associateMovementArtist(movementId, artists);
   }
 
   @Delete(':movementId/artists/:artistId')
