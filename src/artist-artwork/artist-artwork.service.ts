@@ -1,33 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Artist } from 'src/artist/artist.entity';
-import { Exhibition } from 'src/exhibition/exhibition.entity';
+import { ArtistEntity } from 'src/artist/artist.entity';
+import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
 import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { Artwork } from '../artwork/artwork.entity';
+import { ArtworkEntity } from '../artwork/artwork.entity';
 
 @Injectable()
 export class ArtistArtworkService {
     constructor(
-        @InjectRepository(Artwork)
-        private readonly artworkRepository: Repository<Artwork>,
+        @InjectRepository(ArtworkEntity)
+        private readonly artworkRepository: Repository<ArtworkEntity>,
         @InjectRepository(MuseumEntity)
         private readonly museumRepository: Repository<MuseumEntity>,
-        @InjectRepository(Exhibition)
-        private readonly exhibitionRepository: Repository<Exhibition>,
-        @InjectRepository(Artist)
-        private readonly artistRepository: Repository<Artist>,
+        @InjectRepository(ExhibitionEntity)
+        private readonly exhibitionRepository: Repository<ExhibitionEntity>,
+        @InjectRepository(ArtistEntity)
+        private readonly artistRepository: Repository<ArtistEntity>,
     ) { }
 
-    async findArtworksFromArtist(artistId: number): Promise<Artwork[]> {
+    async findArtworksFromArtist(artistId: number): Promise<ArtworkEntity[]> {
         const artist = await this.artistRepository.findOne(artistId, { relations: ['artworks'] });
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
         return artist.artworks;
     }
 
-    async findArtworkFromArtist(artistId: number, artworkId: number): Promise<Artwork> {
+    async findArtworkFromArtist(artistId: number, artworkId: number): Promise<ArtworkEntity> {
         const artist = await this.artistRepository.findOne(artistId, { relations: ["artworks"] });
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -43,7 +43,7 @@ export class ArtistArtworkService {
         return artwork;
     }
 
-    async addArtworkToArtist(artistId: number, artworkId: number): Promise<Artwork> {
+    async addArtworkToArtist(artistId: number, artworkId: number): Promise<ArtworkEntity> {
 
         const artist = await this.artistRepository.findOne(artistId);
         if (!artist)
@@ -59,7 +59,7 @@ export class ArtistArtworkService {
     }
 
     
-    async updateArtworksFromArtist(artistId: number, artworks: Artwork[]): Promise<Artwork[]> {
+    async updateArtworksFromArtist(artistId: number, artworks: ArtworkEntity[]): Promise<ArtworkEntity[]> {
         const artist = await this.artistRepository.findOne(artistId);
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)

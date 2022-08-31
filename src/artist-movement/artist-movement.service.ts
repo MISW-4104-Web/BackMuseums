@@ -1,11 +1,7 @@
-/*
-https://docs.nestjs.com/providers#services
-*/
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArtistDTO } from 'src/artist/artist.dto';
-import { Artist } from 'src/artist/artist.entity';
+import { ArtistDto } from 'src/artist/artist.dto';
+import { ArtistEntity } from 'src/artist/artist.entity';
 import { MovementDTO } from 'src/movement/movement.dto';
 import { Movement } from 'src/movement/movement.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
@@ -14,14 +10,14 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class ArtistMovementService {
   constructor(
-    @InjectRepository(Artist)
-    private readonly artistRepository: Repository<Artist>,
+    @InjectRepository(ArtistEntity)
+    private readonly artistRepository: Repository<ArtistEntity>,
 
     @InjectRepository(Movement)
     private readonly movementRepository: Repository<Movement>
   ) {}
 
-  async addArtistMovement(artistId: number, movementId: number): Promise<ArtistDTO> {
+  async addArtistMovement(artistId: number, movementId: number): Promise<ArtistDto> {
     const movement = await this.movementRepository.findOne(movementId);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND);
@@ -52,14 +48,14 @@ export class ArtistMovementService {
   }
 
   async findMovementsByArtistId(artistId: number): Promise<MovementDTO[]> {
-    const artist: Artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
+    const artist: ArtistEntity = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 
     return artist.movements.filter(p => p.constructor.name === "Movement")
   }
 
-  async associateArtistMovement(artistId: number, movementDTO: MovementDTO[]): Promise<ArtistDTO> {
+  async associateArtistMovement(artistId: number, movementDTO: MovementDTO[]): Promise<ArtistDto> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ["movements"] });
 
     if (!artist)
@@ -79,7 +75,7 @@ export class ArtistMovementService {
     return await this.artistRepository.save(artist);
   }
 
-  async deleteMovementToArtist(movementId: number, artistId: number): Promise<ArtistDTO> {
+  async deleteMovementToArtist(movementId: number, artistId: number): Promise<ArtistDto> {
     const movement = await this.movementRepository.findOne(movementId);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)

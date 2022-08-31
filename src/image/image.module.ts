@@ -3,11 +3,11 @@ import { ImageController } from './image.controller';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from './image.entity';
-import { Artwork } from 'src/artwork/artwork.entity';
-import { Artist } from 'src/artist/artist.entity';
+import { ArtworkEntity } from 'src/artwork/artwork.entity';
+import { ArtistEntity } from 'src/artist/artist.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Image, Artwork, Artist])],
+    imports: [TypeOrmModule.forFeature([Image, ArtworkEntity, ArtistEntity])],
     controllers: [ImageController],
     providers: [ImageService],
 })

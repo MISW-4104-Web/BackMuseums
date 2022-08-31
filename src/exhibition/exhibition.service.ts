@@ -4,28 +4,24 @@ import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Sponsor } from 'src/sponsor/sponsor.entity';
 import { Repository } from 'typeorm';
-import { ExhibitionDto } from './exhibition.dto';
-import { Exhibition } from './exhibition.entity';
+import { ExhibitionEntity } from './exhibition.entity';
 
 @Injectable()
 export class ExhibitionService {
   constructor(
-    @InjectRepository(Exhibition)
-    private readonly exhibitionRepository: Repository<Exhibition>,
+    @InjectRepository(ExhibitionEntity)
+    private readonly exhibitionRepository: Repository<ExhibitionEntity>,
     @InjectRepository(Sponsor)
     private readonly sponsorRepository: Repository<Sponsor>,
     @InjectRepository(MuseumEntity)
     private readonly museumRepository: Repository<MuseumEntity>
   ) {}
 
-  async findAll(museumId: number): Promise<Exhibition[]> {
-    const museum = await this.museumRepository.findOne(museumId, { relations : ['exhibitions', 'exhibitions.sponsor', 'exhibitions.artworks'] });
-    if (!museum)
-      throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
-    return museum.exhibitions;
+  async findAll(): Promise<ExhibitionEntity[]> {
+    return await this.exhibitionRepository.find();
   }
 
-  async findOne(museumId: number, exhibitionId: number): Promise<Exhibition> {
+  async findOne(museumId: number, exhibitionId: number): Promise<ExhibitionEntity> {
     const museum = await this.museumRepository.findOne(museumId, { relations: ["exhibitions"]});
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
@@ -41,7 +37,7 @@ export class ExhibitionService {
     return exhibition;
   }
 
-  async create(museumId: number, exhibition: Exhibition): Promise<Exhibition> {
+  async create(museumId: number, exhibition: ExhibitionEntity): Promise<ExhibitionEntity> {
     if (exhibition.sponsor == null)
       throw new BusinessLogicException("The exhibition must have a sponsor association", BusinessError.PRECONDITION_FAILED);
 
@@ -56,7 +52,7 @@ export class ExhibitionService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async update(museumId: number, exhibitionId: number, exhibitionEntity: Exhibition): Promise<Exhibition> {
+  async update(museumId: number, exhibitionId: number, exhibitionEntity: ExhibitionEntity): Promise<ExhibitionEntity> {
     const exhibition = await this.exhibitionRepository.findOne(exhibitionId);
     if (!exhibition)
     throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)

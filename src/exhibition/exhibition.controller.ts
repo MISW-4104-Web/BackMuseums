@@ -2,17 +2,17 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseIntercept
 import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { ExhibitionDto } from './exhibition.dto';
-import { Exhibition } from './exhibition.entity';
+import { ExhibitionEntity } from './exhibition.entity';
 import { ExhibitionService } from './exhibition.service';
 
-@Controller('museums')
+@Controller('exhibitions')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ExhibitionController {
   constructor(private readonly exhibitionService: ExhibitionService) {}
 
-  @Get('/:museumId/exhibitions/')
-  async findAll(@Param('museumId') museumId: number) {
-    return await this.exhibitionService.findAll(museumId);
+  @Get()
+  async findAll() {
+    return await this.exhibitionService.findAll();
   }
 
   @Get('/:museumId/exhibitions/:exhibitionId')
@@ -23,13 +23,13 @@ export class ExhibitionController {
   @Post('/:museumId/exhibitions/')
   @HttpCode(200)
   async create(@Param('museumId') museumId: number, @Body() exhibitionDto: ExhibitionDto) {
-    const exhibition: Exhibition = plainToInstance(Exhibition, exhibitionDto);
+    const exhibition: ExhibitionEntity = plainToInstance(ExhibitionEntity, exhibitionDto);
     return await this.exhibitionService.create(museumId, exhibition);
   }
 
   @Put('/:museumId/exhibitions/:exhibitionId')
   async update(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number, @Body() exhibitionDto: ExhibitionDto) {
-    const exhibition: Exhibition = plainToInstance(Exhibition, exhibitionDto);
+    const exhibition: ExhibitionEntity = plainToInstance(ExhibitionEntity, exhibitionDto);
     return await this.exhibitionService.update(museumId, exhibitionId, exhibition);
   }
 

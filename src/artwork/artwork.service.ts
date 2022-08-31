@@ -1,116 +1,60 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Artist } from 'src/artist/artist.entity';
-import { Exhibition } from 'src/exhibition/exhibition.entity';
-import { MuseumEntity } from 'src/museum/museum.entity';
+import { ArtistEntity } from 'src/artist/artist.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { ArtworkDTO } from './artwork.dto';
-import { Artwork } from './artwork.entity';
+import { ArtworkEntity } from './artwork.entity';
 
 @Injectable()
 export class ArtworkService {
   constructor(
-    @InjectRepository(Artwork)
-    private readonly artworkRepository: Repository<Artwork>,
-    @InjectRepository(MuseumEntity)
-    private readonly museumRepository: Repository<MuseumEntity>,
-    @InjectRepository(Exhibition)
-    private readonly exhibitionRepository: Repository<Exhibition>,
-    @InjectRepository(Artist)
-    private readonly artistRepository: Repository<Artist>,
+    @InjectRepository(ArtworkEntity)
+    private readonly artworkRepository: Repository<ArtworkEntity>,
+
+    @InjectRepository(ArtistEntity)
+    private readonly artistRepository: Repository<ArtistEntity>,
   ) { }
 
-  async findAll(): Promise<ArtworkDTO[]> {
+  async findAll(): Promise<ArtworkEntity[]> {
     return await this.artworkRepository.find({ relations: ["images", "artist"] });
   }
 
-  async findOne(artworkId: number): Promise<ArtworkDTO> {
+  async findOne(artworkId: number): Promise<ArtworkEntity> {
     const artwork = await this.artworkRepository.findOne(artworkId, { relations: ["images", "artist"] });
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
     return artwork;
   }
 
-  /*
-  async create(artistId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
-    let museum = null;
-    if (artworkDTO.museum != null) {
-      museum = await this.museumRepository.findOne(artworkDTO.museum.id);
-      if (!museum)
-        throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
-    }
-
-    let exhibition = null;
-    if (artworkDTO.exhibition != null) {
-      exhibition = await this.exhibitionRepository.findOne(artworkDTO.exhibition.id);
-      if (!exhibition)
-        throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
-    }
-
-    const artist = await this.artistRepository.findOne(artistId);
+  async create(artwork: ArtworkEntity): Promise<ArtworkEntity> {
+    const artist: ArtistEntity = await this.artistRepository.findOne(artwork.artist.id);
     if (!artist)
-      throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
-
-    const artwork = new Artwork();
-    artwork.name = artworkDTO.name;
-    artwork.year = artworkDTO.year;
-    artwork.description = artworkDTO.description;
-    artwork.type = artworkDTO.type;
-    artwork.mainImage = artworkDTO.mainImage;
-    artwork.museum = museum;
-    artwork.exhibition = exhibition;
+      throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
+    
     artwork.artist = artist;
     return await this.artworkRepository.save(artwork);
   }
 
-  async update(artistId: number, artworkId: number, artworkDTO: ArtworkDTO): Promise<ArtworkDTO> {
+  async update(artworkId: number, artworkEntity: ArtworkEntity): Promise<ArtworkEntity> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
     
-    let museum = null;
-    if (artworkDTO.museum != null) {
-      museum = await this.museumRepository.findOne(artworkDTO.museum.id);
-      if (!museum)
-        throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
-    }
-  
-    let exhibition = null;
-    if (artworkDTO.exhibition != null) {
-      exhibition = await this.exhibitionRepository.findOne(artworkDTO.exhibition.id);
-      if (!exhibition)
-        throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
-    }
-
-    const artist = await this.artistRepository.findOne(artistId);
-    if (!artist)
-      throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
-
-    artwork.name = artworkDTO.name;
-    artwork.year = artworkDTO.year;
-    artwork.description = artworkDTO.description;
-    artwork.type = artworkDTO.type;
-    artwork.mainImage = artworkDTO.mainImage;
-    artwork.museum = museum;
-    artwork.exhibition = exhibition;
-    artwork.artist = artist;
-
-    await this.artworkRepository.save(artwork);
-    return artwork;
-  }
-
-  async delete(artistId: number, artworkId: number) {
-    const artist = await this.artistRepository.findOne(artistId, { relations: ['artworks'] });
+    const artist: ArtistEntity = await this.artistRepository.findOne(artworkEntity.artist.id);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
+    
+    artworkEntity.id = artwork.id;
+    artworkEntity.artist = artist;
+    
+    return await this.artworkRepository.save(artworkEntity);
+  }
 
+  async delete(artworkId: number) {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
     
-    artist.artworks = artist.artworks.filter(e => e.id !== artwork.id);
-    await this.artistRepository.save(artist);
-    return await this.artworkRepository.remove(artwork);
-  }*/
+    await this.artworkRepository.remove(artwork);
+  }
 }

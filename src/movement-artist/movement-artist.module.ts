@@ -6,11 +6,11 @@ https://docs.nestjs.com/modules
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Artist } from 'src/artist/artist.entity';
+import { ArtistEntity } from 'src/artist/artist.entity';
 import { Movement } from 'src/movement/movement.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Movement, Artist])],
+    imports: [TypeOrmModule.forFeature([Movement, ArtistEntity])],
     controllers: [MovementArtistController],
     providers: [MovementArtistService],
 })

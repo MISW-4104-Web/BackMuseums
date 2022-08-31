@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
-import { ArtworkDTO } from './artwork.dto';
+import { ArtworkDto } from './artwork.dto';
+import { ArtworkEntity } from './artwork.entity';
 import { ArtworkService } from './artwork.service';
 
 @Controller('artworks')
@@ -18,21 +20,21 @@ export class ArtworkController {
     return await this.artworkService.findAll();
   }
 
-  /*
-  @Post('/:artistId/artworks')
-  @HttpCode(200)
-  async create(@Param('artistId') artistId: number, @Body() artworkDTO: ArtworkDTO) {
-    return await this.artworkService.create(artistId, artworkDTO);
+  @Post()
+  async create(@Body() artworkDto: ArtworkDto) {
+    const artwork: ArtworkEntity = plainToInstance(ArtworkEntity, artworkDto);
+    return await this.artworkService.create(artwork);
   }
 
-  @Put('/:artistId/artworks/:artworkId')
-  async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() artworkDTO: ArtworkDTO) {
-    return await this.artworkService.update(artistId, artworkId, artworkDTO);
+  @Put('/:artworkId')
+  async update(@Param('artworkId') artworkId: number, @Body() artworkDto: ArtworkDto) {
+    const artwork: ArtworkEntity = plainToInstance(ArtworkEntity, artworkDto);
+    return await this.artworkService.update(artworkId, artwork);
   }
 
-  @Delete('/:artistId/artworks/:artworkId')
+  @Delete('/:artworkId')
   @HttpCode(204)
-  async delete(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
-    return await this.artworkService.delete(artistId, artworkId);
-  }*/
+  async delete(@Param('artworkId') artworkId: number) {
+    return await this.artworkService.delete(artworkId);
+  }
 }

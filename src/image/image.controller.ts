@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
-import { ImageDTO } from './image.dto';
+import { ImageDto } from './image.dto';
 import { ImageService } from './image.service';
 
 @Controller('artists')
@@ -20,12 +20,12 @@ export class ImageController {
 
   @Post('/:artistId/artworks/:artworkId/images/')
   @HttpCode(200)
-  async create(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() imageDTO: ImageDTO) {
+  async create(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() imageDTO: ImageDto) {
     return await this.imageService.create(artistId, artworkId, imageDTO);
   }
 
   @Put('/:artistId/artworks/:artworkId/images/:imageId')
-  async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Param('imageId') imageId: number, @Body() imageDTO: ImageDTO) {
+  async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Param('imageId') imageId: number, @Body() imageDTO: ImageDto) {
     return await this.imageService.update(artistId, artworkId, imageId, imageDTO);
   }
 

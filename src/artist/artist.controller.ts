@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
-import { ArtistDTO } from './artist.dto';
-import { Artist } from './artist.entity';
+import { ArtistDto } from './artist.dto';
+import { ArtistEntity } from './artist.entity';
 import { ArtistService } from './artist.service';
 
 @Controller('artists')
@@ -21,15 +21,14 @@ export class ArtistController {
   }
 
   @Post()
-  @HttpCode(200)
-  async create(@Body() artistDTO: ArtistDTO) {
-    const artist: Artist = plainToInstance(Artist, artistDTO);
+  async create(@Body() artistDTO: ArtistDto) {
+    const artist: ArtistEntity = plainToInstance(ArtistEntity, artistDTO);
     return await this.artistService.create(artist);
   }
 
   @Put(':artistId')
-  async update(@Param('artistId') artistId: number, @Body() artistDTO: ArtistDTO) {
-    const artist: Artist = plainToInstance(Artist, artistDTO);
+  async update(@Param('artistId') artistId: number, @Body() artistDTO: ArtistDto) {
+    const artist: ArtistEntity = plainToInstance(ArtistEntity, artistDTO);
     return await this.artistService.update(artistId, artist);
   }
 

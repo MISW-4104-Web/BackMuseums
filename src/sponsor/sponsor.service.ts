@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Exhibition } from 'src/exhibition/exhibition.entity';
+import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { SponsorDTO } from './sponsor.dto';
@@ -11,8 +11,8 @@ export class SponsorService {
   constructor(
     @InjectRepository(Sponsor)
     private readonly sponsorRepository: Repository<Sponsor>,
-    @InjectRepository(Exhibition)
-    private readonly exhibitionRepository: Repository<Exhibition>
+    @InjectRepository(ExhibitionEntity)
+    private readonly exhibitionRepository: Repository<ExhibitionEntity>
   ) {}
 
   async findAll(): Promise<SponsorDTO[]> {
@@ -28,17 +28,10 @@ export class SponsorService {
   }
 
   async create(sponsorDTO: SponsorDTO): Promise<SponsorDTO> {
-    if (sponsorDTO.exhibition != null) {
-      const exhibition = this.exhibitionRepository.findOne(sponsorDTO.exhibition.id);
-      if (!exhibition)
-        throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
-    }
-
     const sponsor = new Sponsor();
     sponsor.name = sponsorDTO.name;
     sponsor.description = sponsorDTO.description;
     sponsor.website = sponsorDTO.website;
-    sponsor.exhibition = sponsorDTO.exhibition;
     return await this.sponsorRepository.save(sponsor);
   }
 
@@ -46,17 +39,10 @@ export class SponsorService {
     const sponsor = await this.sponsorRepository.findOne(id);
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
-    
-    if (sponsorDTO.exhibition != null) {
-      const exhibition = this.exhibitionRepository.findOne(sponsorDTO.exhibition.id);
-      if (!exhibition)
-        throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND);
-      }
-    
+  
     sponsor.name = sponsorDTO.name;
     sponsor.description = sponsorDTO.description;
     sponsor.website = sponsorDTO.website;
-    sponsor.exhibition = sponsorDTO.exhibition;
 
     await this.sponsorRepository.save(sponsor);
     return sponsor;

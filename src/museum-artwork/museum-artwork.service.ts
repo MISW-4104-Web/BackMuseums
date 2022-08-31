@@ -1,11 +1,7 @@
-/*
-https://docs.nestjs.com/providers#services
-*/
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArtworkDTO } from 'src/artwork/artwork.dto';
-import { Artwork } from 'src/artwork/artwork.entity';
+import { ArtworkDto } from 'src/artwork/artwork.dto';
+import { ArtworkEntity } from 'src/artwork/artwork.entity';
 import { MuseumDto } from 'src/museum/museum.dto';
 import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
@@ -17,8 +13,8 @@ export class MuseumArtworkService {
     @InjectRepository(MuseumEntity)
     private readonly museumRepository: Repository<MuseumEntity>,
 
-    @InjectRepository(Artwork)
-    private readonly artworkRepository: Repository<Artwork>
+    @InjectRepository(ArtworkEntity)
+    private readonly artworkRepository: Repository<ArtworkEntity>
   ) {}
 
   async addMuseumArtwork(museumId: number, artworkId: number): Promise<MuseumEntity> {
@@ -34,7 +30,7 @@ export class MuseumArtworkService {
     return await this.museumRepository.save(museum);
   }
 
-  async findArtworkByMuseumIdArtworkId(artworkId: number, museumId: number): Promise<ArtworkDTO> {
+  async findArtworkByMuseumIdArtworkId(artworkId: number, museumId: number): Promise<ArtworkDto> {
     const artwork = await this.artworkRepository.findOne(artworkId);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
@@ -51,7 +47,7 @@ export class MuseumArtworkService {
       return museumArtwork;
   }
 
-  async findArtworksByMuseumId(museumId: number): Promise<ArtworkDTO[]> {
+  async findArtworksByMuseumId(museumId: number): Promise<ArtworkDto[]> {
     const museum: MuseumEntity = await this.museumRepository.findOne(museumId, { relations : ["artworks"] });
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
@@ -59,13 +55,13 @@ export class MuseumArtworkService {
     return museum.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateMuseumArtwork(museumId: number, artworkDTO: ArtworkDTO[]): Promise<MuseumEntity> {
+  async associateMuseumArtwork(museumId: number, artworkDTO: ArtworkDto[]): Promise<MuseumEntity> {
     const museum = await this.museumRepository.findOne(museumId, { relations : ["artworks"] });
 
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
 
-    const artworks: Artwork[] = [];
+    const artworks: ArtworkEntity[] = [];
 
     for (let i = 0; i < artworkDTO.length; i++) {
       const artwork = await this.artworkRepository.findOne(artworkDTO[i].id);

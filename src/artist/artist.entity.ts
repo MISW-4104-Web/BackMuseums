@@ -1,9 +1,9 @@
-import { Artwork } from "src/artwork/artwork.entity";
+import { ArtworkEntity } from "src/artwork/artwork.entity";
 import { Movement } from "src/movement/movement.entity";
 import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Artist {
+export class ArtistEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,8 +19,8 @@ export class Artist {
   @Column()
   image: string;
 
-  @OneToMany(() => Artwork, artwork => artwork.artist)
-  artworks: Artwork[];
+  @OneToMany(() => ArtworkEntity, artwork => artwork.artist)
+  artworks: ArtworkEntity[];
 
   @ManyToMany(() => Movement, movement => movement.artists)
   movements: Movement[];

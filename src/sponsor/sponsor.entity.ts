@@ -1,4 +1,4 @@
-import { Exhibition } from "src/exhibition/exhibition.entity";
+import { ExhibitionEntity } from "src/exhibition/exhibition.entity";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -15,6 +15,6 @@ export class Sponsor {
   @Column()
   website: string;
 
-  @OneToOne(() => Exhibition, exhibition => exhibition.sponsor)
-  exhibition: Exhibition;
+  @OneToOne(() => ExhibitionEntity, exhibition => exhibition.sponsor)
+  exhibition: ExhibitionEntity;
 }

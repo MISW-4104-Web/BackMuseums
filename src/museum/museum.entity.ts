@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
-import { Artwork } from 'src/artwork/artwork.entity';
-import { Exhibition } from 'src/exhibition/exhibition.entity';
+import { ArtworkEntity } from 'src/artwork/artwork.entity';
+import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
@@ -23,9 +22,9 @@ export class MuseumEntity {
     @Column()
     image: string;
 
-    @OneToMany(() => Exhibition, exhibition => exhibition.museum)
-    exhibitions: Exhibition[];
+    @OneToMany(() => ExhibitionEntity, exhibition => exhibition.museum)
+    exhibitions: ExhibitionEntity[];
 
-    @OneToMany(() => Artwork, artwork => artwork.museum)
-    artworks: Artwork[];
+    @OneToMany(() => ArtworkEntity, artwork => artwork.museum)
+    artworks: ArtworkEntity[];
 }

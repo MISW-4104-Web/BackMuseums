@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { ArtworkDTO } from 'src/artwork/artwork.dto';
+import { ArtworkDto } from 'src/artwork/artwork.dto';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { MuseumArtworkService } from './museum-artwork.service';
 
@@ -25,7 +25,7 @@ export class MuseumArtworkController {
   }
 
   @Put(':museumId/artworks')
-  async associateMuseumArtwork(@Param('museumId') museumId: number, @Body() artworkDTO: ArtworkDTO[]) {
+  async associateMuseumArtwork(@Param('museumId') museumId: number, @Body() artworkDTO: ArtworkDto[]) {
     return await this.museumArtworkService.associateMuseumArtwork(museumId, artworkDTO);
   }
 

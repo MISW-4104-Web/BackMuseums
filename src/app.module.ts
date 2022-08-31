@@ -13,10 +13,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MuseumModule } from './museum/museum.module';
 import { Module } from '@nestjs/common';
 import { MuseumEntity } from './museum/museum.entity';
-import { Exhibition } from './exhibition/exhibition.entity';
-import { Artwork } from './artwork/artwork.entity';
+import { ExhibitionEntity } from './exhibition/exhibition.entity';
+import { ArtworkEntity } from './artwork/artwork.entity';
 import { Movement } from './movement/movement.entity';
-import { Artist } from './artist/artist.entity';
+import { ArtistEntity } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
 import { Image } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
@@ -58,15 +58,15 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
         (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
         process.env.DB_NAME ||
         'modern-art-museum',
-      entities: [Artist, Artwork, Exhibition, Image, Movement, MuseumEntity, Sponsor],
+      entities: [ArtistEntity, ArtworkEntity, ExhibitionEntity, Image, Movement, MuseumEntity, Sponsor],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
-      migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+      migrations: [__dirname + '/shared/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
-      cli: {
+      /*cli: {
         migrationsDir: "src/shared/migrations"
-      },
+      },*/
       /*extra: {
         ssl: {
           rejectUnauthorized: false

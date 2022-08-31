@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Artist } from 'src/artist/artist.entity';
-import { Artwork } from 'src/artwork/artwork.entity';
+import { ArtistEntity } from 'src/artist/artist.entity';
+import { ArtworkEntity } from 'src/artwork/artwork.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { ImageDTO } from './image.dto';
+import { ImageDto } from './image.dto';
 import { Image } from './image.entity';
 
 @Injectable()
@@ -12,13 +12,13 @@ export class ImageService {
   constructor(
     @InjectRepository(Image)
     private readonly imageRepository: Repository<Image>,
-    @InjectRepository(Artwork)
-    private readonly artworkRepository: Repository<Artwork>,
-    @InjectRepository(Artist)
-    private readonly artistRepository: Repository<Artist>
+    @InjectRepository(ArtworkEntity)
+    private readonly artworkRepository: Repository<ArtworkEntity>,
+    @InjectRepository(ArtistEntity)
+    private readonly artistRepository: Repository<ArtistEntity>
   ) {}
 
-  async findAll(artistId: number, artworkId: number): Promise<ImageDTO[]> {
+  async findAll(artistId: number, artworkId: number): Promise<ImageDto[]> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -30,7 +30,7 @@ export class ImageService {
     return artwork.images;
   }
 
-  async findOne(artistId: number, artworkId: number, imageId: number): Promise<ImageDTO> {
+  async findOne(artistId: number, artworkId: number, imageId: number): Promise<ImageDto> {
     const artist = await this.artistRepository.findOne(artistId, { relations : ['artworks'] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
@@ -51,7 +51,7 @@ export class ImageService {
 
   }
 
-  async create(artistId: number, artworkId: number, imageDTO: ImageDTO): Promise<ImageDTO> {
+  async create(artistId: number, artworkId: number, imageDTO: ImageDto): Promise<ImageDto> {
     /*if (imageDTO.artwork == null)
       throw new BusinessLogicException("The image must have a artwork association", BusinessError.PRECONDITION_FAILED);*/
 
@@ -72,7 +72,7 @@ export class ImageService {
     return await this.imageRepository.save(image);
   }
 
-  async update(artistId: number, artworkId: number, imageId: number, imageDTO: ImageDTO): Promise<ImageDTO> {
+  async update(artistId: number, artworkId: number, imageId: number, imageDTO: ImageDto): Promise<ImageDto> {
     const image = await this.imageRepository.findOne(imageId);
     if (!image)
     throw new BusinessLogicException("The image with the given id was not found", BusinessError.NOT_FOUND)

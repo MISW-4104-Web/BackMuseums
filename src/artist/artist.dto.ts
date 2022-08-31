@@ -1,6 +1,6 @@
-import { IsDate, IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { IsISO8601, IsNotEmpty, IsString, IsUrl } from "class-validator";
 
-export class ArtistDTO {
+export class ArtistDto {
 
   @IsString()
   @IsNotEmpty()
@@ -10,7 +10,7 @@ export class ArtistDTO {
   @IsNotEmpty()
   readonly birthplace: string;
 
-  @IsDate()
+  @IsISO8601()
   @IsNotEmpty()
   readonly birthdate: Date;
 
