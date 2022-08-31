@@ -1,5 +1,6 @@
-export class MuseumDTO {
-  readonly id: number;
+/* eslint-disable prettier/prettier */
+export class MuseumDto {
+  readonly id: string;
   readonly name: string;
   readonly description: string;
   readonly address: string;

@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/interceptors/interceptor';
-import { ExhibitionDTO } from './exhibition.dto';
+import { ExhibitionDto } from './exhibition.dto';
+import { Exhibition } from './exhibition.entity';
 import { ExhibitionService } from './exhibition.service';
 
 @Controller('museums')
@@ -20,13 +22,15 @@ export class ExhibitionController {
 
   @Post('/:museumId/exhibitions/')
   @HttpCode(200)
-  async create(@Param('museumId') museumId: number, @Body() exhibitionDTO: ExhibitionDTO) {
-    return await this.exhibitionService.create(museumId, exhibitionDTO);
+  async create(@Param('museumId') museumId: number, @Body() exhibitionDto: ExhibitionDto) {
+    const exhibition: Exhibition = plainToInstance(Exhibition, exhibitionDto);
+    return await this.exhibitionService.create(museumId, exhibition);
   }
 
   @Put('/:museumId/exhibitions/:exhibitionId')
-  async update(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number, @Body() exhibitionDTO: ExhibitionDTO) {
-    return await this.exhibitionService.update(museumId, exhibitionId, exhibitionDTO);
+  async update(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number, @Body() exhibitionDto: ExhibitionDto) {
+    const exhibition: Exhibition = plainToInstance(Exhibition, exhibitionDto);
+    return await this.exhibitionService.update(museumId, exhibitionId, exhibition);
   }
 
   @Delete('/:museumId/exhibitions/:exhibitionId')

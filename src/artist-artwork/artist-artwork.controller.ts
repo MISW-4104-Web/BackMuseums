@@ -18,15 +18,15 @@ export class ArtistArtworkController {
         return await this.artworkService.findAll(artistId);
     }
 
-    @Post('/:artistId/artworks')
+    @Post('/:artistId/artworks/:artworkId')
     @HttpCode(200)
-    async create(@Param('artistId') artistId: number, @Body() artworkDTO: ArtworkDTO) {
-        return await this.artworkService.create(artistId, artworkDTO);
+    async create(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+        return await this.artworkService.create(artistId, artworkId);
     }
 
     @Put('/:artistId/artworks/:artworkId')
-    async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() artworkDTO: ArtworkDTO) {
-        return await this.artworkService.update(artistId, artworkId, artworkDTO);
+    async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
+        return await this.artworkService.update(artistId, artworkId);
     }
 
     @Delete('/:artistId/artworks/:artworkId')

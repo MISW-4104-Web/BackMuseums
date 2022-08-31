@@ -10,18 +10,18 @@ export class DataSetup1648168854473 implements MigrationInterface {
         DELETE FROM public.movement;
         DELETE FROM public.exhibition;
         DELETE FROM public.sponsor;
-        DELETE FROM public.museum;
+        DELETE FROM public.museum_entity;
         
         -- Inserting museums
-        INSERT INTO public.museum(
+        INSERT INTO public.museum_entity(
             id, name, description, address, city, image)
             VALUES (100, 'Bendigo Art Gallery', 'Located in Bendigo, Victoria, we are one of the oldest and largest regional galleries in Australia. Our collection is extensive, with an emphasis on 19th century European art and Australian art from the 1800s, alongside a strong collection of contemporary Australian art.\nOver the last decade, we have cemented a reputation for presenting innovative international exhibitions alongside a dynamic and varied suite of public programs and events.', '42 View Street', 'Bendigo', 'https://www.bendigoregion.com.au/sites/default/files/styles/large/public/2019-05/Bendigo%20Art%20Gallery.jpg?itok=mbJ4vxuK');
         
-        INSERT INTO public.museum(
+        INSERT INTO public.museum_entity(
             id, name, description, address, city, image)
             VALUES (101, 'Museum of Modern Art', 'At The Museum of Modern Art and MoMA PS1, we celebrate creativity, openness, tolerance, and generosity. We aim to be inclusive places— both onsite and online—where diverse cultural, artistic, social, and political positions are welcome. We''re committed to sharing the most thought-provoking modern and contemporary art, and hope you will join us in exploring the art, ideas, and issues of our time.', '11 West 53 Street, Manhattan', 'New York City', 'https://media.cntraveler.com/photos/5dae0325b45cd80008161cf3/master/pass/MOMA-2019_IVRPHOTO-4373_ArtistChoice_HB_007-2-2000x1125.jpg');
         
-        INSERT INTO public.museum(
+        INSERT INTO public.museum_entity(
             id, name, description, address, city, image)
             VALUES (102, 'Tate Modern', 'Our mission is to increase the public''s enjoyment and understanding of British art from the 16th century to the present day and of international modern and contemporary art', 'Bankside, London SE1 9TG', 'London', 'https://upload.wikimedia.org/wikipedia/commons/6/6c/Tate_Modern_viewed_from_Thames_Pleasure_Boat_-_geograph.org.uk_-_307445.jpg');
         

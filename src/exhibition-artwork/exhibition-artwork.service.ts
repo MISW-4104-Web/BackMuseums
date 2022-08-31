@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtworkDTO } from 'src/artwork/artwork.dto';
 import { Artwork } from 'src/artwork/artwork.entity';
-import { ExhibitionDTO } from 'src/exhibition/exhibition.dto';
+import { ExhibitionDto } from 'src/exhibition/exhibition.dto';
 import { Exhibition } from 'src/exhibition/exhibition.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
@@ -17,7 +17,7 @@ export class ExhibitionArtworkService {
     private readonly artworkRepository: Repository<Artwork>
   ) {}
 
-  async addExhibitionArtwork(exhibitionId: number, artworkId: number): Promise<ExhibitionDTO> {
+  async addExhibitionArtwork(exhibitionId: number, artworkId: number): Promise<ExhibitionDto> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
@@ -55,13 +55,13 @@ export class ExhibitionArtworkService {
     return exhibition.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateExhibitionArtwork(exhibitionId: number, artworkDTO: ArtworkDTO[]): Promise<ExhibitionDTO> {
+  async associateExhibitionArtwork(exhibitionId: number, artworkDTO: ArtworkDTO[]): Promise<ExhibitionDto> {
     const exhibition = await this.exhibitionRepository.findOne(exhibitionId, { relations : ["artworks"] });
 
     if (!exhibition)
       throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)
 
-    let artworks: Artwork[] = [];
+    const artworks: Artwork[] = [];
 
     for (let i = 0; i < artworkDTO.length; i++) {
       const artwork = await this.artworkRepository.findOne(artworkDTO[i].id);
@@ -75,7 +75,7 @@ export class ExhibitionArtworkService {
     return await this.exhibitionRepository.save(exhibition);
   }
 
-  async deleteArtworkToExhibition(artworkId: number, exhibitionId: number): Promise<ExhibitionDTO> {
+  async deleteArtworkToExhibition(artworkId: number, exhibitionId: number): Promise<ExhibitionDto> {
     const artwork = await this.artworkRepository.findOne(artworkId);
     if (!artwork)
       throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)

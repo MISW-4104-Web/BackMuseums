@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import { Artwork } from 'src/artwork/artwork.entity';
 import { Exhibition } from 'src/exhibition/exhibition.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
-export class Museum {
+export class MuseumEntity {
     @PrimaryGeneratedColumn()
     id: number;
 

@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { Exhibition } from "src/exhibition/exhibition.entity";
-import { Museum } from "src/museum/museum.entity";
+import { MuseumEntity } from "src/museum/museum.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Artist } from "src/artist/artist.entity";
 import { ARTWORK_TYPE } from "src/artworktype/artworktype.enum";
@@ -30,8 +31,8 @@ export class Artwork {
   })
   mainImage: string;
 
-  @ManyToOne(() => Museum, museum => museum.artworks)
-  museum: Museum;
+  @ManyToOne(() => MuseumEntity, museum => museum.artworks)
+  museum: MuseumEntity;
 
   @ManyToOne(() => Exhibition, exhibition => exhibition.artworks)
   exhibition: Exhibition;

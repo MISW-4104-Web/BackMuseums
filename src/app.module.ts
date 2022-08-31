@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ExhibitionArtworkModule } from './exhibition-artwork/exhibition-artwork.module';
 import { MuseumArtworkModule } from './museum-artwork/museum-artwork.module';
 import { MovementArtistModule } from './movement-artist/movement-artist.module';
@@ -12,7 +13,7 @@ import { ExhibitionModule } from './exhibition/exhibition.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MuseumModule } from './museum/museum.module';
 import { Module } from '@nestjs/common';
-import { Museum } from './museum/museum.entity';
+import { MuseumEntity } from './museum/museum.entity';
 import { Exhibition } from './exhibition/exhibition.entity';
 import { Artwork } from './artwork/artwork.entity';
 import { Movement } from './movement/movement.entity';
@@ -56,7 +57,7 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
         (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
         process.env.DB_NAME ||
         'modern-art-museum',
-      entities: [Artist, Artwork, Exhibition, Image, Movement, Museum, Sponsor],
+      entities: [Artist, Artwork, Exhibition, Image, Movement, MuseumEntity, Sponsor],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
@@ -65,11 +66,11 @@ import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
       cli: {
         migrationsDir: "src/migrations"
       },
-      extra: {
+      /*extra: {
         ssl: {
           rejectUnauthorized: false
         }
-      }
+      }*/
     }),
   ],
 })

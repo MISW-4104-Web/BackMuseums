@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Artist } from 'src/artist/artist.entity';
 import { Exhibition } from 'src/exhibition/exhibition.entity';
-import { Museum } from 'src/museum/museum.entity';
+import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { ArtworkDTO } from './artwork.dto';
@@ -13,8 +13,8 @@ export class ArtworkService {
   constructor(
     @InjectRepository(Artwork)
     private readonly artworkRepository: Repository<Artwork>,
-    @InjectRepository(Museum)
-    private readonly museumRepository: Repository<Museum>,
+    @InjectRepository(MuseumEntity)
+    private readonly museumRepository: Repository<MuseumEntity>,
     @InjectRepository(Exhibition)
     private readonly exhibitionRepository: Repository<Exhibition>,
     @InjectRepository(Artist)
