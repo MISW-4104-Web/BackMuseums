@@ -1,4 +1,5 @@
 import { IsISO8601, IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { ImageDto } from "src/image/image.dto";
 
 export class ArtistDto {
 
@@ -14,7 +15,6 @@ export class ArtistDto {
   @IsNotEmpty()
   readonly birthdate: Date;
 
-  @IsUrl()
   @IsNotEmpty()
-  readonly image: string;
+  readonly image: ImageDto;
 }

@@ -1,6 +1,7 @@
 import { ArtworkEntity } from "src/artwork/artwork.entity";
 import { Movement } from "src/movement/movement.entity";
-import { Column, Entity, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ImageEntity } from "src/image/image.entity";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ArtistEntity {
@@ -16,8 +17,8 @@ export class ArtistEntity {
   @Column()
   birthdate: Date;
 
-  @Column()
-  image: string;
+  @ManyToOne(() => ImageEntity, image => image.artists)
+  image: ImageEntity;
 
   @OneToMany(() => ArtworkEntity, artwork => artwork.artist)
   artworks: ArtworkEntity[];

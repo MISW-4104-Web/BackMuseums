@@ -2,7 +2,7 @@ import { ExhibitionEntity } from "src/exhibition/exhibition.entity";
 import { MuseumEntity } from "src/museum/museum.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ArtistEntity } from "src/artist/artist.entity";
-import { Image } from "src/image/image.entity";
+import { ImageEntity } from "src/image/image.entity";
 
 @Entity()
 export class ArtworkEntity {
@@ -27,8 +27,8 @@ export class ArtworkEntity {
   @ManyToOne(() => ExhibitionEntity, exhibition => exhibition.artworks)
   exhibition: ExhibitionEntity;
 
-  @OneToMany(() => Image, image => image.artwork)
-  images: Image[];
+  @OneToMany(() => ImageEntity, image => image.artwork)
+  images: ImageEntity[];
 
   @ManyToOne(() => ArtistEntity, artist => artist.artworks, {
     onDelete: 'CASCADE'

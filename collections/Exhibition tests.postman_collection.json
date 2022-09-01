@@ -2,19 +2,20 @@
 	"info": {
 		"_postman_id": "0da97f2a-7772-447d-be61-4f2d82e2ed89",
 		"name": "Exhibition tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
-			"name": "Create a new museum",
+			"name": "Create a new image",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"image_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,18 +34,193 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/images",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": {\r\n        \"id\": {{image_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/museums",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
 						"museums"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new museum",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "351"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15f-IzmizFlpYy7N9RpjxtpQbDgvTG4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:11 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"The National Gallery\",\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\n    \"city\": \"London\",\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\",\n    \"id\": 41\n}"
+				}
+			]
 		},
 		{
 			"name": "Create a new sponsor",
@@ -55,7 +231,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"sponsor_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -74,18 +250,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new sponsor",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-vISx+Nue/iL3/DPmcdQXBPHv88M\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Credit Suisse\",\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n    \"website\": \"https://www.credit-suisse.com\",\n    \"id\": 31\n}"
+				}
+			]
 		},
 		{
 			"name": "Create a new exhibition",
@@ -96,7 +337,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"exhibition_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -115,20 +356,196 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new exhibition",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "785"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"311-TJtkYNFDDFhc+33T81L7iXfCsls\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Raphael\",\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\n    \"sponsor\": {\n        \"id\": 31,\n        \"name\": \"Credit Suisse\",\n        \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n        \"website\": \"https://www.credit-suisse.com\"\n    },\n    \"museum\": {\n        \"id\": 41,\n        \"name\": \"The National Gallery\",\n        \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n        \"address\": \"Trafalgar Square, London WC2N 5DN\",\n        \"city\": \"London\",\n        \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\n    },\n    \"id\": 21\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new exhibition with the same sponsor",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 412; \r",
+							"tests[\"Correct error message\"] = responseBody.has(\"The sponsor already has an exhibition\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"DAVinci\",\r\n    \"description\": \"One of the first-ever exhibitions to explore DaVinci's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"museums",
+						"{{museum_id}}",
+						"exhibitions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new exhibition",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "785"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"311-TJtkYNFDDFhc+33T81L7iXfCsls\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Raphael\",\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\n    \"sponsor\": {\n        \"id\": 31,\n        \"name\": \"Credit Suisse\",\n        \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n        \"website\": \"https://www.credit-suisse.com\"\n    },\n    \"museum\": {\n        \"id\": 41,\n        \"name\": \"The National Gallery\",\n        \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n        \"address\": \"Trafalgar Square, London WC2N 5DN\",\n        \"city\": \"London\",\n        \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\n    },\n    \"id\": 21\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all exhibitions in a museum",
@@ -148,20 +565,78 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all exhibitions in a museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "115"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"73-be502ea49cxx6Vkyie6TJFKSvH4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 21,\n        \"name\": \"Raphael\",\n        \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get one exhibition",
@@ -182,13 +657,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -196,7 +669,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get one exhibition",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"{{exhibition_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "113"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"71-xfH2ANsUAvLXeLJ+3eUjBaygR5c\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 21,\n    \"name\": \"Raphael\",\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a non-existent exhibition",
@@ -216,13 +750,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -230,7 +762,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a non-existent exhibition",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "77"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4d-VadhV5zjZoo92nyC3BhDBVC1QQI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The exhibition with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update an exhibition",
@@ -260,13 +853,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -274,7 +865,77 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update an exhibition",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career. Visit us now.\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"{{exhibition_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "800"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"320-IQz5b5jeo8SakRkROVEN9sdMmI4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 21,\n    \"name\": \"Raphael\",\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career. Visit us now.\",\n    \"sponsor\": {\n        \"id\": 31,\n        \"name\": \"Credit Suisse\",\n        \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n        \"website\": \"https://www.credit-suisse.com\"\n    },\n    \"museum\": {\n        \"id\": 41,\n        \"name\": \"The National Gallery\",\n        \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n        \"address\": \"Trafalgar Square, London WC2N 5DN\",\n        \"city\": \"London\",\n        \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\n    }\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a non-existent exhibition",
@@ -303,13 +964,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -317,7 +976,77 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a non-existent exhibition",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"description\": \"One of the first-ever exhibitions to explore Raphael's complete career\",\r\n    \"sponsor\": {\r\n        \"id\": {{sponsor_id}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "77"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4d-VadhV5zjZoo92nyC3BhDBVC1QQI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The exhibition with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete an exhibition",
@@ -336,13 +1065,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -350,7 +1077,60 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete an exhibition",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/{{exhibition_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"{{exhibition_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"78-TaiAW0a5CQiR95hE+hBVZQKQSFE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:52:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete a non-existent exhibition",
@@ -370,13 +1150,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}/exhibitions/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}",
 						"exhibitions",
@@ -384,7 +1162,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a non-existent exhibition",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}/exhibitions/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}",
+								"exhibitions",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "77"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4d-VadhV5zjZoo92nyC3BhDBVC1QQI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:53:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The exhibition with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete a sponsor",
@@ -403,19 +1242,68 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/{{sponsor_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"{{sponsor_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a sponsor",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"{{sponsor_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"124-oSwwuQ8fjuGPvuqpl5ysMR3OUdA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:53:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete a museum",
@@ -434,19 +1322,152 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"157-PK8ujxvPdipodI64SHtpMYd5+Sw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:53:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an image",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images/{{image_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images",
+								"{{image_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ab-/zTXpLPX15b/AH8pxQrRLeYammc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }

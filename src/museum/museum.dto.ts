@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, IsUrl } from "class-validator";
+import { ImageDto } from "src/image/image.dto";
 
-/* eslint-disable prettier/prettier */
 export class MuseumDto {
   @IsString()
   @IsNotEmpty()
@@ -18,7 +18,6 @@ export class MuseumDto {
   @IsNotEmpty()
   readonly city: string;
   
-  @IsUrl()
   @IsNotEmpty()
-  readonly image: string;
+  readonly image: ImageDto;
 }

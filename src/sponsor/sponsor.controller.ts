@@ -19,7 +19,6 @@ export class SponsorController {
   }
 
   @Post()
-  @HttpCode(200)
   async create(@Body() sponsorDTO: SponsorDTO) {
     return await this.sponsorService.create(sponsorDTO);
   }

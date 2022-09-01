@@ -3,20 +3,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { ArtistEntity } from './artist.entity';
+import { ImageEntity } from "../image/image.entity";
 
 @Injectable()
 export class ArtistService {
   constructor(
     @InjectRepository(ArtistEntity)
-    private readonly artistRepository: Repository<ArtistEntity>
+    private readonly artistRepository: Repository<ArtistEntity>,
+
+    @InjectRepository(ImageEntity)
+    private readonly imageRepository: Repository<ImageEntity>
   ) {}
 
   async findAll(): Promise<ArtistEntity[]> {
-    return await this.artistRepository.find({ relations: ["movements", "artworks"] });
+    return await this.artistRepository.find({ relations: ["movements", "artworks", "image"] });
   }
 
-  async findOne(id: number): Promise<ArtistEntity> {
-    const artist = await this.artistRepository.findOne(id, { relations: ["movements", "artworks"] });
+  async findOne(artistId: number): Promise<ArtistEntity> {
+    const artist = await this.artistRepository.findOne(artistId, { relations: ["movements", "artworks", "image"] });
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
     
@@ -24,20 +28,30 @@ export class ArtistService {
   }
 
   async create(artist: ArtistEntity): Promise<ArtistEntity> {
-    return await this.artistRepository.save(artist);
+    const image = await this.imageRepository.findOne(artist.image.id)
+    if (!image)
+      throw new BusinessLogicException("The image with the given id was not found", BusinessError.NOT_FOUND)
+
+    artist.image = image;   
+    return await this.artistRepository.save(artist); 
   }
 
-  async update(id: number, artistEntity: ArtistEntity): Promise<ArtistEntity> {
-    const artist = await this.artistRepository.findOne(id);
+  async update(artistId: number, artistEntity: ArtistEntity): Promise<ArtistEntity> {
+    const artist = await this.artistRepository.findOne(artistId, {relations: ["image"]});
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
+     
+    const image = await this.imageRepository.findOne(artistEntity.image.id)
+    if (!image)
+      throw new BusinessLogicException("The image with the given id was not found", BusinessError.NOT_FOUND)
     
-    artistEntity.id = artist.id;
-    return await this.artistRepository.save(artistEntity);
+    artistEntity.image = image;
+
+    return await this.artistRepository.save({...artist, ...artistEntity});
   }
 
-  async delete(id: number) {
-    const artist = await this.artistRepository.findOne(id);
+  async delete(artistId: number) {
+    const artist = await this.artistRepository.findOne(artistId);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
     

@@ -1,6 +1,7 @@
 import { ArtworkEntity } from 'src/artwork/artwork.entity';
 import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { ImageEntity } from 'src/image/image.entity';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
 
 @Entity()
 export class MuseumEntity {
@@ -19,8 +20,8 @@ export class MuseumEntity {
     @Column()
     city: string;
 
-    @Column()
-    image: string;
+    @ManyToOne(() => ImageEntity, image => image.museums)
+    image: ImageEntity
 
     @OneToMany(() => ExhibitionEntity, exhibition => exhibition.museum)
     exhibitions: ExhibitionEntity[];

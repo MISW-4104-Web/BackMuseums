@@ -18,7 +18,7 @@ import { ArtworkEntity } from './artwork/artwork.entity';
 import { Movement } from './movement/movement.entity';
 import { ArtistEntity } from './artist/artist.entity';
 import { Sponsor } from './sponsor/sponsor.entity';
-import { Image } from './image/image.entity';
+import { ImageEntity } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 import { MuseumExhibitionModule } from './museum-exhibition/museum-exhibition.module';
 import { ArtworkArtistModule } from './artwork-artist/artwork-artist.module';
@@ -58,7 +58,7 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
         (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
         process.env.DB_NAME ||
         'modern-art-museum',
-      entities: [ArtistEntity, ArtworkEntity, ExhibitionEntity, Image, Movement, MuseumEntity, Sponsor],
+      entities: [ArtistEntity, ArtworkEntity, ExhibitionEntity, ImageEntity, Movement, MuseumEntity, Sponsor],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,

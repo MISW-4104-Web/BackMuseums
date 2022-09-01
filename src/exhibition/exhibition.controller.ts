@@ -5,14 +5,14 @@ import { ExhibitionDto } from './exhibition.dto';
 import { ExhibitionEntity } from './exhibition.entity';
 import { ExhibitionService } from './exhibition.service';
 
-@Controller('exhibitions')
+@Controller('museums')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ExhibitionController {
   constructor(private readonly exhibitionService: ExhibitionService) {}
 
-  @Get()
-  async findAll() {
-    return await this.exhibitionService.findAll();
+  @Get('/:museumId/exhibitions')
+  async findAll(@Param('museumId') museumId: number) {
+    return await this.exhibitionService.findAll(museumId);
   }
 
   @Get('/:museumId/exhibitions/:exhibitionId')
@@ -21,7 +21,7 @@ export class ExhibitionController {
   }
 
   @Post('/:museumId/exhibitions/')
-  @HttpCode(200)
+  @HttpCode(201)
   async create(@Param('museumId') museumId: number, @Body() exhibitionDto: ExhibitionDto) {
     const exhibition: ExhibitionEntity = plainToInstance(ExhibitionEntity, exhibitionDto);
     return await this.exhibitionService.create(museumId, exhibition);

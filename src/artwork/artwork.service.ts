@@ -43,11 +43,10 @@ export class ArtworkService {
     const artist: ArtistEntity = await this.artistRepository.findOne(artworkEntity.artist.id);
     if (!artist)
       throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
-    
-    artworkEntity.id = artwork.id;
+     
     artworkEntity.artist = artist;
     
-    return await this.artworkRepository.save(artworkEntity);
+    return await this.artworkRepository.save({...artwork, ...artworkEntity});
   }
 
   async delete(artworkId: number) {

@@ -2,19 +2,20 @@
 	"info": {
 		"_postman_id": "5d17678c-baf3-495c-ae14-1c465c817668",
 		"name": "Museum tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
-			"name": "Create a new museum",
+			"name": "Create a new image",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"image_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,18 +34,193 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/images",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new museum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"museum_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": {\r\n        \"id\": {{image_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/museums",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
 						"museums"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new museum",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "351"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15f-+/90g3zCTnCNLne8Q0Q4IWeA5t8\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"The National Gallery\",\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\n    \"city\": \"London\",\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\",\n    \"id\": 44\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all museums",
@@ -64,18 +240,74 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all museums",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "384"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"180-Puc2JOakBcmeLXo0NzwI43VCFRg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 44,\n        \"name\": \"The National Gallery\",\n        \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n        \"address\": \"Trafalgar Square, London WC2N 5DN\",\n        \"city\": \"London\",\n        \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\",\n        \"artworks\": [],\n        \"exhibitions\": []\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get one museum",
@@ -96,19 +328,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get one museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "382"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"17e-jawtsOwqpIZ5lO1iRigKn2S7dHc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:38 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 44,\n    \"name\": \"The National Gallery\",\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\n    \"city\": \"London\",\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\",\n    \"artworks\": [],\n    \"exhibitions\": []\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a non-existent museum",
@@ -128,19 +417,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a non-existent museum",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a museum",
@@ -162,7 +508,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Tha National Gallery of London\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Tha National Gallery of London\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": {\r\n        \"id\": {{image_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -170,19 +516,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a museum",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tha National Gallery of London\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "361"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"169-y4ii8GGwsf5NAHaU/75FKUAZERw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 44,\n    \"name\": \"Tha National Gallery of London\",\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\n    \"city\": \"London\",\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a non-existent museum",
@@ -203,7 +615,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": {\r\n        \"id\": {{image_id}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,19 +623,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a non-existent museum",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The National Gallery\",\r\n    \"description\": \"Founded in 1824, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900\",\r\n    \"address\": \"Trafalgar Square, London WC2N 5DN\",\r\n    \"city\": \"London\",\r\n    \"image\": \"https://cdn.archpaper.com/wp-content/uploads/2021/05/p-101-Sainsbury-Wing-of-The-National-Gallery-London-1280x1015.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete a museum",
@@ -242,19 +720,68 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/{{museum_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"{{museum_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/{{museum_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"{{museum_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"161-eL14o6C5CK8XH/Wvz1xZp1A/UiQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:58:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete a non-existent museum",
@@ -274,19 +801,160 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/museums/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/museums/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"museums",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a non-existent museum",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/museums/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"museums",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "73"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"49-v/cpCsS/IuHJb9v22y7e8zPAYzs\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:59:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The museum with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an image",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images/{{image_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images",
+								"{{image_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ab-/zTXpLPX15b/AH8pxQrRLeYammc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }

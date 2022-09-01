@@ -1,37 +1,40 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { ImageDto } from './image.dto';
+import { ImageEntity } from './image.entity';
 import { ImageService } from './image.service';
 
-@Controller('artists')
+@Controller('images') 
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
-  @Get('/:artistId/artworks/:artworkId/images/')
-  async findAll(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
-    return await this.imageService.findAll(artistId, artworkId);
+  @Get()
+  async findAll() {
+    return await this.imageService.findAll();
   }
 
-  @Get('/:artistId/artworks/:artworkId/images/:imageId')
-  async findOne(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Param('imageId') imageId: number) {
-    return await this.imageService.findOne(artistId, artworkId, imageId);
+  @Get('/:imageId')
+  async findOne(@Param('imageId') imageId: number) {
+    return await this.imageService.findOne(imageId);
   }
 
-  @Post('/:artistId/artworks/:artworkId/images/')
-  @HttpCode(200)
-  async create(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Body() imageDTO: ImageDto) {
-    return await this.imageService.create(artistId, artworkId, imageDTO);
+  @Post()
+  async create(@Body() imageDTO: ImageDto) {
+    const image: ImageEntity = plainToInstance(ImageEntity, imageDTO);
+    return await this.imageService.create(image);
   }
 
-  @Put('/:artistId/artworks/:artworkId/images/:imageId')
-  async update(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Param('imageId') imageId: number, @Body() imageDTO: ImageDto) {
-    return await this.imageService.update(artistId, artworkId, imageId, imageDTO);
+  @Put('/:imageId')
+  async update(@Param('imageId') imageId: number, @Body() imageDTO: ImageDto) {
+    const image: ImageEntity = plainToInstance(ImageEntity, imageDTO);
+    return await this.imageService.update(imageId, image);
   }
 
-  @Delete('/:artistId/artworks/:artworkId/images/:imageId')
+  @Delete('/:imageId')
   @HttpCode(204)
-  async delete(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number, @Param('imageId') imageId: number) {
-    return await this.imageService.delete(artistId, artworkId, imageId);
+  async delete(@Param('imageId') imageId: number) {
+    return await this.imageService.delete(imageId);
   }
 }
