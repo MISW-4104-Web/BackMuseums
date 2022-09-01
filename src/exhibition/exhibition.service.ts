@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
-import { Sponsor } from 'src/sponsor/sponsor.entity';
+import { SponsorEntity } from 'src/sponsor/sponsor.entity';
 import { Repository } from 'typeorm';
 import { ExhibitionEntity } from './exhibition.entity';
 
@@ -11,8 +11,8 @@ export class ExhibitionService {
   constructor(
     @InjectRepository(ExhibitionEntity)
     private readonly exhibitionRepository: Repository<ExhibitionEntity>,
-    @InjectRepository(Sponsor)
-    private readonly sponsorRepository: Repository<Sponsor>,
+    @InjectRepository(SponsorEntity)
+    private readonly sponsorRepository: Repository<SponsorEntity>,
     @InjectRepository(MuseumEntity)
     private readonly museumRepository: Repository<MuseumEntity>
   ) {} 

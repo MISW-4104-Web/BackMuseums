@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
-import { MovementDTO } from './movement.dto';
+import { MovementDto } from './movement.dto';
+import { MovementEntity } from './movement.entity';
 import { MovementService } from './movement.service';
 
 @Controller('movements')
@@ -19,14 +21,15 @@ export class MovementController {
   }
 
   @Post()
-  @HttpCode(200)
-  async create(@Body() movementDTO: MovementDTO) {
-    return await this.movementService.create(movementDTO);
+  async create(@Body() movementDto: MovementDto) {
+    const movement = plainToInstance(MovementEntity, movementDto);
+    return await this.movementService.create(movement);
   }
 
   @Put(':movementId')
-  async update(@Param('movementId') movementId: number, @Body() movementDTO: MovementDTO) {
-    return await this.movementService.update(movementId, movementDTO);
+  async update(@Param('movementId') movementId: number, @Body() movementDto: MovementDto) {
+    const movement = plainToInstance(MovementEntity, movementDto);
+    return await this.movementService.update(movementId, movement);
   }
 
   @Delete(':movementId')

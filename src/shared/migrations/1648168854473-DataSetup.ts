@@ -5,11 +5,11 @@ export class DataSetup1648168854473 implements MigrationInterface {
         -- Clearing existing data
         DELETE FROM public.image_entity;
         DELETE FROM public.artwork_entity;
-        DELETE FROM public.movement_artists_artist_entity;
+        DELETE FROM public.movement_entity_artists_artist_entity;
         DELETE FROM public.artist_entity;
-        DELETE FROM public.movement;
+        DELETE FROM public.movement_entity;
         DELETE FROM public.exhibition_entity;
-        DELETE FROM public.sponsor;
+        DELETE FROM public.sponsor_entity;
         DELETE FROM public.museum_entity;
         
         -- Inserting images for museums
@@ -39,27 +39,27 @@ export class DataSetup1648168854473 implements MigrationInterface {
             VALUES (102, 'Tate Modern', 'Our mission is to increase the public''s enjoyment and understanding of British art from the 16th century to the present day and of international modern and contemporary art', 'Bankside, London SE1 9TG', 'London', 102);
         
         -- Inserting sponsors
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (100, 'Creative Victoria', 'We acknowledge the Traditional Owners of the place now called Victoria, and all First Peoples living and working on this land. We celebrate the history and contemporary creativity of the world''s oldest living culture and pay respect to Elders – past, present and future.', 'https://creative.vic.gov.au/');
         
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (101, 'Greater Bendigo', 'The City of Greater Bendigo is located in the centre of Victoria, covering almost 3,000 square kilometres.\nWe have a growing population of more than 110,000, and are the state''s third largest economy base in Victoria. We are a service and infrastructure centre for north central Victoria, and surrounded by 40,000 hectares of regional, state and national parkland.', 'https://www.bendigo.vic.gov.au/');
         
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (102, 'Allianz', 'The Allianz Group is one of the leading integrated financial services providers worldwide. Here you find the company profile, the Allianz fact sheet and further information on business operations.\nOur ambition is to accompany you in life – giving you everything you need to have the courage to go forward. We offer our 100 million customers in more than 70 countries a wide range of products, services, and solutions in insurance and asset management.', 'https://www.allianz.com/en.html');
         
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (103, 'Bank of America', 'Bank of America are a longstanding partner of Tate, having supported a number of exhibitions at both Tate Modern and Tate Britain since 2008. Our partnership stems from a shared belief in the value of art to society. With Bank of America''s support Tate continues to bring world class exhibitions and the work of a diverse and seminal artists to our audiences.', 'https://www.bankofamerica.com/');
         
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (104, 'EY', 'EY is one of the UK''s longest standing corporate supporters of the arts. We have supported the sector since 1994 and in 2013 we launched the EY Tate Arts Partnership. The partnership extends to all four Tate galleries and includes sponsorship of exhibitions, knowledge and expertise sharing, and memberships with Tate''s national network of museums. This support is designed to drive benefit for our people, our clients and the communities across the country we work within.', 'https://www.ey.com/en_uk/corporate-responsibility/ey-uk-our-sponsorship-of-the-arts');
         
-        INSERT INTO public.sponsor(
+        INSERT INTO public.sponsor_entity(
             id, name, description, website)
             VALUES (105, 'The Huo Family Foundation', 'The Huo Family Foundation is a grant-giving foundation based in London. Its mission is to support education, communities and the pursuit of knowledge.\nThe Foundation’s current focus is in five main areas: education; neuroscience and psychology; public policy; the arts; and Covid-19 research.', 'https://huofamilyfoundation.org/');
         
@@ -89,25 +89,25 @@ export class DataSetup1648168854473 implements MigrationInterface {
             VALUES (105, 'The EY Exhibition: Van Gogh and Britain', 'The EY Exhibition: Van Gogh and Britain presents the largest collection of Van Gogh''s paintings in the UK for nearly a decade. Some of his most famous works will be brought together from around the world – including Shoes, Starry Night over the Rhône, L''Arlésienne, and two works he made while a patient at the Saint-Paul Asylum, At Eternity''s Gate and Prisoners Exercising. They will be joined by the very rarely lent Sunflowers from London''s National Gallery.\nThe exhibition also looks at the British artists who were inspired by Van Gogh, including Francis Bacon, David Bomberg, and the young Camden Town painters. It shows how his vision set British artists on the road to modern art.', 102, 104);
         
         -- Inserting movements
-        INSERT INTO public.movement(
-            id, name, description, "countryOfOrigin", "activeYears")
-            VALUES (100, 'Avant-garde', 'The avant-garde is a person or work that is experimental, radical, or unorthodox with respect to art, culture, or society. It is frequently characterized by aesthetic innovation and initial unacceptability.\nThe avant-garde pushes the boundaries of what is accepted as the norm or the status quo, primarily in the cultural realm. The avant-garde is considered by some to be a hallmark of modernism. Many artists have aligned themselves with the avant-garde movement, and still continue to do so, tracing their history from Dada through the Situationists and to postmodern artists such as the Language poets around 1981.\nThe avant-garde also promotes radical social reforms. This meaning was evoked by the Saint Simonian Olinde Rodrigues in his essay, "L''artiste, le savant et l''industriel" ("The artist, the scientist and the industrialist", 1825). This essay contains the first use of "avant-garde" in its now customary sense; there, Rodrigues called on artists to "serve as [the people''s] avant-garde", insisting that "the power of the arts is indeed the most immediate and fastest way" to social, political and economic reform.', 'France', 'From the latter half of the 19th century to this day');
+        INSERT INTO public.movement_entity(
+            id, name, description, "countryOfOrigin")
+            VALUES (100, 'Avant-garde', 'The avant-garde is a person or work that is experimental, radical, or unorthodox with respect to art, culture, or society. It is frequently characterized by aesthetic innovation and initial unacceptability.\nThe avant-garde pushes the boundaries of what is accepted as the norm or the status quo, primarily in the cultural realm. The avant-garde is considered by some to be a hallmark of modernism. Many artists have aligned themselves with the avant-garde movement, and still continue to do so, tracing their history from Dada through the Situationists and to postmodern artists such as the Language poets around 1981.\nThe avant-garde also promotes radical social reforms. This meaning was evoked by the Saint Simonian Olinde Rodrigues in his essay, "L''artiste, le savant et l''industriel" ("The artist, the scientist and the industrialist", 1825). This essay contains the first use of "avant-garde" in its now customary sense; there, Rodrigues called on artists to "serve as [the people''s] avant-garde", insisting that "the power of the arts is indeed the most immediate and fastest way" to social, political and economic reform.', 'France');
         
-        INSERT INTO public.movement(
-            id, name, description, "countryOfOrigin", "activeYears")
-            VALUES (101, 'Post-Impressionism', 'Post-Impressionism (also spelled Postimpressionism) was a predominantly French art movement that developed roughly between 1886 and 1905, from the last Impressionist exhibition to the birth of Fauvism. Post-Impressionism emerged as a reaction against Impressionists'' concern for the naturalistic depiction of light and colour. Due to its broad emphasis on abstract qualities or symbolic content, Post-Impressionism encompasses Les Nabis, Neo-Impressionism, Symbolism, Cloisonnism, Pont-Aven School, as well as Synthetism, along with some later Impressionists'' work. The movement was led by Paul Cézanne (known as the father of Post-Impressionism), Paul Gauguin, Vincent van Gogh and Georges Seurat.\nThe term Post-Impressionism was first used by art critic Roger Fry in 1906. Critic Frank Rutter in a review of the Salon d''Automne published in Art News, 15 October 1910, described Othon Friesz as a "post-impressionist leader"; there was also an advert for the show The Post-Impressionists of France. Three weeks later, Roger Fry used the term again when he organised the 1910 exhibition Manet and the Post-Impressionists, defining it as the development of French art since Manet.\nPost-Impressionists extended Impressionism while rejecting its limitations: they continued using vivid colours, often thick application of paint and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary colour.', 'France', 'Between 1886 and 1905');
+        INSERT INTO public.movement_entity(
+            id, name, description, "countryOfOrigin")
+            VALUES (101, 'Post-Impressionism', 'Post-Impressionism (also spelled Postimpressionism) was a predominantly French art movement that developed roughly between 1886 and 1905, from the last Impressionist exhibition to the birth of Fauvism. Post-Impressionism emerged as a reaction against Impressionists'' concern for the naturalistic depiction of light and colour. Due to its broad emphasis on abstract qualities or symbolic content, Post-Impressionism encompasses Les Nabis, Neo-Impressionism, Symbolism, Cloisonnism, Pont-Aven School, as well as Synthetism, along with some later Impressionists'' work. The movement was led by Paul Cézanne (known as the father of Post-Impressionism), Paul Gauguin, Vincent van Gogh and Georges Seurat.\nThe term Post-Impressionism was first used by art critic Roger Fry in 1906. Critic Frank Rutter in a review of the Salon d''Automne published in Art News, 15 October 1910, described Othon Friesz as a "post-impressionist leader"; there was also an advert for the show The Post-Impressionists of France. Three weeks later, Roger Fry used the term again when he organised the 1910 exhibition Manet and the Post-Impressionists, defining it as the development of French art since Manet.\nPost-Impressionists extended Impressionism while rejecting its limitations: they continued using vivid colours, often thick application of paint and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary colour.', 'France');
         
-        INSERT INTO public.movement(
-            id, name, description, "countryOfOrigin", "activeYears")
-            VALUES (102, 'Naive art', 'Naive art could easily be dismissed as art that''s created by people who “don''t know what they’re doing”, but that undermines the raw creativity found within works of the movement and its uninhibited and instinctive approach to materials, composition and ideas.\nBefore the 20th century, in its most basic sense naive art was any form of visual art created by a person who lacked the formal education and training a professional artist undergoes. When a trained artists emulates this aesthetic, it is often referred to as primitivism, pseudo-naive art or faux naive art.', 'France', '18th to 20th century');
+        INSERT INTO public.movement_entity(
+            id, name, description, "countryOfOrigin")
+            VALUES (102, 'Naive art', 'Naive art could easily be dismissed as art that''s created by people who “don''t know what they’re doing”, but that undermines the raw creativity found within works of the movement and its uninhibited and instinctive approach to materials, composition and ideas.\nBefore the 20th century, in its most basic sense naive art was any form of visual art created by a person who lacked the formal education and training a professional artist undergoes. When a trained artists emulates this aesthetic, it is often referred to as primitivism, pseudo-naive art or faux naive art.', 'France');
         
-        INSERT INTO public.movement(
-            id, name, description, "countryOfOrigin", "activeYears")
-            VALUES (103, 'Conceptual art', 'Conceptual art is art for which the idea (or concept) behind the work is more important than the finished art object. It emerged as an art movement in the 1960s and the term usually refers to art made from the mid-1960s to the mid-1970s. Joseph Kosuth. Clock (One and Five), English/Latin Version (1965)', 'United States of America', 'Mid-1960s to the mid-1970s');
+        INSERT INTO public.movement_entity(
+            id, name, description, "countryOfOrigin")
+            VALUES (103, 'Conceptual art', 'Conceptual art is art for which the idea (or concept) behind the work is more important than the finished art object. It emerged as an art movement in the 1960s and the term usually refers to art made from the mid-1960s to the mid-1970s. Joseph Kosuth. Clock (One and Five), English/Latin Version (1965)', 'United States of America');
         
-        INSERT INTO public.movement(
-            id, name, description, "countryOfOrigin", "activeYears")
-            VALUES (104, 'Vorticism', 'Vorticism was a London-based modernist art movement formed in 1914 by the writer and artist Wyndham Lewis. The movement was partially inspired by Cubism and was introduced to the public by means of the publication of the Vorticist manifesto in Blast magazine. Familiar forms of representational art were rejected in favour of a geometric style that tended towards a hard-edged abstraction. Lewis proved unable to harness the talents of his disparate group of avant-garde artists; however, for a brief period Vorticism proved to be an exciting intervention and an artistic riposte to Marinetti''s Futurism and the post-impressionism of Roger Fry''s Omega Workshops.\nVorticist paintings emphasised ''modern life'' as an array of bold lines and harsh colours drawing the viewer''s eye into the centre of the canvas and vorticist sculpture created energy and intensity through ''direct carving''.', 'England', 'Between 1912 and 1915');
+        INSERT INTO public.movement_entity(
+            id, name, description, "countryOfOrigin")
+            VALUES (104, 'Vorticism', 'Vorticism was a London-based modernist art movement formed in 1914 by the writer and artist Wyndham Lewis. The movement was partially inspired by Cubism and was introduced to the public by means of the publication of the Vorticist manifesto in Blast magazine. Familiar forms of representational art were rejected in favour of a geometric style that tended towards a hard-edged abstraction. Lewis proved unable to harness the talents of his disparate group of avant-garde artists; however, for a brief period Vorticism proved to be an exciting intervention and an artistic riposte to Marinetti''s Futurism and the post-impressionism of Roger Fry''s Omega Workshops.\nVorticist paintings emphasised ''modern life'' as an array of bold lines and harsh colours drawing the viewer''s eye into the centre of the canvas and vorticist sculpture created energy and intensity through ''direct carving''.', 'England');
 
         -- Inserting images for artists
         INSERT INTO public.image_entity(
@@ -291,40 +291,40 @@ export class DataSetup1648168854473 implements MigrationInterface {
             VALUES (129, 'https://upload.wikimedia.org/wikipedia/en/thumb/5/50/Bomberg%2C_The_Mud_Bath.jpg/300px-Bomberg%2C_The_Mud_Bath.jpg', 'The Mud Bath (2)', 201, 300, 109);
         
         -- Associating artists and movements
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (100, 100);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (100, 101);
         
-        INSERT INTO public.movement_artists_artist_entity( 
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity( 
+            "movementEntityId", "artistEntityId")
             VALUES (100, 106);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (101, 101);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (101, 104);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (101, 105);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (102, 102);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (103, 103);
         
-        INSERT INTO public.movement_artists_artist_entity(
-            "movementId", "artistEntityId")
+        INSERT INTO public.movement_entity_artists_artist_entity(
+            "movementEntityId", "artistEntityId")
             VALUES (104, 106);
     `;
 

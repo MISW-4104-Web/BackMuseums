@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "6788ab1f-4231-4906-9c62-24e2acd5a5b6",
 		"name": "Sponsor tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
@@ -14,7 +15,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"sponsor_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -33,18 +34,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new sponsor",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-VlfD7pODqWP8t8q/a5s50HlMheA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:00:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Credit Suisse\",\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n    \"website\": \"https://www.credit-suisse.com\",\n    \"id\": 33\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all sponsors",
@@ -64,18 +130,74 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all sponsors",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "320"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"140-kUeyiIcdQkKH1OghGSHCL6VzeVI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 33,\n        \"name\": \"Credit Suisse\",\n        \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n        \"website\": \"https://www.credit-suisse.com\",\n        \"exhibition\": null\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get one sponsor",
@@ -96,19 +218,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/{{sponsor_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"{{sponsor_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get one sponsor",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"{{sponsor_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "318"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"13e-HvGX6eGt6pon0jGCCa9j6zKqEJ4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 33,\n    \"name\": \"Credit Suisse\",\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n    \"website\": \"https://www.credit-suisse.com\",\n    \"exhibition\": null\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a non-existent sponsor",
@@ -128,19 +307,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a non-existent sponsor",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-UwrCdtPlT743GkLz+c+cW7Iqt9s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The sponsor with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a sponsor",
@@ -170,19 +406,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/{{sponsor_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"{{sponsor_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a sponsor",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"{{sponsor_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-SyW5hKsdYN7gARpUe0u7Q3qtGMU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:35 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 33,\n    \"name\": \"Credit Suisse\",\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\n    \"website\": \"https://www.credit-suisse.com\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a non-existent sponsor",
@@ -211,19 +513,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a non-existent sponsor",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Credit Suisse\",\r\n    \"description\": \"Credit Suisse has a long and distinguished tradition of supporting the arts, working with leading cultural institutions to encourage innovative projects and wider access to theatre, music, and the visual arts.\",\r\n    \"website\": \"https://www.credit-suisse.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-UwrCdtPlT743GkLz+c+cW7Iqt9s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The sponsor with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete a non-existent sponsor",
@@ -243,19 +611,76 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a non-existent sponsor",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-UwrCdtPlT743GkLz+c+cW7Iqt9s\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The sponsor with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete a sponsor",
@@ -274,19 +699,68 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/sponsors/{{sponsor_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"sponsors",
 						"{{sponsor_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a sponsor",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/sponsors/{{sponsor_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"sponsors",
+								"{{sponsor_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"124-oSwwuQ8fjuGPvuqpl5ysMR3OUdA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 17:01:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }

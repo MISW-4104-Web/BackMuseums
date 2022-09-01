@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { ArtworkDto } from 'src/artwork/artwork.dto';
+import { ArtworkEntity } from 'src/artwork/artwork.entity';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { MuseumArtworkService } from './museum-artwork.service';
 
@@ -25,8 +27,9 @@ export class MuseumArtworkController {
   }
 
   @Put(':museumId/artworks')
-  async associateMuseumArtwork(@Param('museumId') museumId: number, @Body() artworkDTO: ArtworkDto[]) {
-    return await this.museumArtworkService.associateMuseumArtwork(museumId, artworkDTO);
+  async associateMuseumArtwork(@Param('museumId') museumId: number, @Body() artworksDTO: ArtworkDto[]) {
+    const artworks = plainToInstance(ArtworkEntity, artworksDTO)
+    return await this.museumArtworkService.associateMuseumArtwork(museumId, artworks);
   }
 
   @Delete(':museumId/artworks/:artworkId')

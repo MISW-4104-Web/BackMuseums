@@ -2,21 +2,20 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { MovementDTO } from './movement.dto';
-import { Movement } from './movement.entity';
+import { MovementEntity } from './movement.entity';
 
 @Injectable()
 export class MovementService {
   constructor(
-    @InjectRepository(Movement)
-    private readonly movementRepository: Repository<Movement>
+    @InjectRepository(MovementEntity)
+    private readonly movementRepository: Repository<MovementEntity>
   ) {}
 
-  async findAll(): Promise<MovementDTO[]> {
-    return await this.movementRepository.find();
+  async findAll(): Promise<MovementEntity[]> {
+    return await this.movementRepository.find({relations: ["artists"]});
   }
 
-  async findOne(id: number): Promise<MovementDTO> {
+  async findOne(id: number): Promise<MovementEntity> {
     const movement = await this.movementRepository.findOne(id, { relations: ["artists"] });
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
@@ -24,29 +23,16 @@ export class MovementService {
       return movement;
   }
 
-  async create(movementDTO: MovementDTO): Promise<MovementDTO> {
-    const movement = new Movement();
-    movement.name = movementDTO.name;
-    movement.description = movementDTO.description;
-    movement.countryOfOrigin = movementDTO.countryOfOrigin;
-    movement.activeYears = movementDTO.activeYears;
-    
-    return await this.movementRepository.save(movement);
+  async create(movementEntity: MovementEntity): Promise<MovementEntity> {
+    return await this.movementRepository.save(movementEntity);
   }
 
-  async update(id: number, movementDTO: MovementDTO): Promise<MovementDTO> {
+  async update(id: number, movementEntity: MovementEntity): Promise<MovementEntity> {
     const movement = await this.movementRepository.findOne(id);
     if (!movement)
       throw new BusinessLogicException("The movement with the given id was not found", BusinessError.NOT_FOUND)
-    else {
-      movement.name = movementDTO.name;
-      movement.description = movementDTO.description;
-      movement.countryOfOrigin = movementDTO.countryOfOrigin;
-      movement.activeYears = movementDTO.activeYears;
       
-      await this.movementRepository.save(movement);
-      return movement;
-    }
+    return await this.movementRepository.save({...movement, ...movementEntity});
   }
 
   async delete(id: number) {

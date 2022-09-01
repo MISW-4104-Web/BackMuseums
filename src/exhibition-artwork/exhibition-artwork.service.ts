@@ -55,21 +55,17 @@ export class ExhibitionArtworkService {
     return exhibition.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateExhibitionArtwork(exhibitionId: number, artworkDTO: ArtworkDto[]): Promise<ExhibitionDto> {
+  async associateExhibitionArtwork(exhibitionId: number, artworks: ArtworkEntity[]): Promise<ExhibitionDto> {
     const exhibition = await this.exhibitionRepository.findOne(exhibitionId, { relations : ["artworks"] });
 
     if (!exhibition)
       throw new BusinessLogicException("The exhibition with the given id was not found", BusinessError.NOT_FOUND)
 
-    const artworks: ArtworkEntity[] = [];
-
-    for (let i = 0; i < artworkDTO.length; i++) {
-      const artwork = await this.artworkRepository.findOne(artworkDTO[i].id);
+    artworks.forEach(async artworkEntity=>{
+      const artwork = await this.artworkRepository.findOne(artworkEntity.id);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
-      else 
-        artworks.push(artwork);
-    }
+    })
 
     exhibition.artworks = artworks;
     return await this.exhibitionRepository.save(exhibition);

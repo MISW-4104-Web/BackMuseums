@@ -1,6 +1,6 @@
 import { ArtworkEntity } from "src/artwork/artwork.entity";
 import { MuseumEntity } from "src/museum/museum.entity";
-import { Sponsor } from "src/sponsor/sponsor.entity";
+import { SponsorEntity } from "src/sponsor/sponsor.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -22,9 +22,9 @@ export class ExhibitionEntity {
   @OneToMany(() => ArtworkEntity, artwork => artwork.exhibition)
   artworks: ArtworkEntity[];
 
-  @OneToOne(() => Sponsor, sponsor => sponsor.exhibition, {
+  @OneToOne(() => SponsorEntity, sponsor => sponsor.exhibition, {
     onDelete: 'CASCADE'
   })
   @JoinColumn()
-  sponsor: Sponsor;
+  sponsor: SponsorEntity;
 }

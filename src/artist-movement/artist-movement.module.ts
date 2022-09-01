@@ -3,10 +3,10 @@ import { ArtistMovementService } from './artist-movement.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArtistEntity } from 'src/artist/artist.entity';
-import { Movement } from 'src/movement/movement.entity';
+import { MovementEntity } from 'src/movement/movement.entity';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([ArtistEntity, Movement])],
+    imports: [TypeOrmModule.forFeature([ArtistEntity, MovementEntity])],
     controllers: [ArtistMovementController],
     providers: [ArtistMovementService],
 })

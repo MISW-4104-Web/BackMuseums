@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
-import { SponsorDTO } from './sponsor.dto';
+import { SponsorDto } from './sponsor.dto';
+import { SponsorEntity } from './sponsor.entity';
 import { SponsorService } from './sponsor.service';
 
 @Controller('sponsors')
@@ -19,13 +21,15 @@ export class SponsorController {
   }
 
   @Post()
-  async create(@Body() sponsorDTO: SponsorDTO) {
-    return await this.sponsorService.create(sponsorDTO);
+  async create(@Body() sponsorDto: SponsorDto) {
+    const sponsor = plainToInstance(SponsorEntity, sponsorDto)
+    return await this.sponsorService.create(sponsor);
   }
 
   @Put(':sponsorId')
-  async update(@Param('sponsorId') sponsorId: number, @Body() sponsorDTO: SponsorDTO) {
-    return await this.sponsorService.update(sponsorId, sponsorDTO);
+  async update(@Param('sponsorId') sponsorId: number, @Body() sponsorDto: SponsorDto) {
+    const sponsor = plainToInstance(SponsorEntity, sponsorDto)
+    return await this.sponsorService.update(sponsorId, sponsor);
   }
 
   @Delete(':sponsorId')

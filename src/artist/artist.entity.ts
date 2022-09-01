@@ -1,5 +1,5 @@
 import { ArtworkEntity } from "src/artwork/artwork.entity";
-import { Movement } from "src/movement/movement.entity";
+import { MovementEntity } from "src/movement/movement.entity";
 import { ImageEntity } from "src/image/image.entity";
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -23,6 +23,6 @@ export class ArtistEntity {
   @OneToMany(() => ArtworkEntity, artwork => artwork.artist)
   artworks: ArtworkEntity[];
 
-  @ManyToMany(() => Movement, movement => movement.artists)
-  movements: Movement[];
+  @ManyToMany(() => MovementEntity, movement => movement.artists)
+  movements: MovementEntity[];
 }

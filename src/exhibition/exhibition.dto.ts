@@ -1,8 +1,16 @@
+import { IsNotEmpty, IsString } from "class-validator";
+import { SponsorDto } from "src/sponsor/sponsor.dto";
+
 export class ExhibitionDto {
-  readonly id: number;
+
+  @IsNotEmpty()
+  @IsString()
   readonly name: string;
+
+  @IsNotEmpty()
+  @IsString()
   readonly description: string;
-  /*TODO: cambiar por */
-  /*readonly sponsor: Sponsor;
-  readonly museum: Museum;*/
+
+  @IsNotEmpty()  
+  readonly sponsor: SponsorDto;
 }

@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "8eeaed3d-95f9-437c-a25e-646fc2777db5",
 		"name": "Movement tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
@@ -14,7 +15,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"movement_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"121\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,18 +34,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new movement",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Expressionism\",\r\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"121\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "289"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"121-FGCtuXlVBJN7iFGHgGh7NnmlJ6M\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Expressionism\",\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"121\",\n    \"id\": 43\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all movements",
@@ -64,18 +130,74 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all movements",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "291"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"123-dMXfM3ZUwA3mlfUiRHOq2ONwNUQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 43,\n        \"name\": \"Expressionism\",\n        \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n        \"countryOfOrigin\": \"Spain, France\",\n        \"activeYears\": \"121\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Get one movement",
@@ -96,19 +218,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get one movement",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "302"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12e-r5qSoqgxf952tnBFmRkSMAw+wGk\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 43,\n    \"name\": \"Expressionism\",\n    \"description\": \"Expressionism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"121\",\n    \"artists\": []\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a non-existent movement",
@@ -128,19 +307,76 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a non-existent movement",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-A8xRLcHR89h0nvY7MtsmiUrrVKc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The movement with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a movement",
@@ -170,19 +406,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a movement",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"150\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "275"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"113-FrdouSXsDyGSwSuj2e2C1+2Z+Po\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 43,\n    \"name\": \"Cubism\",\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"150\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Update a non-existent movement",
@@ -211,19 +513,85 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Update a non-existent movement",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"Early 20th century\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-A8xRLcHR89h0nvY7MtsmiUrrVKc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The movement with the given id was not found\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Delete a movement",
@@ -242,19 +610,68 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a movement",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10b-+FaLXzVobBqLPbID8NxkGgqIIl8\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete a non-existent movement",
@@ -274,19 +691,76 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"0"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a non-existent movement",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "75"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4b-A8xRLcHR89h0nvY7MtsmiUrrVKc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:56:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The movement with the given id was not found\"\n}"
+				}
+			]
 		}
 	]
 }

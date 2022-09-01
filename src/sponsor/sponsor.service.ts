@@ -3,23 +3,22 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
-import { SponsorDTO } from './sponsor.dto';
-import { Sponsor } from './sponsor.entity';
+import { SponsorEntity } from './sponsor.entity';
 
 @Injectable()
 export class SponsorService {
   constructor(
-    @InjectRepository(Sponsor)
-    private readonly sponsorRepository: Repository<Sponsor>,
+    @InjectRepository(SponsorEntity)
+    private readonly sponsorRepository: Repository<SponsorEntity>,
     @InjectRepository(ExhibitionEntity)
     private readonly exhibitionRepository: Repository<ExhibitionEntity>
   ) {}
 
-  async findAll(): Promise<SponsorDTO[]> {
+  async findAll(): Promise<SponsorEntity[]> {
     return await this.sponsorRepository.find({ relations: ["exhibition"] });
   }
 
-  async findOne(id: number): Promise<SponsorDTO> {
+  async findOne(id: number): Promise<SponsorEntity> {
     const sponsor = await this.sponsorRepository.findOne(id, { relations: ["exhibition"] });
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
@@ -27,25 +26,16 @@ export class SponsorService {
       return sponsor;
   }
 
-  async create(sponsorDTO: SponsorDTO): Promise<SponsorDTO> {
-    const sponsor = new Sponsor();
-    sponsor.name = sponsorDTO.name;
-    sponsor.description = sponsorDTO.description;
-    sponsor.website = sponsorDTO.website;
-    return await this.sponsorRepository.save(sponsor);
+  async create(sponsorEntity: SponsorEntity): Promise<SponsorEntity> {
+    return await this.sponsorRepository.save(sponsorEntity);
   }
 
-  async update(id: number, sponsorDTO: SponsorDTO): Promise<SponsorDTO> {
+  async update(id: number, sponsorEntity: SponsorEntity): Promise<SponsorEntity> {
     const sponsor = await this.sponsorRepository.findOne(id);
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
   
-    sponsor.name = sponsorDTO.name;
-    sponsor.description = sponsorDTO.description;
-    sponsor.website = sponsorDTO.website;
-
-    await this.sponsorRepository.save(sponsor);
-    return sponsor;
+    return await this.sponsorRepository.save({...sponsor, ...sponsorEntity});
   }
 
   async delete(id: number) {

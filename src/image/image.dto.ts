@@ -1,7 +1,20 @@
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+
 export class ImageDto {
-  readonly id: number;
+
+  @IsString()
+  @IsNotEmpty()
   readonly source: string;
+
+  @IsString()
+  @IsNotEmpty()
   readonly altText: string;
+
+  @IsNumber()
+  @IsNotEmpty()
   readonly height: number;
+
+  @IsNumber()
+  @IsNotEmpty()
   readonly width: number;
 }

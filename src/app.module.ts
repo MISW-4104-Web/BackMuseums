@@ -15,9 +15,9 @@ import { Module } from '@nestjs/common';
 import { MuseumEntity } from './museum/museum.entity';
 import { ExhibitionEntity } from './exhibition/exhibition.entity';
 import { ArtworkEntity } from './artwork/artwork.entity';
-import { Movement } from './movement/movement.entity';
+import { MovementEntity } from './movement/movement.entity';
 import { ArtistEntity } from './artist/artist.entity';
-import { Sponsor } from './sponsor/sponsor.entity';
+import { SponsorEntity } from './sponsor/sponsor.entity';
 import { ImageEntity } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
 import { MuseumExhibitionModule } from './museum-exhibition/museum-exhibition.module';
@@ -58,7 +58,7 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
         (process.env.DATABASE_URL && process.env.DATABASE_URL.split('/')[3]) ||
         process.env.DB_NAME ||
         'modern-art-museum',
-      entities: [ArtistEntity, ArtworkEntity, ExhibitionEntity, ImageEntity, Movement, MuseumEntity, Sponsor],
+      entities: [ArtistEntity, ArtworkEntity, ExhibitionEntity, ImageEntity, MovementEntity, MuseumEntity, SponsorEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,

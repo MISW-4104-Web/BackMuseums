@@ -55,21 +55,17 @@ export class MuseumArtworkService {
     return museum.artworks.filter(p => p.constructor.name === "Artwork")
   }
 
-  async associateMuseumArtwork(museumId: number, artworkDTO: ArtworkDto[]): Promise<MuseumEntity> {
+  async associateMuseumArtwork(museumId: number, artworks: ArtworkEntity[]): Promise<MuseumEntity> {
     const museum = await this.museumRepository.findOne(museumId, { relations : ["artworks"] });
 
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
 
-    const artworks: ArtworkEntity[] = [];
-
-    for (let i = 0; i < artworkDTO.length; i++) {
-      const artwork = await this.artworkRepository.findOne(artworkDTO[i].id);
+    artworks.forEach(async artworkEntity=>{
+      const artwork = await this.artworkRepository.findOne(artworkEntity.id);
       if (!artwork)
-        throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
-      else 
-        artworks.push(artwork);
-    }
+        throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
+    })
 
     museum.artworks = artworks;
     return await this.museumRepository.save(museum);

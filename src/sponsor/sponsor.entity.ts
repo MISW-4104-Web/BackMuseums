@@ -2,7 +2,7 @@ import { ExhibitionEntity } from "src/exhibition/exhibition.entity";
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Sponsor {
+export class SponsorEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
