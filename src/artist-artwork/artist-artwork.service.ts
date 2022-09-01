@@ -12,10 +12,7 @@ export class ArtistArtworkService {
     constructor(
         @InjectRepository(ArtworkEntity)
         private readonly artworkRepository: Repository<ArtworkEntity>,
-        @InjectRepository(MuseumEntity)
-        private readonly museumRepository: Repository<MuseumEntity>,
-        @InjectRepository(ExhibitionEntity)
-        private readonly exhibitionRepository: Repository<ExhibitionEntity>,
+
         @InjectRepository(ArtistEntity)
         private readonly artistRepository: Repository<ArtistEntity>,
     ) { }
