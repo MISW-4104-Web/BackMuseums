@@ -21,7 +21,6 @@ export class ArtistArtworkController {
     }
 
     @Post('/:artistId/artworks/:artworkId')
-    @HttpCode(200)
     async create(@Param('artistId') artistId: number, @Param('artworkId') artworkId: number) {
         return await this.artworkService.addArtworkToArtist(artistId, artworkId);
     }

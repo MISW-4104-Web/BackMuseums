@@ -50,8 +50,8 @@ export class ArtistArtworkService {
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND);
         
         const artwork = await this.artworkRepository.findOne(artworkId);
-            if (!artwork)
-                throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
+        if (!artwork)
+            throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
 
         artwork.artist = artist;
         
@@ -64,14 +64,17 @@ export class ArtistArtworkService {
         if (!artist)
             throw new BusinessLogicException("The artist with the given id was not found", BusinessError.NOT_FOUND)
 
-        artworks.forEach(async artworkEntity=>{
+        const updatedArtworks: ArtworkEntity[] = [];
+        
+        for(let artworkEntity of artworks){
             const artwork = await this.artworkRepository.findOne(artworkEntity.id);
             if (!artwork)
-                throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)
+                throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND)    
             artwork.artist = artist;
-        })
-        
-        return artworks;
+            updatedArtworks.push(await this.artworkRepository.save(artwork));
+        } 
+         
+        return updatedArtworks;
     }
 
     async deleteArtworkFromArtist(artistId: number, artworkId: number) {
@@ -85,6 +88,5 @@ export class ArtistArtworkService {
 
         artist.artworks = artist.artworks.filter(e => e.id !== artwork.id);
         await this.artistRepository.save(artist);
-        return await this.artworkRepository.remove(artwork);
     }
 }

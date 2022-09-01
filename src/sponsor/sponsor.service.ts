@@ -22,8 +22,8 @@ export class SponsorService {
     const sponsor = await this.sponsorRepository.findOne(id, { relations: ["exhibition"] });
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
-    else
-      return sponsor;
+    
+    return sponsor;
   }
 
   async create(sponsorEntity: SponsorEntity): Promise<SponsorEntity> {
@@ -42,7 +42,7 @@ export class SponsorService {
     const sponsor = await this.sponsorRepository.findOne(id);
     if (!sponsor)
       throw new BusinessLogicException("The sponsor with the given id was not found", BusinessError.NOT_FOUND)
-    else
-      return await this.sponsorRepository.remove(sponsor);
+    
+    return await this.sponsorRepository.remove(sponsor);
   }
 }

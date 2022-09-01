@@ -2,19 +2,20 @@
 	"info": {
 		"_postman_id": "5b1bb759-8b4f-46fe-a800-d4d49488b390",
 		"name": "Artist-Artwork tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
-			"name": "Create a new artist",
+			"name": "Create a new image",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"image_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +34,121 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/images",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artist_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": {\r\n        \"id\": {{image_id_1}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/artists",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
 						"artists"
 					]
 				}
@@ -121,8 +230,8 @@
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artwork_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"artwork_id_1\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -133,7 +242,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artist_id_1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -141,15 +250,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artworks",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
-						"artists",
-						"{{artist_id}}",
 						"artworks"
 					]
 				}
@@ -226,7 +331,431 @@
 			]
 		},
 		{
-			"name": "Get all artworks",
+			"name": "Create a new image 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"image_id_2\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo 2\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/images",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new artist 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artist_id_2\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso 2\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": {\r\n        \"id\": {{image_id_2}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/artists",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new artist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "200"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c8-x67Bibj6Zaiq+cBBnj6o++zNp24\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Pablo Picasso\",\n    \"birthplace\": \"Madrid, Spain\",\n    \"birthdate\": \"1881-10-25\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"id\": 83\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new artwork 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artwork_id_2\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"La Femme qui pleure 2\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\",\r\n    \"artist\": {\r\n        \"id\": {{artist_id_2}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/artworks",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artworks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new artwork",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "491"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1eb-19Wyx1km9yKSoo62HN8GNopnWbE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"La Femme qui pleure\",\n    \"year\": 1837,\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n    \"type\": \"Painting\",\n    \"museum\": null,\n    \"exhibition\": null,\n    \"artist\": {\n        \"id\": 83,\n        \"name\": \"Pablo Picasso\",\n        \"birthplace\": \"Madrid, Spain\",\n        \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n    },\n    \"id\": 61\n}"
+				}
+			]
+		},
+		{
+			"name": "Add an artwork to an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}/artworks/{{artwork_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists",
+						"{{artist_id_2}}",
+						"artworks",
+						"{{artwork_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new artwork",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "491"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1eb-19Wyx1km9yKSoo62HN8GNopnWbE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"La Femme qui pleure\",\n    \"year\": 1837,\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n    \"type\": \"Painting\",\n    \"museum\": null,\n    \"exhibition\": null,\n    \"artist\": {\n        \"id\": 83,\n        \"name\": \"Pablo Picasso\",\n        \"birthplace\": \"Madrid, Spain\",\n        \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n    },\n    \"id\": 61\n}"
+				}
+			]
+		},
+		{
+			"name": "Get all artworks of an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -243,15 +772,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}/artworks/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
+						"{{artist_id_2}}",
 						"artworks",
 						""
 					]
@@ -321,7 +848,7 @@
 			]
 		},
 		{
-			"name": "Get one artwork",
+			"name": "Get one artwork of an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -339,17 +866,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}/artworks/{{artwork_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
+						"{{artist_id_2}}",
 						"artworks",
-						"{{artwork_id}}"
+						"{{artwork_id_1}}"
 					]
 				}
 			},
@@ -417,7 +942,7 @@
 			]
 		},
 		{
-			"name": "Get a non-existent artwork",
+			"name": "Get a non-existent artwork of an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -434,15 +959,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}/artworks/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
+						"{{artist_id_2}}",
 						"artworks",
 						"0"
 					]
@@ -512,7 +1035,7 @@
 			]
 		},
 		{
-			"name": "Update an artwork",
+			"name": "Update artworks to an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -531,7 +1054,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+					"raw": "[{\r\n    \"id\": {{artwork_id_1}}\r\n},\r\n{\r\n    \"id\": {{artwork_id_2}}\r\n}]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -539,17 +1062,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}/artworks",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
-						"artworks",
-						"{{artwork_id}}"
+						"{{artist_id_1}}",
+						"artworks"
 					]
 				}
 			},
@@ -626,7 +1146,7 @@
 			]
 		},
 		{
-			"name": "Update a non-existent artwork",
+			"name": "Update non-existent artworks to an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -644,7 +1164,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"La Femme qui pleure\",\r\n    \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\r\n    \"year\": 1837,\r\n    \"type\": \"Painting\"\r\n}",
+					"raw": "[{\r\n    \"id\": 0\r\n}]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -652,17 +1172,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}/artworks",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
-						"artworks",
-						"0"
+						"{{artist_id_1}}",
+						"artworks"
 					]
 				}
 			},
@@ -739,7 +1256,7 @@
 			]
 		},
 		{
-			"name": "Delete an artwork",
+			"name": "Delete an artwork of an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -755,17 +1272,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}/artworks/{{artwork_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
+						"{{artist_id_1}}",
 						"artworks",
-						"{{artwork_id}}"
+						"{{artwork_id_1}}"
 					]
 				}
 			},
@@ -825,7 +1340,91 @@
 			]
 		},
 		{
-			"name": "Delete a non-existent artwork",
+			"name": "Delete an artwork 2 of an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}/artworks/{{artwork_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists",
+						"{{artist_id_1}}",
+						"artworks",
+						"{{artwork_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artwork",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e3-tQZORI333ur5SomA2pedxj0aCag\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:37 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete a non-existent artwork of an artist",
 			"event": [
 				{
 					"listen": "test",
@@ -842,15 +1441,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}/artworks/0",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}",
+						"{{artist_id_1}}",
 						"artworks",
 						"0"
 					]
@@ -920,6 +1517,266 @@
 			]
 		},
 		{
+			"name": "Delete an artwork 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 204; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artworks/{{artwork_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a non-existent artwork",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-HdSXQ9DOFik77lA6BTILifOYwSg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The artwork with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an artwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Entity with requested ID exists\"] = responseCode.code === 204; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artworks/{{artwork_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artworks",
+						"{{artwork_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete a non-existent artwork",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/0",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"0"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "74"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4a-HdSXQ9DOFik77lA6BTILifOYwSg\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The artwork with the given id was not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete an artist 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists",
+						"{{artist_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
 			"name": "Delete an artist",
 			"event": [
 				{
@@ -936,15 +1793,173 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
-						"{{artist_id}}"
+						"{{artist_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an image 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:51:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id_1}}"
 					]
 				}
 			},
