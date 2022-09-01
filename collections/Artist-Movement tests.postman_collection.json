@@ -1,20 +1,21 @@
 {
 	"info": {
-		"_postman_id": "b636606b-6828-420a-958d-7a22a4d36cea",
+		"_postman_id": "a815cf3a-e2ae-460e-9106-13829767496e",
 		"name": "Artist-Movement tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
-			"name": "Create a new artist",
+			"name": "Create a new image",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"postman.setGlobalVariable(\"image_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1981-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,13 +34,121 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/images",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1981-10-25\",\r\n    \"image\": {\r\n        \"id\": {{image_id}}\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/artists",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
 						"artists"
 					]
 				}
@@ -55,7 +164,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"movement_id_1\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -66,7 +175,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"100\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,13 +183,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements"
 					]
 				}
@@ -96,7 +203,7 @@
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"postman.setGlobalVariable(\"movement_id_2\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -107,7 +214,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Surrealism\",\r\n    \"description\": \"Surrealism was a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.\",\r\n    \"countryOfOrigin\": \"France, Belgium\",\r\n    \"activeYears\": \"105\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Surrealism\",\r\n    \"description\": \"Surrealism was a cultural movement that developed in Europe in the aftermath of World War I in which artists depicted unnerving, illogical scenes and developed techniques to allow the unconscious mind to express itself.\",\r\n    \"countryOfOrigin\": \"France, Belgium\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,13 +222,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements"
 					]
 				}
@@ -135,7 +240,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
 						],
 						"type": "text/javascript"
 					}
@@ -145,13 +250,11 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements/{{movement_id_1}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements/{{movement_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements",
@@ -162,14 +265,12 @@
 			"response": []
 		},
 		{
-			"name": "Get an artist's movement",
+			"name": "Get a movement of an artist",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"console.log(responseBody);\r",
-							"var data = JSON.parse(responseBody);\r",
 							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -180,13 +281,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements/{{movement_id_1}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements/{{movement_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements",
@@ -197,14 +296,12 @@
 			"response": []
 		},
 		{
-			"name": "Get all artist's movements",
+			"name": "Get all movements of an artist",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"console.log(responseBody);\r",
-							"var data = JSON.parse(responseBody);\r",
 							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -215,13 +312,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements",
@@ -257,13 +352,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements"
@@ -289,13 +382,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements/{{movement_id_1}}/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements/{{movement_id_1}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements",
@@ -323,13 +414,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/movements/{{movement_id_2}}/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}/movements/{{movement_id_2}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}",
 						"movements",
@@ -357,13 +446,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id_1}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id_1}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id_1}}"
 					]
@@ -388,13 +475,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id_2}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id_2}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id_2}}"
 					]
@@ -419,19 +504,101 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id}}"
 					]
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an image",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images/{{image_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images",
+								"{{image_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ab-/zTXpLPX15b/AH8pxQrRLeYammc\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:41 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }

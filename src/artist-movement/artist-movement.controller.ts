@@ -12,29 +12,28 @@ export class ArtistMovementController {
 
   @Get(':artistId/movements/:movementId')
   async findMovementByArtistIdMovementId(@Param('movementId') movementId: number, @Param('artistId') artistId: number) {
-    return await this.artistMovementService.findMovementByArtistIdMovementId(movementId, artistId);
+    return await this.artistMovementService.findMovementByArtist(movementId, artistId);
   }
 
   @Get(':artistId/movements')
   async findMovementsByArtistId(@Param('artistId') artistId: number) {
-    return await this.artistMovementService.findMovementsByArtistId(artistId);
+    return await this.artistMovementService.findMovementsByArtist(artistId);
   }
 
   @Post(':artistId/movements/:movementId/')
-  @HttpCode(200)
   async addArtistMovement(@Param('movementId') movementId: number, @Param('artistId') artistId: number) {
-    return await this.artistMovementService.addArtistMovement(artistId, movementId);
+    return await this.artistMovementService.addMovementToArtist(artistId, movementId);
   }
 
   @Put(':artistId/movements')
   async associateArtistMovement(@Param('artistId') artistId: number, @Body() movementDTO: MovementDto[]) {
     const movements = plainToInstance(MovementEntity, movementDTO)
-    return await this.artistMovementService.associateArtistMovement(artistId, movements);
+    return await this.artistMovementService.updateMovementsFromArtist(artistId, movements);
   }
 
   @Delete(':artistId/movements/:movementId')
   @HttpCode(204)
   async deleteMovementToArtist(@Param('movementId') movementId: number, @Param('artistId') artistId: number) {
-    return await this.artistMovementService.deleteMovementToArtist(movementId, artistId);
+    return await this.artistMovementService.deleteMovementFromArtist(movementId, artistId);
   }
 }
