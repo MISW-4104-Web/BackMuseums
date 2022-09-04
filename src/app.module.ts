@@ -20,8 +20,6 @@ import { ArtistEntity } from './artist/artist.entity';
 import { SponsorEntity } from './sponsor/sponsor.entity';
 import { ImageEntity } from './image/image.entity';
 import { ArtistArtworkModule } from './artist-artwork/artist-artwork.module';
-import { MuseumExhibitionModule } from './museum-exhibition/museum-exhibition.module';
-import { ArtworkArtistModule } from './artwork-artist/artwork-artist.module';
 import { ArtworkImageModule } from './artwork-image/artwork-image.module';
 
 @Module({
@@ -73,8 +71,6 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
         }
       }*/
     }),
-    MuseumExhibitionModule,
-    ArtworkArtistModule,
     ArtworkImageModule,
   ],
 })

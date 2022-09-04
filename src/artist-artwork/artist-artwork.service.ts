@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ArtistEntity } from 'src/artist/artist.entity';
-import { ExhibitionEntity } from 'src/exhibition/exhibition.entity';
-import { MuseumEntity } from 'src/museum/museum.entity';
 import { BusinessLogicException, BusinessError } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';
 import { ArtworkEntity } from '../artwork/artwork.entity';
