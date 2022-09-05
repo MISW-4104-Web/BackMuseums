@@ -11,30 +11,29 @@ export class MuseumArtworkController {
   constructor(private readonly museumArtworkService: MuseumArtworkService) {}
 
   @Get(':museumId/artworks/:artworkId')
-  async findArtworkByMuseumIdArtworkId(@Param('artworkId') artworkId: number, @Param('museumId') museumId: number) {
-    return await this.museumArtworkService.findArtworkByMuseumIdArtworkId(artworkId, museumId);
+  async findArtworkFromMuseum(@Param('artworkId') artworkId: number, @Param('museumId') museumId: number) {
+    return await this.museumArtworkService.findArtworkFromMuseum(museumId, artworkId)
   }
 
   @Get(':museumId/artworks')
-  async findArtworksByMuseumId(@Param('museumId') museumId: number) {
-    return await this.museumArtworkService.findArtworksByMuseumId(museumId);
+  async findArtworksFromMuseum(@Param('museumId') museumId: number) {
+    return await this.museumArtworkService.findArtworksFromMuseum(museumId)
   }
 
   @Post(':museumId/artworks/:artworkId/')
-  @HttpCode(200)
-  async addMuseumArtwork(@Param('artworkId') artworkId: number, @Param('museumId') museumId: number) {
-    return await this.museumArtworkService.addMuseumArtwork(museumId, artworkId);
+  async addArtworkToMuseum(@Param('artworkId') artworkId: number, @Param('museumId') museumId: number) {
+    return await this.museumArtworkService.addArtworkToMuseum(museumId, artworkId)
   }
 
   @Put(':museumId/artworks')
-  async associateMuseumArtwork(@Param('museumId') museumId: number, @Body() artworksDTO: ArtworkDto[]) {
+  async updateArtworksFromMuseum(@Param('museumId') museumId: number, @Body() artworksDTO: ArtworkDto[]) {
     const artworks = plainToInstance(ArtworkEntity, artworksDTO)
-    return await this.museumArtworkService.associateMuseumArtwork(museumId, artworks);
+    return await this.museumArtworkService.updateArtworksFromMuseum(museumId, artworks);
   }
 
   @Delete(':museumId/artworks/:artworkId')
   @HttpCode(204)
   async deleteArtworkToMuseum(@Param('artworkId') artworkId: number, @Param('museumId') museumId: number) {
-    return await this.museumArtworkService.deleteArtworkToMuseum(artworkId, museumId);
+    return await this.museumArtworkService.deleteArtworkFromMuseum(museumId, artworkId);
   }
 }
