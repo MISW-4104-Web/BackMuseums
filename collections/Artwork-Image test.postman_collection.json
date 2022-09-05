@@ -13,9 +13,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"image_id_artist\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"image_id_artist\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -123,9 +126,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"artist_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -229,9 +235,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artwork_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"artwork_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -386,9 +395,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"image_id_artwork\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"image_id_artwork\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -496,7 +508,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -598,8 +612,15 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; ",
-							"tests[\"Correct error message\"] = responseBody.has(\"The image with the given id was not found\");"
+							"",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The image with the given id was not found\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -701,8 +722,15 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; ",
-							"tests[\"Correct error message\"] = responseBody.has(\"The artwork with the given id was not found\");"
+							"",
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The artwork with the given id was not found\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -804,7 +832,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 200"
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -914,8 +944,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; ",
-							"tests[\"Correct error message\"] = responseBody.has(\"The image with the given id was not found\");"
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The image with the given id was not found\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1025,8 +1061,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"Entity with requested ID exists\"] = responseCode.code === 404; ",
-							"tests[\"Correct error message\"] = responseBody.has(\"The artwork with the given id was not found\");"
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The artwork with the given id was not found\");",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1136,7 +1178,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1238,7 +1282,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1338,7 +1384,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1438,7 +1486,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -1538,7 +1588,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}

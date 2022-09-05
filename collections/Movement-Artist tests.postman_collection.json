@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "21a4beb9-88fe-411e-b4f1-b28530705688",
 		"name": "Movement-Artist tests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8840688"
 	},
 	"item": [
 		{
@@ -12,9 +13,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movement_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"movement_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +29,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"200\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -33,18 +37,197 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new movement",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Cubism\",\r\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\r\n    \"countryOfOrigin\": \"Spain, France\",\r\n    \"activeYears\": \"200\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "275"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"113-6vM096DX9zq/y53npRi/ITILMpU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Cubism\",\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"200\",\n    \"id\": 44\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"image_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/images",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
 		},
 		{
 			"name": "Create a new artist",
@@ -53,9 +236,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id_1\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"artist_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -66,7 +252,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": {\r\n        \"id\": {{image_id_1}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,18 +260,196 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new artist",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pablo Picasso\",\r\n    \"birthplace\": \"Madrid, Spain\",\r\n    \"birthdate\": \"1881-10-25\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "200"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"c8-FxxEWq2WAWgC4vbmEE2yb8G01YI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:08 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Pablo Picasso\",\n    \"birthplace\": \"Madrid, Spain\",\n    \"birthdate\": \"1881-10-25\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"id\": 86\n}"
+				}
+			]
+		},
+		{
+			"name": "Create a new image 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"image_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/images",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create a new image",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\r\n    \"altText\": \"Pablo-Picassoo.jpg\",\r\n    \"height\": 300,\r\n    \"width\": 300\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}/artworks/{{artwork_id}}/images",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}",
+								"artworks",
+								"{{artwork_id}}",
+								"images"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "426"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1aa-a4XWqUWJbh/x1m20exedbSIudEA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:55:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"source\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"altText\": \"Pablo-Picassoo.jpg\",\n    \"height\": 300,\n    \"width\": 300,\n    \"artwork\": {\n        \"id\": 64,\n        \"name\": \"La Femme qui pleure\",\n        \"year\": 1837,\n        \"description\": \"The Weeping Woman, I is an elaboration of one of the central figures in Picasso’s famous mural-size painting Guernica, executed some months earlier.\",\n        \"type\": \"Painting\"\n    },\n    \"id\": 11\n}"
+				}
+			]
 		},
 		{
 			"name": "Create a new artist 2",
@@ -94,9 +458,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id_2\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"artist_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -107,7 +474,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Salvador Dalí\",\r\n    \"birthplace\": \"Cataluña, Spain\",\r\n    \"birthdate\": \"1904-05-11\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\r\n}",
+					"raw": "{\r\n    \"name\": \"Salvador Dalí\",\r\n    \"birthplace\": \"Cataluña, Spain\",\r\n    \"birthdate\": \"1904-05-11\",\r\n    \"image\": {\r\n        \"id\": {{image_id_2}}\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,18 +482,83 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Create a new artist 2",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Salvador Dalí\",\r\n    \"birthplace\": \"Cataluña, Spain\",\r\n    \"birthdate\": \"1904-05-11\",\r\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "220"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"dc-OgsYE5Co89hh4fLJ2qgucbZ8MW4\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Salvador Dalí\",\n    \"birthplace\": \"Cataluña, Spain\",\n    \"birthdate\": \"1904-05-11\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\",\n    \"id\": 87\n}"
+				}
+			]
 		},
 		{
 			"name": "Add artist to movement",
@@ -135,7 +567,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -145,13 +579,11 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}",
 						"artists",
@@ -160,7 +592,69 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Add artist to movement",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								"{{artist_id_1}}",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "502"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1f6-GV8VMhwNSULtyYLY7d3sZvn23Tw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 44,\n    \"name\": \"Cubism\",\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"200\",\n    \"artists\": [\n        {\n            \"id\": 86,\n            \"name\": \"Pablo Picasso\",\n            \"birthplace\": \"Madrid, Spain\",\n            \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n            \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Get a movement's artist",
@@ -169,8 +663,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data= JSON.parse(responseBody);\r",
-							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -180,13 +675,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}",
 						"artists",
@@ -195,7 +688,69 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get a movement's artist",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								"{{artist_id_1}}",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "214"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d6-xiVN6fGw4ftGUoONF6xKWOhoxgM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:23 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 86,\n    \"name\": \"Pablo Picasso\",\n    \"birthplace\": \"Madrid, Spain\",\n    \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n}"
+				}
+			]
 		},
 		{
 			"name": "Associate artists to movement",
@@ -204,7 +759,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -223,13 +780,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}",
 						"artists",
@@ -237,7 +792,77 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Associate artists to movement",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\": {{artist_id_1}}\r\n    },\r\n    {\r\n        \"id\": {{artist_id_2}}\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "737"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e1-GvZiK9yNx1WnP3l1fhMcZut8EXA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:27 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 44,\n    \"name\": \"Cubism\",\n    \"description\": \"Cubism is an early-20th-century avant-garde art movement that revolutionized European painting and sculpture, and inspired related movements in music, literature and architecture.\",\n    \"countryOfOrigin\": \"Spain, France\",\n    \"activeYears\": \"200\",\n    \"artists\": [\n        {\n            \"id\": 86,\n            \"name\": \"Pablo Picasso\",\n            \"birthplace\": \"Madrid, Spain\",\n            \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n            \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n        },\n        {\n            \"id\": 87,\n            \"name\": \"Salvador Dalí\",\n            \"birthplace\": \"Cataluña, Spain\",\n            \"birthdate\": \"1904-05-11T00:00:00.000Z\",\n            \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\n        }\n    ]\n}"
+				}
+			]
 		},
 		{
 			"name": "Get all movement's artists",
@@ -246,8 +871,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data= JSON.parse(responseBody);\r",
-							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test('Number of artworks > ' + 0, function () {\r",
+							"    var data = pm.response.json()\r",
+							"    pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -257,13 +888,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}",
 						"artists",
@@ -271,7 +900,68 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Get all movement's artists",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "451"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1c3-0LRjUkBVNphPzZHHXr5fAMuwWks\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 86,\n        \"name\": \"Pablo Picasso\",\n        \"birthplace\": \"Madrid, Spain\",\n        \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\"\n    },\n    {\n        \"id\": 87,\n        \"name\": \"Salvador Dalí\",\n        \"birthplace\": \"Cataluña, Spain\",\n        \"birthdate\": \"1904-05-11T00:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Salvador_Dal%C3%AD_1939.jpg/220px-Salvador_Dal%C3%AD_1939.jpg\"\n    }\n]"
+				}
+			]
 		},
 		{
 			"name": "Delete a movement's artist",
@@ -280,7 +970,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -290,13 +982,11 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/{{artist_id_1}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}",
 						"artists",
@@ -305,16 +995,72 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a movement's artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								"{{artist_id_1}}",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e1-GvZiK9yNx1WnP3l1fhMcZut8EXA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
-			"name": "Delete an artist",
+			"name": "Delete a movement's artist 2",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -324,19 +1070,74 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_1}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}/artists/{{artist_id_2}}/",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
+						"movements",
+						"{{movement_id}}",
 						"artists",
-						"{{artist_id_1}}"
+						"{{artist_id_2}}",
+						""
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a movement's artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}/artists/{{artist_id_1}}/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}",
+								"artists",
+								"{{artist_id_1}}",
+								""
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2e1-GvZiK9yNx1WnP3l1fhMcZut8EXA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:39 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete an artist 2",
@@ -345,7 +1146,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -355,19 +1158,314 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_2}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/artists/{{artist_id_2}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"artists",
 						"{{artist_id_2}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_1}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an image 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id_2}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_1}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artists/{{artist_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists",
+						"{{artist_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist 2",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_2}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id_2}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"e2-HMHwOdtDgz7KohNnRluuB0uFoTA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/images/{{image_id_1}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"images",
+						"{{image_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete an artist",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id_1}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ce-bAV93uHf4DaQbN3rjmWUbohyIpo\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		},
 		{
 			"name": "Delete a movement",
@@ -376,7 +1474,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -386,19 +1486,68 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
-					"protocol": "{{protocol}}",
+					"raw": "{{baseUrl}}/movements/{{movement_id}}",
 					"host": [
-						"{{host}}"
+						"{{baseUrl}}"
 					],
 					"path": [
-						"api",
 						"movements",
 						"{{movement_id}}"
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "Delete a movement",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/movements/{{movement_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"movements",
+								"{{movement_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"10b-h8OywfsAykPlogVYqD+ddIHDbzU\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 28 Mar 2022 16:57:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
 		}
 	]
 }

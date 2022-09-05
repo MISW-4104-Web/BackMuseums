@@ -59,11 +59,11 @@ export class MuseumArtworkService {
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND)
 
-    artworks.forEach(async artworkEntity=>{
+    for(let artworkEntity of artworks) {
       const artwork = await this.artworkRepository.findOne(artworkEntity.id);
       if (!artwork)
         throw new BusinessLogicException("The artwork with the given id was not found", BusinessError.NOT_FOUND);
-    })
+    }
 
     museum.artworks = artworks;
     return await this.museumRepository.save(museum);

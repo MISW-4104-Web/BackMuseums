@@ -11,30 +11,29 @@ export class MovementArtistController {
   constructor(private readonly movementArtistService: MovementArtistService) {}
 
   @Get(':movementId/artists/:artistId')
-  async findArtistByMovementIdArtistId(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
-    return await this.movementArtistService.findArtistByMovementIdArtistId(artistId, movementId);
+  async findArtistFromMovement(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
+    return await this.movementArtistService.findArtistFromMovement(movementId, artistId)
   }
 
   @Get(':movementId/artists')
-  async findArtistsByMovementId(@Param('movementId') movementId: number) {
-    return await this.movementArtistService.findArtistsByMovementId(movementId);
+  async findArtistsFromMovement(@Param('movementId') movementId: number) {
+    return await this.movementArtistService.findArtistsFromMovement(movementId);
   }
 
   @Post(':movementId/artists/:artistId/')
-  @HttpCode(200)
   async addMovementArtist(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
     return await this.movementArtistService.addMovementArtist(movementId, artistId);
   }
 
   @Put(':movementId/artists')
-  async associateMovementArtist(@Param('movementId') movementId: number, @Body() artistsDto: ArtistDto[]) {
+  async updateArtistsFromMovement(@Param('movementId') movementId: number, @Body() artistsDto: ArtistDto[]) {
     const artists: ArtistEntity [] = plainToInstance(ArtistEntity, artistsDto)
-    return await this.movementArtistService.associateMovementArtist(movementId, artists);
+    return await this.movementArtistService.updateArtistsFromMovement(movementId, artists);
   }
 
   @Delete(':movementId/artists/:artistId')
   @HttpCode(204)
-  async deleteArtistToMovement(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
-    return await this.movementArtistService.deleteArtistToMovement(artistId, movementId);
+  async deleteArtistFromMovement(@Param('artistId') artistId: number, @Param('movementId') movementId: number) {
+    return await this.movementArtistService.deleteArtistFromMovement(movementId, artistId);
   }
 }

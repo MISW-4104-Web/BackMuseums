@@ -13,9 +13,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"image_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"image_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -123,9 +127,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"artist_id\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"artist_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -162,9 +170,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movement_id_1\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"movement_id_1\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -201,9 +212,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var data = JSON.parse(responseBody);\r",
-							"postman.setGlobalVariable(\"movement_id_2\", data.id);\r",
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"movement_id_2\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -240,7 +254,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"POST request doesn't fail\"] = responseCode.code === 201;"
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -271,7 +287,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -302,7 +320,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"GET request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test('Number of artworks > ' + 0, function () {",
+							"    var data = pm.response.json()",
+							"    pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -333,7 +358,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"PUT request doesn't fail\"] = responseCode.code === 200;"
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -372,7 +399,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -404,7 +433,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -436,7 +467,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -465,7 +498,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -494,7 +529,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -523,7 +560,9 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"tests[\"DELETE request doesn't fail\"] = responseCode.code === 204;"
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
 						],
 						"type": "text/javascript"
 					}
