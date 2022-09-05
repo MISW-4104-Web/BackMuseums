@@ -65,11 +65,11 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
       /*cli: {
         migrationsDir: "src/shared/migrations"
       },*/
-      /*extra: {
+      extra: {
         ssl: {
           rejectUnauthorized: false
         }
-      }*/
+      }
     }),
     ArtworkImageModule,
   ],
