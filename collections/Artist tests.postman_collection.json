@@ -229,6 +229,96 @@
 			]
 		},
 		{
+			"name": "Get one artist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/artists/{{artist_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"artists",
+						"{{artist_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get one artist",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"artists",
+								"{{artist_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "242"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"f2-uHV+8px8WfsP8Q48O0OGvBCMs3A\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 31 Mar 2022 13:07:02 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"name\": \"Pablo Picasso\",\n    \"birthplace\": \"Madrid, Spain\",\n    \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"movements\": [],\n    \"artworks\": []\n}"
+				}
+			]
+		},
+		{
 			"name": "Get all artists",
 			"event": [
 				{
@@ -318,96 +408,6 @@
 					],
 					"cookie": [],
 					"body": "[\n    {\n        \"id\": 100,\n        \"name\": \"Brett Whiteley\",\n        \"birthplace\": \"Sydney, New South Wales, Australia\",\n        \"birthdate\": \"1939-04-07T05:00:00.000Z\",\n        \"image\": \"https://content.api.news/v3/images/bin/6e366e88e44b0777b55a87ea6f2ffbd3\",\n        \"movements\": [\n            {\n                \"id\": 100,\n                \"name\": \"Avant-garde\",\n                \"description\": \"The avant-garde is a person or work that is experimental, radical, or unorthodox with respect to art, culture, or society. It is frequently characterized by aesthetic innovation and initial unacceptability.\\nThe avant-garde pushes the boundaries of what is accepted as the norm or the status quo, primarily in the cultural realm. The avant-garde is considered by some to be a hallmark of modernism. Many artists have aligned themselves with the avant-garde movement, and still continue to do so, tracing their history from Dada through the Situationists and to postmodern artists such as the Language poets around 1981.\\nThe avant-garde also promotes radical social reforms. This meaning was evoked by the Saint Simonian Olinde Rodrigues in his essay, \\\"L'artiste, le savant et l'industriel\\\" (\\\"The artist, the scientist and the industrialist\\\", 1825). This essay contains the first use of \\\"avant-garde\\\" in its now customary sense; there, Rodrigues called on artists to \\\"serve as [the people's] avant-garde\\\", insisting that \\\"the power of the arts is indeed the most immediate and fastest way\\\" to social, political and economic reform.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"From the latter half of the 19th century to this day\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 101,\n                \"name\": \"Self portrait in the studio\",\n                \"year\": 1976,\n                \"description\": \"Similar to Brett Whiteley's other major paintings of this period, 'Self-portrait in the studio' exudes a sense of sumptuous living and the liquid presence of the harbour through what he called 'the ecstasy-like effect of Ultramarine blue'. Whiteley's tiny mirror self-portrait also reflects the influence of Eastern art in his portrayal of man as merely part of a larger landscape.\",\n                \"type\": \"Painting\"\n            },\n            {\n                \"id\": 100,\n                \"name\": \"Dogs\",\n                \"year\": 1975,\n                \"description\": \"Brett Whiteley felt deeply connected to animals since childhood. In fact, between 1965 and 1988 he staged four exhibitions whose predominant or exclusive subject was animals that he had observed in zoos, domestic environments and in nature.\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 101,\n        \"name\": \"Grace Cossington Smith\",\n        \"birthplace\": \"Neutral Bay, New South Wales, Australia\",\n        \"birthdate\": \"1892-04-20T04:56:16.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/3/3c/Grace_Cossington_Smith_Turramurra.jpg\",\n        \"movements\": [\n            {\n                \"id\": 100,\n                \"name\": \"Avant-garde\",\n                \"description\": \"The avant-garde is a person or work that is experimental, radical, or unorthodox with respect to art, culture, or society. It is frequently characterized by aesthetic innovation and initial unacceptability.\\nThe avant-garde pushes the boundaries of what is accepted as the norm or the status quo, primarily in the cultural realm. The avant-garde is considered by some to be a hallmark of modernism. Many artists have aligned themselves with the avant-garde movement, and still continue to do so, tracing their history from Dada through the Situationists and to postmodern artists such as the Language poets around 1981.\\nThe avant-garde also promotes radical social reforms. This meaning was evoked by the Saint Simonian Olinde Rodrigues in his essay, \\\"L'artiste, le savant et l'industriel\\\" (\\\"The artist, the scientist and the industrialist\\\", 1825). This essay contains the first use of \\\"avant-garde\\\" in its now customary sense; there, Rodrigues called on artists to \\\"serve as [the people's] avant-garde\\\", insisting that \\\"the power of the arts is indeed the most immediate and fastest way\\\" to social, political and economic reform.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"From the latter half of the 19th century to this day\"\n            },\n            {\n                \"id\": 101,\n                \"name\": \"Post-Impressionism\",\n                \"description\": \"Post-Impressionism (also spelled Postimpressionism) was a predominantly French art movement that developed roughly between 1886 and 1905, from the last Impressionist exhibition to the birth of Fauvism. Post-Impressionism emerged as a reaction against Impressionists' concern for the naturalistic depiction of light and colour. Due to its broad emphasis on abstract qualities or symbolic content, Post-Impressionism encompasses Les Nabis, Neo-Impressionism, Symbolism, Cloisonnism, Pont-Aven School, as well as Synthetism, along with some later Impressionists' work. The movement was led by Paul Cézanne (known as the father of Post-Impressionism), Paul Gauguin, Vincent van Gogh and Georges Seurat.\\nThe term Post-Impressionism was first used by art critic Roger Fry in 1906. Critic Frank Rutter in a review of the Salon d'Automne published in Art News, 15 October 1910, described Othon Friesz as a \\\"post-impressionist leader\\\"; there was also an advert for the show The Post-Impressionists of France. Three weeks later, Roger Fry used the term again when he organised the 1910 exhibition Manet and the Post-Impressionists, defining it as the development of French art since Manet.\\nPost-Impressionists extended Impressionism while rejecting its limitations: they continued using vivid colours, often thick application of paint and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary colour.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"Between 1886 and 1905\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 102,\n                \"name\": \"Self portrait\",\n                \"year\": 1931,\n                \"description\": \"Painted in 1948, Cossington Smith's self-portrait represents her vibrant use of light-infused colour and interest in structure and form. Depicting herself in the prime of her long career, the short brushstrokes, laden with paint, build up a strong colour portrait and capture the dedication she felt towards her art in her intense focused gaze and the determined set of her lips.\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 106,\n        \"name\": \"David Bomberg\",\n        \"birthplace\": \"Birmingham, England\",\n        \"birthdate\": \"1890-12-05T04:56:16.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/0/0f/Photo_of_Davis_Bomberg.jpg\",\n        \"movements\": [\n            {\n                \"id\": 100,\n                \"name\": \"Avant-garde\",\n                \"description\": \"The avant-garde is a person or work that is experimental, radical, or unorthodox with respect to art, culture, or society. It is frequently characterized by aesthetic innovation and initial unacceptability.\\nThe avant-garde pushes the boundaries of what is accepted as the norm or the status quo, primarily in the cultural realm. The avant-garde is considered by some to be a hallmark of modernism. Many artists have aligned themselves with the avant-garde movement, and still continue to do so, tracing their history from Dada through the Situationists and to postmodern artists such as the Language poets around 1981.\\nThe avant-garde also promotes radical social reforms. This meaning was evoked by the Saint Simonian Olinde Rodrigues in his essay, \\\"L'artiste, le savant et l'industriel\\\" (\\\"The artist, the scientist and the industrialist\\\", 1825). This essay contains the first use of \\\"avant-garde\\\" in its now customary sense; there, Rodrigues called on artists to \\\"serve as [the people's] avant-garde\\\", insisting that \\\"the power of the arts is indeed the most immediate and fastest way\\\" to social, political and economic reform.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"From the latter half of the 19th century to this day\"\n            },\n            {\n                \"id\": 104,\n                \"name\": \"Vorticism\",\n                \"description\": \"Vorticism was a London-based modernist art movement formed in 1914 by the writer and artist Wyndham Lewis. The movement was partially inspired by Cubism and was introduced to the public by means of the publication of the Vorticist manifesto in Blast magazine. Familiar forms of representational art were rejected in favour of a geometric style that tended towards a hard-edged abstraction. Lewis proved unable to harness the talents of his disparate group of avant-garde artists; however, for a brief period Vorticism proved to be an exciting intervention and an artistic riposte to Marinetti's Futurism and the post-impressionism of Roger Fry's Omega Workshops.\\nVorticist paintings emphasised 'modern life' as an array of bold lines and harsh colours drawing the viewer's eye into the centre of the canvas and vorticist sculpture created energy and intensity through 'direct carving'.\",\n                \"countryOfOrigin\": \"England\",\n                \"activeYears\": \"Between 1912 and 1915\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 109,\n                \"name\": \"The Mud Bath\",\n                \"year\": 1914,\n                \"description\": \"Bathing figures were a traditional way of depicting the nude, but here Bomberg brings the subject into the modern era by basing the scene on steam baths used by the local Jewish population near Bomberg's home in east London. Bomberg was closely associated with a group of artists known as the vorticists. Their aim was to create art that expressed the modern world through imagery derived from machines and the urban environment. Here Bomberg reduces the human figure to a series of geometric shapes, a process he described as 'searching for an intenser expression … where I use Naturalistic Form I have stripped it of all irrelevant matter.'\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 104,\n        \"name\": \"Paul Cézanne\",\n        \"birthplace\": \"Aix-en-Provence, France\",\n        \"birthdate\": \"1839-01-19T04:56:16.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Paul-Cezanne.jpg/220px-Paul-Cezanne.jpg\",\n        \"movements\": [\n            {\n                \"id\": 101,\n                \"name\": \"Post-Impressionism\",\n                \"description\": \"Post-Impressionism (also spelled Postimpressionism) was a predominantly French art movement that developed roughly between 1886 and 1905, from the last Impressionist exhibition to the birth of Fauvism. Post-Impressionism emerged as a reaction against Impressionists' concern for the naturalistic depiction of light and colour. Due to its broad emphasis on abstract qualities or symbolic content, Post-Impressionism encompasses Les Nabis, Neo-Impressionism, Symbolism, Cloisonnism, Pont-Aven School, as well as Synthetism, along with some later Impressionists' work. The movement was led by Paul Cézanne (known as the father of Post-Impressionism), Paul Gauguin, Vincent van Gogh and Georges Seurat.\\nThe term Post-Impressionism was first used by art critic Roger Fry in 1906. Critic Frank Rutter in a review of the Salon d'Automne published in Art News, 15 October 1910, described Othon Friesz as a \\\"post-impressionist leader\\\"; there was also an advert for the show The Post-Impressionists of France. Three weeks later, Roger Fry used the term again when he organised the 1910 exhibition Manet and the Post-Impressionists, defining it as the development of French art since Manet.\\nPost-Impressionists extended Impressionism while rejecting its limitations: they continued using vivid colours, often thick application of paint and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary colour.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"Between 1886 and 1905\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 107,\n                \"name\": \"The Large Bathers\",\n                \"year\": 1906,\n                \"description\": \"The bathers theme originated in the Renaissance and traditionally showed idealized female bodies in total harmony with nature. Yet Cézanne disturbs this easy relationship here and in his other works on the subject. In this canvas, thick with paint, space is hard to read, and the landscape —note the dead tree branches and ominous clouds—seems harsh and threatening. While he derived many of the figures' poses from classical statuary, Cézanne overturns tradition as soon as he references it: bodies are deliberately distorted, with obliterated faces, truncated limbs, and uneven flesh.\",\n                \"type\": \"Painting\"\n            },\n            {\n                \"id\": 106,\n                \"name\": \"Mont Sainte-Victoire seen from Bellevue\",\n                \"year\": 1887,\n                \"description\": \"Mont Sainte-Victoire seen from Bellevue, 1885-87 is another panoramic view, of a delicate, tranquil beauty. Admirable is the thought of opposing to the distant landscape the high tree in the foreground, a form through which the near and far, the left and right, become more sharply defined, each with its own mood and dominant. Breadth, height, and depth are almost equally developed; the balance of these dimensions is one of the sources of the fullness and calm of the painting. We experience the vastness of the space in the broad valley with the viaduct; we feel the equivalent depth in the long, endless passage from the house in the foreground to the mountain top; but we also measure the great height of the space in the central tree which spans the whole vertical dimension, crossing every zone of the landscape and reaching from the lower to the upper edge of the canvas.\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 105,\n        \"name\": \"Vincent van Gogh\",\n        \"birthplace\": \"Zundert, Netherlands\",\n        \"birthdate\": \"1853-03-30T04:56:16.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg/474px-Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project_%28454045%29.jpg\",\n        \"movements\": [\n            {\n                \"id\": 101,\n                \"name\": \"Post-Impressionism\",\n                \"description\": \"Post-Impressionism (also spelled Postimpressionism) was a predominantly French art movement that developed roughly between 1886 and 1905, from the last Impressionist exhibition to the birth of Fauvism. Post-Impressionism emerged as a reaction against Impressionists' concern for the naturalistic depiction of light and colour. Due to its broad emphasis on abstract qualities or symbolic content, Post-Impressionism encompasses Les Nabis, Neo-Impressionism, Symbolism, Cloisonnism, Pont-Aven School, as well as Synthetism, along with some later Impressionists' work. The movement was led by Paul Cézanne (known as the father of Post-Impressionism), Paul Gauguin, Vincent van Gogh and Georges Seurat.\\nThe term Post-Impressionism was first used by art critic Roger Fry in 1906. Critic Frank Rutter in a review of the Salon d'Automne published in Art News, 15 October 1910, described Othon Friesz as a \\\"post-impressionist leader\\\"; there was also an advert for the show The Post-Impressionists of France. Three weeks later, Roger Fry used the term again when he organised the 1910 exhibition Manet and the Post-Impressionists, defining it as the development of French art since Manet.\\nPost-Impressionists extended Impressionism while rejecting its limitations: they continued using vivid colours, often thick application of paint and real-life subject matter, but were more inclined to emphasize geometric forms, distort form for expressive effect, and use unnatural or arbitrary colour.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"Between 1886 and 1905\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 108,\n                \"name\": \"L'Arlésienne\",\n                \"year\": 1889,\n                \"description\": \"While in Arles, Van Gogh painted two very similar portraits of Marie Ginoux, the proprietress of the Café de la Gare, wearing the regional costume of the legendary dark-haired beauties of Arles. The first version, which he described in a letter of November 1888 as \\\"an Arlésienne . . . knocked off in one hour,\\\" must be the more thinly and summarily executed portrait in the Musée d'Orsay, Paris. In it a parasol and gloves lie on the table instead of books. This portrait belonged to the sitter until she sold it in 1895.\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 102,\n        \"name\": \"Frédéric Bruly Bouabré\",\n        \"birthplace\": \"Zépréguhé, Côte d'Ivoire\",\n        \"birthdate\": \"1923-03-11T05:00:00.000Z\",\n        \"image\": \"https://elhombrejazmin.com/wp-content/imagenes/2013/11/frederic_bruly_bouabre.jpg\",\n        \"movements\": [\n            {\n                \"id\": 102,\n                \"name\": \"Naive art\",\n                \"description\": \"Naive art could easily be dismissed as art that's created by people who “don't know what they’re doing”, but that undermines the raw creativity found within works of the movement and its uninhibited and instinctive approach to materials, composition and ideas.\\nBefore the 20th century, in its most basic sense naive art was any form of visual art created by a person who lacked the formal education and training a professional artist undergoes. When a trained artists emulates this aesthetic, it is often referred to as primitivism, pseudo-naive art or faux naive art.\",\n                \"countryOfOrigin\": \"France\",\n                \"activeYears\": \"18th to 20th century\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 103,\n                \"name\": \"Connaissance du monde\",\n                \"year\": 1996,\n                \"description\": \"In the late 1970s, after decades of making handwritten manuscripts, Bouabré began to draw on found cardboard, combining image and text. From the 1980s onwards, as the scope of his interests grew, he embarked on an all-encompassing project, drawing from observation almost daily. He titled the open-ended series of drawings Connaissance du Monde, and worked on it until his death in 2014, systematically compiling and classifying forms, ideas, and a wide range of phenomena, including domestic objects, cloud formations, and tribal scarifications, as well as the political climate and world events.\",\n                \"type\": \"Painting\"\n            }\n        ]\n    },\n    {\n        \"id\": 103,\n        \"name\": \"Cornelia Parker\",\n        \"birthplace\": \"Cheshire, England\",\n        \"birthdate\": \"1956-07-14T05:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/2/28/Cornelia-Parker-010-1.jpg\",\n        \"movements\": [\n            {\n                \"id\": 103,\n                \"name\": \"Conceptual art\",\n                \"description\": \"Conceptual art is art for which the idea (or concept) behind the work is more important than the finished art object. It emerged as an art movement in the 1960s and the term usually refers to art made from the mid-1960s to the mid-1970s. Joseph Kosuth. Clock (One and Five), English/Latin Version (1965)\",\n                \"countryOfOrigin\": \"United States of America\",\n                \"activeYears\": \"Mid-1960s to the mid-1970s\"\n            }\n        ],\n        \"artworks\": [\n            {\n                \"id\": 105,\n                \"name\": \"Cold Dark Matter: An Exploded View\",\n                \"year\": 1991,\n                \"description\": \"Cold Dark Matter: An Exploded View is the restored contents of a garden shed exploded by the British Army at the request of the artist Cornelia Parker. The surviving pieces have been used by Parker to create an installation suspended from the ceiling as if held mid-explosion. Lit by a single lightbulb the fragments cast dramatic shadows on the gallery's walls.\",\n                \"type\": \"Object\"\n            },\n            {\n                \"id\": 104,\n                \"name\": \"Thirty Pieces of Silver\",\n                \"year\": 1989,\n                \"description\": \"hirty Pieces of Silver comprises over a thousand flattened silver objects, including plates, spoons, candlesticks, trophies, cigarette cases, teapots and trombones. All the objects were ceremoniously crushed by a steamroller at Cornelia Parker's request. She then arranged the transformed silver artefacts into thirty disc-shaped groups, which are suspended about a foot from the floor by hundreds of fine wires. Each 'disc' is approximately ninety centimetres in diameter and they are always hung in orderly rows, although their overall configuration is adapted each time to the space in which the work is displayed. The title refers to the biblical story of how the apostle Judas Iscariot betrayed Jesus in return for thirty pieces of silver.\",\n                \"type\": \"Object\"\n            }\n        ]\n    },\n    {\n        \"id\": 1,\n        \"name\": \"Pablo Picasso\",\n        \"birthplace\": \"Madrid, Spain\",\n        \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n        \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n        \"movements\": [],\n        \"artworks\": []\n    }\n]"
-				}
-			]
-		},
-		{
-			"name": "Get one artist",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/artists/{{artist_id}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"artists",
-						"{{artist_id}}"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Get one artist",
-					"originalRequest": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{protocol}}://{{host}}/api/artists/{{artist_id}}",
-							"protocol": "{{protocol}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"artists",
-								"{{artist_id}}"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
-						{
-							"key": "X-Powered-By",
-							"value": "Express"
-						},
-						{
-							"key": "Access-Control-Allow-Origin",
-							"value": "*"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Content-Length",
-							"value": "242"
-						},
-						{
-							"key": "ETag",
-							"value": "W/\"f2-uHV+8px8WfsP8Q48O0OGvBCMs3A\""
-						},
-						{
-							"key": "Date",
-							"value": "Thu, 31 Mar 2022 13:07:02 GMT"
-						},
-						{
-							"key": "Connection",
-							"value": "keep-alive"
-						},
-						{
-							"key": "Keep-Alive",
-							"value": "timeout=5"
-						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 1,\n    \"name\": \"Pablo Picasso\",\n    \"birthplace\": \"Madrid, Spain\",\n    \"birthdate\": \"1881-10-25T00:00:00.000Z\",\n    \"image\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Pablo_picasso_1.jpg/200px-Pablo_picasso_1.jpg\",\n    \"movements\": [],\n    \"artworks\": []\n}"
 				}
 			]
 		},

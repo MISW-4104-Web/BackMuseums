@@ -18,7 +18,7 @@ export class ExhibitionService {
   ) {} 
 
   async findAll(museumId: number): Promise<ExhibitionEntity[]> {
-    const museum = await this.museumRepository.findOne(museumId, { relations: ["exhibitions", "exhibitions.sponsor"]});
+    const museum = await this.museumRepository.findOne(museumId, { relations: ["exhibitions", "exhibitions.sponsor", "exhibitions.artworks"]});
     if (!museum)
       throw new BusinessLogicException("The museum with the given id was not found", BusinessError.NOT_FOUND);
 
