@@ -5,36 +5,35 @@ import { ArtworkEntity } from 'src/artwork/artwork.entity';
 import { BusinessErrorsInterceptor } from 'src/shared/interceptors/interceptor';
 import { ExhibitionArtworkService } from './exhibition-artwork.service';
 
-@Controller('exhibitions')
+@Controller('museums')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class ExhibitionArtworkController {
   constructor(private readonly exhibitionArtworkService: ExhibitionArtworkService) {}
 
-  @Get(':exhibitionId/artworks/:artworkId')
-  async findArtworkByExhibitionIdArtworkId(@Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
-    return await this.exhibitionArtworkService.findArtworkByExhibitionIdArtworkId(artworkId, exhibitionId);
+  @Get(':museumId/exhibitions/:exhibitionId/artworks/:artworkId')
+  async findArtworkFromExhibition(@Param('museumId') museumId: number, @Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
+    return await this.exhibitionArtworkService.findArtworkFromExhibition(museumId, exhibitionId, artworkId)
   }
 
-  @Get(':exhibitionId/artworks')
-  async findArtworksByExhibitionId(@Param('exhibitionId') exhibitionId: number) {
-    return await this.exhibitionArtworkService.findArtworksByExhibitionId(exhibitionId);
+  @Get(':museumId/exhibitions/:exhibitionId/artworks')
+  async findArtworksFromExhibition(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number) {
+    return await this.exhibitionArtworkService.findArtworksByExhibition(museumId, exhibitionId);
   }
 
-  @Post(':exhibitionId/artworks/:artworkId/')
-  @HttpCode(200)
-  async addExhibitionArtwork(@Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
-    return await this.exhibitionArtworkService.addExhibitionArtwork(exhibitionId, artworkId);
+  @Post(':museumId/exhibitions/:exhibitionId/artworks/:artworkId/')
+  async addArtworkToExhibition(@Param('museumId') museumId: number, @Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
+    return await this.exhibitionArtworkService.addArtworkToExhibition(museumId, exhibitionId, artworkId);
   }
 
-  @Put(':exhibitionId/artworks')
-  async associateExhibitionArtwork(@Param('exhibitionId') exhibitionId: number, @Body() artworksDTO: ArtworkDto[]) {
+  @Put(':museumId/exhibitions/:exhibitionId/artworks')
+  async updateExhibitionsFromArtwork(@Param('museumId') museumId: number, @Param('exhibitionId') exhibitionId: number, @Body() artworksDTO: ArtworkDto[]) {
     const artworks = plainToInstance(ArtworkEntity, artworksDTO)
-    return await this.exhibitionArtworkService.associateExhibitionArtwork(exhibitionId, artworks);
+    return await this.exhibitionArtworkService.updateExhibitionsFromArtwork(museumId, exhibitionId, artworks);
   }
 
-  @Delete(':exhibitionId/artworks/:artworkId')
+  @Delete(':museumId/exhibitions/:exhibitionId/artworks/:artworkId')
   @HttpCode(204)
-  async deleteArtworkToExhibition(@Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
-    return await this.exhibitionArtworkService.deleteArtworkToExhibition(artworkId, exhibitionId);
+  async deleteArtworkFromExhibition(@Param('museumId') museumId: number, @Param('artworkId') artworkId: number, @Param('exhibitionId') exhibitionId: number) {
+    return await this.exhibitionArtworkService.deleteArtworkFromExhibition(museumId, exhibitionId, artworkId);
   }
 }
