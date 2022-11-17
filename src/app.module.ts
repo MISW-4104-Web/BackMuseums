@@ -62,9 +62,6 @@ import { ArtworkImageModule } from './artwork-image/artwork-image.module';
       keepConnectionAlive: true,
       migrations: [__dirname + '/shared/migrations/**/*{.ts,.js}'],
       migrationsRun: true,
-      /*cli: {
-        migrationsDir: "src/shared/migrations"
-      },*/
       extra: {
         ssl: {
           rejectUnauthorized: false
